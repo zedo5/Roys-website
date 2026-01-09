@@ -4,21 +4,57 @@
     "image": "/assets/uploads/picture-1.jpg"
   },
   "about": {
-    "p1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "p2": "Duis cursus, mi quis viverra ornare, eros dolor interdum nulla."
+    "p1": "Waleed Medaa Group is a Syrian architectural firm based in Damascus, delivering comprehensive architectural and construction solutions for high-end projects.\n\nThe firm specializes in construction management and supervision, providing end-to-end services from concept through execution. With multidisciplinary design and management teams across all engineering fields, Waleed Medaa Group ensures full project coordination, technical excellence, and execution precision.",
+    "p2": "Our work spans residential housing, commercial real estate, logistics centers, leisure developments, and high-rise buildings. Every project is approached with a commitment to quality, functionality, and architectural integrity, with the ultimate goal of meeting—and surpassing—client expectations."
   },
   "services": [
     {
       "num": "01",
       "title": "Architecture",
-      "text": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings.",
+      "text": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings. Our architectural services combine creativity with technical rigor to deliver clear, buildable solutions.",
       "bullets": [
         "Concept Design",
         "Architectural Planning",
         "3D Visualization & Modeling",
         "Construction Documentation"
       ],
-      "image": "/assets/uploads/service-1.jpg"
+      "image": "/assets/uploads/picture-3.jpg"
+    },
+    {
+      "num": "02",
+      "title": "Interior Design",
+      "text": "We create refined interior environments that balance aesthetics, functionality, and material quality. Our interior design approach ensures cohesive spaces that enhance user experience and complement the architectural vision.",
+      "bullets": [
+        "Space Planning & Layout Design",
+        "Material & Finishes Selection",
+        "Custom Furniture & Joinery Design",
+        "Lighting & Interior Visualization"
+      ],
+      "image": "/assets/uploads/picture-4.jpg"
+    },
+    {
+      "num": "03",
+      "title": "Layout Planning",
+      "text": "We develop efficient layout solutions that optimize circulation, usability, and spatial clarity. Each plan is carefully structured to support functionality, flexibility, and long-term performance.\n",
+      "bullets": [
+        "Spatial Zoning & Circulation Studies",
+        "Functional Area Planning",
+        "Residential & Commercial Layouts",
+        "Optimization for Code & Efficiency"
+      ],
+      "image": "/assets/uploads/picture-5.jpg"
+    },
+    {
+      "title": "Project Management",
+      "num": "04",
+      "text": "We provide comprehensive project management and construction supervision services to ensure projects are delivered on time, within budget, and to the highest quality standards.",
+      "bullets": [
+        "Construction Management & Supervision",
+        "Cost Control & Scheduling",
+        "Multidisciplinary Coordination",
+        "Quality Assurance & Site Follow-up"
+      ],
+      "image": "/assets/uploads/picture-6.jpg"
     }
   ],
   "projects": [

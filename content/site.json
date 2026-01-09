@@ -1,7 +1,7 @@
 {
   "hero": {
-    "word": "WOODLAND",
-    "image": "/assets/uploads/hero.jpg"
+    "word": "WM GROUP",
+    "image": "/assets/uploads/picture-1.jpg"
   },
   "about": {
     "p1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -12,7 +12,12 @@
       "num": "01",
       "title": "Architecture",
       "text": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings.",
-      "bullets": ["Concept Design", "Architectural Planning", "3D Visualization & Modeling", "Construction Documentation"],
+      "bullets": [
+        "Concept Design",
+        "Architectural Planning",
+        "3D Visualization & Modeling",
+        "Construction Documentation"
+      ],
       "image": "/assets/uploads/service-1.jpg"
     }
   ],
@@ -26,11 +31,17 @@
     }
   ],
   "gallery": [
-    { "image": "/assets/uploads/gallery-1.jpg" },
-    { "image": "/assets/uploads/gallery-2.jpg" }
+    {
+      "image": "/assets/uploads/gallery-1.jpg"
+    },
+    {
+      "image": "/assets/uploads/gallery-2.jpg"
+    }
   ],
   "reviews": [
-    { "quote": "Working with Woodland Architects was a blessing for our home." }
+    {
+      "quote": "Working with Woodland Architects was a blessing for our home."
+    }
   ],
   "partner": {
     "title": "PARTNER WITH US",
@@ -40,8 +51,14 @@
   "footer": {
     "email": "hi@woodland.com",
     "social": [
-      { "label": "Twitter", "url": "https://twitter.com" },
-      { "label": "LinkedIn", "url": "https://linkedin.com" }
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com"
+      }
     ]
   }
 }

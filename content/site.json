@@ -60,29 +60,41 @@
   "projects": [
     {
       "side": "right",
-      "title": "Coastal Villa",
-      "meta": "Aspen • Residential • 2024",
-      "desc": "Lorem ipsum...",
-      "image": "/assets/uploads/project-1.jpg"
+      "meta": "Syria Residential Yaffour",
+      "desc": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
+      "title": "Villa concept in Yaffour",
+      "image": "/assets/uploads/picture-7.jpg"
+    },
+    {
+      "side": "left",
+      "title": "Marota City",
+      "meta": "Syria Residential Block: H10",
+      "desc": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
+      "image": "/assets/uploads/picture-8.jpg"
     }
   ],
   "gallery": [
     {
-      "image": "/assets/uploads/gallery-1.jpg"
+      "image": "/assets/uploads/picture-9.jpg"
     },
     {
-      "image": "/assets/uploads/gallery-2.jpg"
-    }
-  ],
-  "reviews": [
+      "image": "/assets/uploads/picture-10.jpg"
+    },
     {
-      "quote": "Working with Woodland Architects was a blessing for our home."
+      "image": "/assets/uploads/picture-11.jpg"
+    },
+    {
+      "image": "/assets/uploads/picture-12.jpg"
+    },
+    {
+      "image": "/assets/uploads/picture-13.jpg"
     }
   ],
+  "reviews": [],
   "partner": {
     "title": "PARTNER WITH US",
     "desc": "If you’re someone who’s looking to bring a space to life, share a few details so we can discuss your vision.",
-    "image": "/assets/uploads/partner.jpg"
+    "image": "/assets/uploads/picture-14.jpg"
   },
   "footer": {
     "email": "hi@woodland.com",

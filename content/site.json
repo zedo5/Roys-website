@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "word": "WOODLAND",
+    "image": "/assets/uploads/hero.jpg"
+  },
+  "about": {
+    "p1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "p2": "Duis cursus, mi quis viverra ornare, eros dolor interdum nulla."
+  },
+  "services": [
+    {
+      "num": "01",
+      "title": "Architecture",
+      "text": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings.",
+      "bullets": ["Concept Design", "Architectural Planning", "3D Visualization & Modeling", "Construction Documentation"],
+      "image": "/assets/uploads/service-1.jpg"
+    }
+  ],
+  "projects": [
+    {
+      "side": "right",
+      "title": "Coastal Villa",
+      "meta": "Aspen • Residential • 2024",
+      "desc": "Lorem ipsum...",
+      "image": "/assets/uploads/project-1.jpg"
+    }
+  ],
+  "gallery": [
+    { "image": "/assets/uploads/gallery-1.jpg" },
+    { "image": "/assets/uploads/gallery-2.jpg" }
+  ],
+  "reviews": [
+    { "quote": "Working with Woodland Architects was a blessing for our home." }
+  ],
+  "partner": {
+    "title": "PARTNER WITH US",
+    "desc": "If you’re someone who’s looking to bring a space to life, share a few details so we can discuss your vision.",
+    "image": "/assets/uploads/partner.jpg"
+  },
+  "footer": {
+    "email": "hi@woodland.com",
+    "social": [
+      { "label": "Twitter", "url": "https://twitter.com" },
+      { "label": "LinkedIn", "url": "https://linkedin.com" }
+    ]
+  }
+}

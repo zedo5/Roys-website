@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Woodland — Static Replica (Client-Editable via Decap CMS)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --black:#1e1e1e;
+            --grey:#6f6f6f;
+            --blue:#c1d0d8;
+            --white:#ffffff;
+
+            --container: 1200px;
+            --shadow: 0 18px 50px rgba(0,0,0,.14);
+            --soft-shadow: 0 12px 30px rgba(0,0,0,.10);
+        }
+
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            margin:0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color:var(--black);
+            background:var(--white);
+            line-height:1.45;
+        }
+        a{color:inherit;text-decoration:none}
+        img{max-width:100%;display:block}
+        .container{
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        /* Sticky minimal top bar */
+        .topbar{
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30,30,30,.08);
+        }
+        .nav{
+            display:flex;
+            align-items:flex-start;
+            justify-content:space-between;
+            gap: 20px;
+            padding: 16px 0;
+        }
+        .brand{display:flex;flex-direction:column;gap:4px;line-height:1.1}
+        .brand strong{font-weight:800;letter-spacing:.02em;font-size:18px}
+        .brand span{font-size:11px;color:var(--grey)}
+        .navlinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+        .navlinks a{font-size:12px;opacity:.9}
+
+        /* HERO (full-bleed bigger horizontally) */
+        .hero{padding:18px 0 0}
+        .hero .container{max-width: 100%; padding: 0;}
+        .hero-media{
+            position:relative;
+            overflow:hidden;
+            background:#eee;
+            border-radius: 0;
+        }
+        .hero-img{
+            width:100%;
+            height: clamp(520px, 82vh, 860px); /* bigger vertically */
+            object-fit: cover;
+            transform-origin:center;
+            position: relative;
+            z-index: 1;
+        }
+        /* Center-split “open” wipes */
+        .wipe{
+            position:absolute;
+            top:0;
+            width:50%;
+            height:100%;
+            background: var(--white);
+            z-index: 5;
+            pointer-events:none;
+            transform: scaleX(1);
+        }
+        .wipe.split.left{left:0; transform-origin:left;}
+        .wipe.split.right{right:0; transform-origin:right;}
+
+        /* WOODLAND text ONLY on hero */
+        .hero-word{
+            position:absolute;
+            left: 60px;
+            top: 110px;
+            font-weight: 800;
+            font-size: clamp(64px, 10vw, 160px);
+            letter-spacing: .06em;
+            color: rgba(30,30,30,.18);
+            text-transform: uppercase;
+            pointer-events:none;
+            user-select:none;
+            white-space:nowrap;
+            mix-blend-mode: multiply;
+            z-index: 6;
+        }
+
+        /* General sections */
+        section{padding: 80px 0;}
+        .split{
+            display:grid;
+            grid-template-columns: 1fr 520px;
+            gap: 60px;
+            align-items:start;
+        }
+        .big-title{
+            font-size: clamp(44px, 6vw, 74px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .right{justify-self:end;width:100%}
+
+        /* About copy */
+        .about-copy p{
+            margin: 0 0 14px;
+            color: var(--grey);
+            font-size: 14px;
+            max-width: 52ch;
+        }
+
+        /* Services accordion */
+        .accordion{border-top: 1px solid rgba(30,30,30,.12)}
+        .acc-item{border-bottom: 1px solid rgba(30,30,30,.12); padding: 18px 0}
+        .acc-head{
+            display:grid;
+            grid-template-columns: 38px 1fr 28px;
+            gap: 12px;
+            align-items:center;
+            cursor:pointer;
+            user-select:none;
+        }
+        .acc-num{font-size: 12px;color: var(--grey)}
+        .acc-title{font-weight: 700;font-size: 14px}
+        .acc-plus{
+            font-size: 22px;
+            line-height: 1;
+            justify-self:end;
+            transform-origin:center;
+            transition: transform .25s ease;
+        }
+        .acc-panel{
+            display:grid;
+            grid-template-columns: 1fr 220px;
+            gap: 16px;
+            padding: 12px 0 0 50px;
+            overflow:hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height .45s ease, opacity .35s ease;
+        }
+        .acc-item.open .acc-panel{max-height: 520px; opacity: 1}
+        .acc-item.open .acc-plus{transform: rotate(45deg)}
+        .acc-panel p{margin:0 0 10px;color:var(--grey);font-size:13px;max-width:46ch}
+        .bullets{margin:0;padding-left:16px;color:var(--grey);font-size:12px;display:grid;gap:6px}
+        .acc-panel img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+            border-radius:10px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        /* PROJECTS — alternating overlay card */
+        .projects-wrap{margin-top: 20px;}
+        .project{
+            position: relative;
+            padding: 38px 0;
+        }
+        .project .img{
+            width: 100%;
+            height: clamp(340px, 50vh, 520px);
+            object-fit: cover;
+            display:block;
+        }
+        .project .card{
+            position:absolute;
+            top: 88px;
+            width: 340px;
+            background: rgba(255,255,255,.92);
+            border: 1px solid rgba(30,30,30,.10);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+        .project.right .card{right: 0;}
+        .project.left  .card{left: 0;}
+        .project h3{margin:0 0 8px;font-size:14px;font-weight:800}
+        .project .meta{font-size:11px;color:var(--grey);margin:0 0 10px}
+        .project .desc{margin:0;color:var(--grey);font-size:12px;line-height:1.6}
+
+        /* Featured row */
+        .featured-row{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap: 16px;
+            padding: 50px 0 70px;
+        }
+        .featured-row .label{
+            font-size: 12px;
+            letter-spacing: .14em;
+            font-weight: 700;
+            color: var(--black);
+            opacity: .85;
+            text-transform: uppercase;
+        }
+        .logos{
+            display:flex;
+            gap: 60px;
+            align-items:center;
+            justify-content:center;
+            flex-wrap:wrap;
+        }
+        .logo{
+            font-weight:800;
+            letter-spacing:.06em;
+            opacity:.95;
+            font-size: 28px;
+        }
+
+        /* Gallery */
+        .gallery-title-center{
+            text-align:center;
+            font-size: clamp(64px, 10vw, 150px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0;
+            padding: 0 0 40px;
+            text-transform: uppercase;
+        }
+        .gallery-stage{
+            position: relative;
+            height: 560px;
+            margin-top: 10px;
+            overflow: visible;
+        }
+        .gallery-word{
+            position:absolute;
+            left: 50%;
+            top: 48%;
+            transform: translate(-50%,-50%);
+            font-size: clamp(70px, 10vw, 160px);
+            font-weight: 800;
+            letter-spacing: .06em;
+            color: rgba(30,30,30,.18);
+            text-transform: uppercase;
+            white-space:nowrap;
+            user-select:none;
+            pointer-events:none;
+        }
+        .g{
+            position:absolute;
+            box-shadow: var(--soft-shadow);
+            overflow:hidden;
+            background:#f2f2f2;
+        }
+        .g img{width:100%;height:100%;object-fit:cover}
+
+        /* approximate placements */
+        .g1{left: 14%; top: 160px; width: 260px; height: 260px;}
+        .g2{left: 42%; top: 12px;  width: 340px; height: 380px;}
+        .g3{left: 72%; top: 260px; width: 260px; height: 260px;}
+        .g4{left: 30%; top: -40px; width: 320px; height: 220px;}
+        .g5{left: 66%; top: -60px; width: 320px; height: 220px;}
+
+        /* REVIEWS block */
+        .reviews{padding: 0;}
+        .reviews-band{
+            background: var(--black);
+            color: var(--white);
+            padding: 120px 0 120px;
+            position: relative;
+            overflow:hidden;
+            min-height: 640px;
+            display:flex;
+            align-items:center;
+        }
+        .reviews-inner{
+            width: 100%;
+            text-align:center;
+            padding: 0 22px;
+        }
+        .reviews-kicker{
+            font-size: 12px;
+            letter-spacing: .14em;
+            font-weight: 700;
+            opacity: .9;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+        }
+        .reviews-title{
+            font-size: clamp(56px, 8vw, 96px);
+            font-weight: 800;
+            margin: 0 0 18px;
+            text-transform: uppercase;
+        }
+        .review-quote{
+            max-width: 88ch;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255,255,255,.78);
+            font-style: italic;
+            min-height: 92px;
+        }
+        .review-controls{
+            margin-top: 22px;
+            display:flex;
+            justify-content:center;
+            gap: 10px;
+        }
+        .pillbtn{
+            width: 64px;
+            height: 34px;
+            border-radius: 999px;
+            border: none;
+            background: var(--blue);
+            color: #111;
+            display:grid;
+            place-items:center;
+            cursor:pointer;
+            user-select:none;
+            box-shadow: 0 10px 24px rgba(0,0,0,.25);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .pillbtn:active{transform: translateY(1px);}
+
+        /* PARTNER WITH US */
+        .partner{padding: 0; background: var(--white);}
+        .partner-grid{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 720px;
+        }
+        .partner-left{padding: 90px 70px 60px 70px;}
+        .partner-title{
+            margin:0 0 18px;
+            font-size: 76px;
+            line-height: 0.95;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+        .partner-desc{
+            margin:0 0 54px;
+            color: var(--grey);
+            font-size: 14px;
+            max-width: 62ch;
+        }
+        .partner-form .field{margin: 0 0 18px;}
+        .partner-form label{
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(30,30,30,.65);
+            margin: 0 0 10px;
+            display:block;
+        }
+        .partner-form input,
+        .partner-form textarea{
+            width:100%;
+            border: none;
+            background: rgba(30,30,30,.06);
+            padding: 14px 14px;
+            border-radius: 0;
+            outline: none;
+            font: inherit;
+        }
+        .partner-form textarea{min-height: 110px; resize: vertical;}
+        .partner-submit{
+            width:100%;
+            border: none;
+            background: var(--black);
+            color: var(--white);
+            padding: 16px 18px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .partner-submit:active{transform: translateY(1px);}
+        .partner-right{
+            position: relative;
+            overflow:hidden;
+            background:#eee;
+        }
+        .partner-right img{
+            width:100%;
+            height:100%;
+            object-fit: cover;
+            transform-origin:center;
+        }
+
+        /* FOOTER */
+        .footer{padding: 70px 0 40px; background: var(--white);}
+        .footer-grid{
+            display:grid;
+            grid-template-columns: 1fr 1fr 1fr 1.6fr;
+            gap: 60px;
+            align-items:start;
+        }
+        .footer h4{
+            margin: 0 0 16px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .footer a, .footer p{
+            margin: 0 0 10px;
+            color: rgba(30,30,30,.55);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .footer a:hover{opacity:.85}
+        .footer-news label{
+            display:block;
+            margin: 0 0 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgba(30,30,30,.55);
+        }
+        .footer-news input{
+            width:100%;
+            border: none;
+            background: rgba(30,30,30,.06);
+            padding: 18px 16px;
+            font: inherit;
+            outline:none;
+        }
+        .footer-news button{
+            width:100%;
+            margin-top: 18px;
+            border:none;
+            background: var(--black);
+            color: var(--white);
+            padding: 18px 16px;
+            font-weight: 700;
+            letter-spacing:.08em;
+            text-transform: uppercase;
+            cursor:pointer;
+        }
+        .footer-news button:active{transform: translateY(1px);}
+
+        /* Reveal defaults (GSAP animates these to visible) */
+        .reveal{opacity:0; transform: translateY(18px);}
+        .reveal-left{opacity:0; transform: translateX(-22px);}
+        .reveal-right{opacity:0; transform: translateX(22px);}
+
+        @media (max-width: 980px){
+            .split{grid-template-columns: 1fr; gap: 22px;}
+            .right{justify-self:start; max-width: 720px;}
+
+            .project .card{position:relative; top:auto; left:auto; right:auto; width: 100%; margin-top: 16px;}
+            .gallery-stage{height: 720px;}
+            .g1,.g2,.g3,.g4,.g5{position:relative; left:auto; top:auto; width:100%; height:240px; margin-bottom:14px;}
+            .gallery-word{display:none;}
+
+            .navlinks{display:none;}
+
+            .partner-grid{grid-template-columns:1fr}
+            .partner-left{padding: 64px 22px}
+            .partner-title{font-size: 56px}
+
+            .footer-grid{grid-template-columns:1fr 1fr}
+            .hero-word{left:22px; top: 90px;}
+        }
+        @media (max-width: 520px){
+            .footer-grid{grid-template-columns:1fr}
+            section{padding: 64px 0;}
+            .hero-img{height: 72vh;}
+        }
+    </style>
+</head>
+
+<body>
+<header class="topbar">
+    <div class="container">
+        <div class="nav">
+            <a class="brand" href="#top">
+                <strong>WOODLAND</strong>
+                <span>Spaces like home since 2010</span>
+            </a>
+
+            <nav class="navlinks" aria-label="Primary">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#partner">Partner</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- HERO -->
+<main id="top" class="hero">
+    <div class="container">
+        <div class="hero-media" id="heroMedia">
+            <div class="wipe split left" data-wipe-left></div>
+            <div class="wipe split right" data-wipe-right></div>
+
+            <div class="hero-word" id="heroWord">WOODLAND</div>
+
+            <img class="hero-img" id="heroImg"
+                 src="https://cdn.prod.website-files.com/684afec0a4c0b1f83bda33ea/6865758e22cd592d1f498c76_Modern%20White%20Building%20%281%29.jpeg"
+                 alt="Hero building" />
+        </div>
+    </div>
+</main>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="split">
+            <h2 class="big-title reveal-left">ABOUT</h2>
+            <div class="right about-copy">
+                <p id="aboutP1" class="reveal">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p id="aboutP2" class="reveal">Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <div class="container">
+        <div class="split">
+            <h2 class="big-title reveal-left">SERVICES</h2>
+            <div class="right reveal">
+                <div class="accordion" id="servicesAccordion"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="split">
+            <h2 class="big-title reveal-left">PROJECTS</h2>
+            <div class="right"></div>
+        </div>
+        <div class="projects-wrap" id="projectsWrap"></div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="container">
+        <div class="featured-row reveal">
+            <div class="label">AS FEATURED IN</div>
+            <div class="logos">
+                <div class="logo">HGTV</div>
+                <div class="logo">eXp</div>
+                <div class="logo">FORTUNE</div>
+            </div>
+        </div>
+
+        <h2 class="gallery-title-center reveal">GALLERY</h2>
+
+        <div class="gallery-stage" id="galleryStage">
+            <div class="gallery-word reveal">GALLERY</div>
+            <!-- gallery images injected here -->
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews">
+    <div class="reviews-band">
+        <div class="reviews-inner">
+            <p class="reviews-kicker reveal">HEAR OUR CLIENT</p>
+            <h2 class="reviews-title reveal">REVIEWS</h2>
+
+            <div class="review-quote reveal" id="reviewText">
+                “Working with Woodland Architects was a blessing for our home.”
+            </div>
+
+            <div class="review-controls reveal">
+                <button class="pillbtn" id="prev" aria-label="Previous review">←</button>
+                <button class="pillbtn" id="next" aria-label="Next review">→</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTNER WITH US -->
+<section id="partner" class="partner">
+    <div class="partner-grid">
+        <div class="partner-left">
+            <h2 class="partner-title reveal-left" id="partnerTitle">PARTNER WITH<br>US</h2>
+            <p class="partner-desc reveal" id="partnerDesc">
+                If you’re someone who’s looking to bring a space to life, share a few details so we can discuss your vision.
+            </p>
+
+            <form class="partner-form reveal" onsubmit="event.preventDefault(); alert('Static demo: connect a backend to submit.');">
+                <div class="field">
+                    <label for="pname">Your full name</label>
+                    <input id="pname" name="pname" type="text" />
+                </div>
+
+                <div class="field">
+                    <label for="pemail">Your email address</label>
+                    <input id="pemail" name="pemail" type="email" />
+                </div>
+
+                <div class="field">
+                    <label for="pproj">A little bit about your project</label>
+                    <textarea id="pproj" name="pproj" placeholder="Example Text"></textarea>
+                </div>
+
+                <button class="partner-submit" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="partner-right reveal-right">
+            <img id="partnerImg"
+                 src="https://cdn.prod.website-files.com/684afec0a4c0b1f83bda33ea/6865758e22cd592d1f498c76_Modern%20White%20Building%20%281%29.jpeg"
+                 alt="Partner image" />
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="reveal">
+                <h4>Quick Links</h4>
+                <a href="#about">About</a><br>
+                <a href="#services">Services</a><br>
+                <a href="#projects">Projects</a><br>
+                <a href="#gallery">Gallery</a><br>
+                <a href="#reviews">Reviews</a><br>
+                <a href="#partner">Partner</a>
+            </div>
+
+            <div class="reveal">
+                <h4>Resources</h4>
+                <a href="#">Style guide</a><br>
+                <a href="#">Licenses</a><br>
+                <a href="#">Changelog</a>
+            </div>
+
+            <div class="reveal">
+                <h4>Contact</h4>
+                <p id="footerEmail">hi@woodland.com</p>
+                <div id="footerSocials"></div>
+            </div>
+
+            <div class="footer-news reveal">
+                <h4>Newsletter</h4>
+                <label for="newsletter">Your email address</label>
+                <input id="newsletter" type="email" />
+                <button type="button" onclick="alert('Static demo: connect a backend to store emails.');">Submit</button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<script>
+    // ---------- helpers ----------
+    function escapeHtml(s){
+        return String(s ?? "")
+            .replaceAll("&","&amp;")
+            .replaceAll("<","&lt;")
+            .replaceAll(">","&gt;")
+            .replaceAll('"',"&quot;")
+            .replaceAll("'","&#039;");
+    }
+
+    // ---------- Reviews carousel (client-editable) ----------
+    let REVIEWS = [
+        "Working with Woodland Architects was a blessing for our home."
+    ];
+    let reviewIndex = 0;
+
+    function setReviews(list){
+        const cleaned = (list || []).map(x => String(x || "").trim()).filter(Boolean);
+        if (cleaned.length) REVIEWS = cleaned;
+        reviewIndex = 0;
+        const el = document.getElementById("reviewText");
+        if (el) el.textContent = `“${REVIEWS[0]}”`;
+    }
+
+    function initReviewsControls(){
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+        const el = document.getElementById("reviewText");
+        if (!prev || !next || !el) return;
+
+        const swap = () => {
+            el.textContent = `“${REVIEWS[reviewIndex]}”`;
+            if (window.gsap){
+                gsap.fromTo(el, {opacity:0, y: -10}, {opacity:1, y:0, duration:.35, ease:"power2.out"});
+            }
+        };
+
+        prev.onclick = () => { reviewIndex = (reviewIndex - 1 + REVIEWS.length) % REVIEWS.length; swap(); };
+        next.onclick = () => { reviewIndex = (reviewIndex + 1) % REVIEWS.length; swap(); };
+    }
+
+    // ---------- render: services ----------
+    function renderServices(services){
+        const wrap = document.getElementById("servicesAccordion");
+        if (!wrap) return;
+
+        const list = Array.isArray(services) ? services : [];
+        wrap.innerHTML = list.map((s, idx) => {
+            const open = idx === 0 ? "open" : "";
+            const bullets = Array.isArray(s?.bullets) ? s.bullets : [];
+            return `
+          <div class="acc-item ${open}">
+            <div class="acc-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? "true" : "false"}">
+              <div class="acc-num">${escapeHtml(s?.num ?? String(idx+1).padStart(2,"0"))}</div>
+              <div class="acc-title">${escapeHtml(s?.title ?? "Service")}</div>
+              <div class="acc-plus">+</div>
+            </div>
+
+            <div class="acc-panel">
+              <div>
+                <p>${escapeHtml(s?.text ?? "")}</p>
+                <ul class="bullets">
+                  ${bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+                </ul>
+              </div>
+              <img src="${escapeHtml(s?.image ?? "")}" alt="${escapeHtml(s?.title ?? "Service")}" />
+            </div>
+          </div>
+        `;
+        }).join("");
+    }
+
+    function initAccordion(){
+        const items = Array.from(document.querySelectorAll('#servicesAccordion .acc-item'));
+        const toggle = (item) => {
+            const isOpen = item.classList.contains('open');
+            items.forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.acc-head')?.setAttribute('aria-expanded','false');
+            });
+            if (!isOpen){
+                item.classList.add('open');
+                item.querySelector('.acc-head')?.setAttribute('aria-expanded','true');
+            }
+        };
+
+        items.forEach(item => {
+            const head = item.querySelector('.acc-head');
+            if (!head) return;
+            head.onclick = () => toggle(item);
+            head.onkeydown = (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(item); }
+            };
+        });
+    }
+
+    // ---------- render: projects (client can add/remove freely) ----------
+    function renderProjects(projects){
+        const wrap = document.getElementById("projectsWrap");
+        if (!wrap) return;
+
+        const list = Array.isArray(projects) ? projects : [];
+        wrap.innerHTML = list.map((p) => {
+            const side = (p?.side === "left") ? "left" : "right";
+            return `
+          <div class="project ${side}" data-side="${side}">
+            <img class="img reveal" src="${escapeHtml(p?.image ?? "")}" alt="${escapeHtml(p?.title ?? "Project")}" />
+            <div class="card ${side === "left" ? "reveal-left" : "reveal-right"}">
+              <h3>${escapeHtml(p?.title ?? "Project")}</h3>
+              <div class="meta">${escapeHtml(p?.meta ?? "")}</div>
+              <p class="desc">${escapeHtml(p?.desc ?? "")}</p>
+            </div>
+          </div>
+        `;
+        }).join("");
+    }
+
+    // ---------- render: gallery (uses first 5 images in “overlap” layout) ----------
+    function renderGallery(gallery){
+        const stage = document.getElementById("galleryStage");
+        if (!stage) return;
+
+        // keep the word element
+        const word = stage.querySelector(".gallery-word");
+        stage.innerHTML = "";
+        if (word) stage.appendChild(word);
+
+        const list = Array.isArray(gallery) ? gallery : [];
+        const srcs = list.map(x => x?.image).filter(Boolean);
+
+        const slots = ["g4","g5","g1","g2","g3"]; // order similar to earlier markup
+        for (let i=0; i<Math.min(5, srcs.length); i++){
+            const cls = slots[i];
+            const div = document.createElement("div");
+            div.className = `g ${cls} ${i % 2 ? "reveal-right" : "reveal-left"}`;
+            div.innerHTML = `<img src="${escapeHtml(srcs[i])}" alt="">`;
+            stage.appendChild(div);
+        }
+    }
+
+    // ---------- render: footer socials ----------
+    function renderFooterSocials(social){
+        const wrap = document.getElementById("footerSocials");
+        if (!wrap) return;
+        const list = Array.isArray(social) ? social : [];
+        wrap.innerHTML = list.map(x => {
+            const label = escapeHtml(x?.label ?? "Link");
+            const url = escapeHtml(x?.url ?? "#");
+            return `<a href="${url}" target="_blank" rel="noreferrer">${label}</a><br>`;
+        }).join("");
+    }
+
+    // ---------- animations ----------
+    function clearScrollTriggers(){
+        if (!window.ScrollTrigger) return;
+        ScrollTrigger.getAll().forEach(t => t.kill());
+    }
+
+    function initAnimations(){
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        clearScrollTriggers();
+
+        // Generic reveals
+        const revealTo = (selector) => {
+            document.querySelectorAll(selector).forEach((el) => {
+                gsap.to(el, {
+                    opacity: 1, x: 0, y: 0,
+                    duration: 0.75,
+                    ease: "power2.out",
+                    scrollTrigger: { trigger: el, start: "top 82%" }
+                });
+            });
+        };
+        revealTo(".reveal");
+        revealTo(".reveal-left");
+        revealTo(".reveal-right");
+
+        // HERO: open from center (left + right)
+        gsap.fromTo('[data-wipe-left]',
+            { scaleX: 1 },
+            { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 }
+        );
+        gsap.fromTo('[data-wipe-right]',
+            { scaleX: 1 },
+            { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 }
+        );
+
+        // HERO: subtle settle + parallax (text over first image)
+        gsap.fromTo("#heroImg", { scale: 1.06 }, { scale: 1.0, duration: 1.1, ease: "power2.out" });
+
+        gsap.to("#heroWord", {
+            y: 70,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#heroMedia",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+        gsap.to("#heroImg", {
+            y: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#heroMedia",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Projects: image fades + card slides from side
+        gsap.utils.toArray(".project").forEach((proj) => {
+            const img = proj.querySelector(".img");
+            const card = proj.querySelector(".card");
+            const side = proj.dataset.side;
+
+            gsap.fromTo(img, {opacity:0, y: 18}, {
+                opacity:1, y:0, duration: .75, ease:"power2.out",
+                scrollTrigger: { trigger: proj, start: "top 78%" }
+            });
+
+            gsap.fromTo(card,
+                {opacity:0, x: side === "right" ? 26 : -26},
+                {
+                    opacity:1, x:0, duration: .8, ease:"power2.out",
+                    scrollTrigger: { trigger: proj, start: "top 78%" }
+                }
+            );
+        });
+
+        // Gallery: fly-in + subtle drift
+        gsap.utils.toArray("#galleryStage .g").forEach((el, idx) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 26, rotate: (idx % 2 ? 1.0 : -1.0) },
+                {
+                    opacity: 1, y: 0, rotate: 0,
+                    duration: .8,
+                    ease: "power2.out",
+                    scrollTrigger: { trigger: "#galleryStage", start: "top 78%" }
+                }
+            );
+
+            gsap.to(el, {
+                y: (idx % 2 ? -14 : 14),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#galleryStage",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // Reviews staging
+        gsap.timeline({
+            scrollTrigger: { trigger: ".reviews-band", start: "top 78%" }
+        })
+            .fromTo(".reviews-kicker", {opacity:0, y: 12}, {opacity:1, y:0, duration:.45, ease:"power2.out"})
+            .fromTo(".reviews-title",  {opacity:0, y: 14}, {opacity:1, y:0, duration:.55, ease:"power2.out"}, "-=0.15")
+            .fromTo("#reviewText",     {opacity:0, y: 14}, {opacity:1, y:0, duration:.55, ease:"power2.out"}, "-=0.10")
+            .fromTo(".review-controls",{opacity:0, y: 10}, {opacity:1, y:0, duration:.45, ease:"power2.out"}, "-=0.10");
+    }
+
+    // ---------- content loader (Decap CMS edits /content/site.json) ----------
+    async function loadSiteContent(){
+        const res = await fetch("/content/site.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load /content/site.json");
+        const data = await res.json();
+
+        // HERO
+        if (data?.hero?.word) document.getElementById("heroWord").textContent = data.hero.word;
+        if (data?.hero?.image) document.getElementById("heroImg").src = data.hero.image;
+
+        // ABOUT
+        if (data?.about?.p1) document.getElementById("aboutP1").textContent = data.about.p1;
+        if (data?.about?.p2) document.getElementById("aboutP2").textContent = data.about.p2;
+
+        // SERVICES
+        renderServices(data?.services);
+        initAccordion();
+
+        // PROJECTS (add/remove freely)
+        renderProjects(data?.projects);
+
+        // GALLERY
+        renderGallery(data?.gallery);
+
+        // REVIEWS
+        const reviewQuotes = Array.isArray(data?.reviews) ? data.reviews.map(r => r?.quote).filter(Boolean) : [];
+        setReviews(reviewQuotes);
+
+        // PARTNER
+        if (data?.partner?.title) document.getElementById("partnerTitle").innerHTML = escapeHtml(data.partner.title).replaceAll("\n","<br>");
+        if (data?.partner?.desc) document.getElementById("partnerDesc").textContent = data.partner.desc;
+        if (data?.partner?.image) document.getElementById("partnerImg").src = data.partner.image;
+
+        // FOOTER
+        if (data?.footer?.email) document.getElementById("footerEmail").textContent = data.footer.email;
+        renderFooterSocials(data?.footer?.social);
+
+        // Init animations after DOM is fully rendered
+        initAnimations();
+    }
+
+    // ---------- boot ----------
+    initReviewsControls();
+
+    loadSiteContent().catch((err) => {
+        console.warn(err);
+        // Fallback: still run animations on static placeholders
+        initAnimations();
+    });
+</script>
+</body>
+</html>

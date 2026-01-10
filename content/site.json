@@ -1,58 +1,84 @@
 {
+  "langDefault": "en",
+  "brand": {
+    "name": "WM GROUP",
+    "logo": "/assets/uploads/logo.png"
+  },
   "hero": {
-    "word": "WM GROUP",
+    "word": {
+      "en": "WM GROUP",
+      "ar": "WM GROUP"
+    },
     "image": "/assets/uploads/picture-1.jpg"
   },
   "about": {
-    "p1": "Waleed Medaa Group is a Syrian architectural firm based in Damascus, delivering comprehensive architectural and construction solutions for high-end projects.\n\nThe firm specializes in construction management and supervision, providing end-to-end services from concept through execution. With multidisciplinary design and management teams across all engineering fields, Waleed Medaa Group ensures full project coordination, technical excellence, and execution precision.",
-    "p2": "Our work spans residential housing, commercial real estate, logistics centers, leisure developments, and high-rise buildings. Every project is approached with a commitment to quality, functionality, and architectural integrity, with the ultimate goal of meeting—and surpassing—client expectations."
+    "p1": {
+      "en": "Waleed Medaa Group is a Syrian architectural firm based in Damascus, delivering comprehensive architectural and construction solutions for high-end projects.\n\nThe firm specializes in construction management and supervision, providing end-to-end services from concept through execution. With multidisciplinary design and management teams across all engineering fields, Waleed Medaa Group ensures full project coordination, technical excellence, and execution precision.",
+      "ar": ""
+    },
+    "p2": {
+      "en": "Our work spans residential housing, commercial real estate, logistics centers, leisure developments, and high-rise buildings. Every project is approached with a commitment to quality, functionality, and architectural integrity, with the ultimate goal of meeting—and surpassing—client expectations.",
+      "ar": ""
+    }
   },
   "services": [
     {
       "num": "01",
-      "title": "Architecture",
-      "text": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings. Our architectural services combine creativity with technical rigor to deliver clear, buildable solutions.",
+      "title": { "en": "Architecture", "ar": "" },
+      "text": {
+        "en": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings. Our architectural services combine creativity with technical rigor to deliver clear, buildable solutions.",
+        "ar": ""
+      },
       "bullets": [
-        "Concept Design",
-        "Architectural Planning",
-        "3D Visualization & Modeling",
-        "Construction Documentation"
+        { "bullet": { "en": "Concept Design", "ar": "" } },
+        { "bullet": { "en": "Architectural Planning", "ar": "" } },
+        { "bullet": { "en": "3D Visualization & Modeling", "ar": "" } },
+        { "bullet": { "en": "Construction Documentation", "ar": "" } }
       ],
       "image": "/assets/uploads/picture-3.jpg"
     },
     {
       "num": "02",
-      "title": "Interior Design",
-      "text": "We create refined interior environments that balance aesthetics, functionality, and material quality. Our interior design approach ensures cohesive spaces that enhance user experience and complement the architectural vision.",
+      "title": { "en": "Interior Design", "ar": "" },
+      "text": {
+        "en": "We create refined interior environments that balance aesthetics, functionality, and material quality. Our interior design approach ensures cohesive spaces that enhance user experience and complement the architectural vision.",
+        "ar": ""
+      },
       "bullets": [
-        "Space Planning & Layout Design",
-        "Material & Finishes Selection",
-        "Custom Furniture & Joinery Design",
-        "Lighting & Interior Visualization"
+        { "bullet": { "en": "Space Planning & Layout Design", "ar": "" } },
+        { "bullet": { "en": "Material & Finishes Selection", "ar": "" } },
+        { "bullet": { "en": "Custom Furniture & Joinery Design", "ar": "" } },
+        { "bullet": { "en": "Lighting & Interior Visualization", "ar": "" } }
       ],
       "image": "/assets/uploads/picture-4.jpg"
     },
     {
       "num": "03",
-      "title": "Layout Planning",
-      "text": "We develop efficient layout solutions that optimize circulation, usability, and spatial clarity. Each plan is carefully structured to support functionality, flexibility, and long-term performance.\n",
+      "title": { "en": "Layout Planning", "ar": "" },
+      "text": {
+        "en": "We develop efficient layout solutions that optimize circulation, usability, and spatial clarity. Each plan is carefully structured to support functionality, flexibility, and long-term performance.",
+        "ar": ""
+      },
       "bullets": [
-        "Spatial Zoning & Circulation Studies",
-        "Functional Area Planning",
-        "Residential & Commercial Layouts",
-        "Optimization for Code & Efficiency"
+        { "bullet": { "en": "Spatial Zoning & Circulation Studies", "ar": "" } },
+        { "bullet": { "en": "Functional Area Planning", "ar": "" } },
+        { "bullet": { "en": "Residential & Commercial Layouts", "ar": "" } },
+        { "bullet": { "en": "Optimization for Code & Efficiency", "ar": "" } }
       ],
       "image": "/assets/uploads/picture-5.jpg"
     },
     {
-      "title": "Project Management",
       "num": "04",
-      "text": "We provide comprehensive project management and construction supervision services to ensure projects are delivered on time, within budget, and to the highest quality standards.",
+      "title": { "en": "Project Management", "ar": "" },
+      "text": {
+        "en": "We provide comprehensive project management and construction supervision services to ensure projects are delivered on time, within budget, and to the highest quality standards.",
+        "ar": ""
+      },
       "bullets": [
-        "Construction Management & Supervision",
-        "Cost Control & Scheduling",
-        "Multidisciplinary Coordination",
-        "Quality Assurance & Site Follow-up"
+        { "bullet": { "en": "Construction Management & Supervision", "ar": "" } },
+        { "bullet": { "en": "Cost Control & Scheduling", "ar": "" } },
+        { "bullet": { "en": "Multidisciplinary Coordination", "ar": "" } },
+        { "bullet": { "en": "Quality Assurance & Site Follow-up", "ar": "" } }
       ],
       "image": "/assets/uploads/picture-6.jpg"
     }
@@ -60,53 +86,45 @@
   "projects": [
     {
       "side": "right",
-      "meta": "Syria Residential Yaffour",
-      "desc": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
-      "title": "Villa concept in Yaffour",
+      "title": { "en": "Villa concept in Yaffour", "ar": "" },
+      "meta": { "en": "Syria • Residential • Yaffour", "ar": "" },
+      "desc": {
+        "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
+        "ar": ""
+      },
       "image": "/assets/uploads/picture-7.jpg"
     },
     {
       "side": "left",
-      "title": "Marota City",
-      "meta": "Syria Residential Block: H10",
-      "desc": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
+      "title": { "en": "Marota City", "ar": "" },
+      "meta": { "en": "Syria • Residential • Block H10", "ar": "" },
+      "desc": {
+        "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
+        "ar": ""
+      },
       "image": "/assets/uploads/picture-8.jpg"
     }
   ],
   "gallery": [
-    {
-      "image": "/assets/uploads/picture-9.jpg"
-    },
-    {
-      "image": "/assets/uploads/picture-10.jpg"
-    },
-    {
-      "image": "/assets/uploads/picture-11.jpg"
-    },
-    {
-      "image": "/assets/uploads/picture-12.jpg"
-    },
-    {
-      "image": "/assets/uploads/picture-13.jpg"
-    }
+    { "image": "/assets/uploads/picture-9.jpg" },
+    { "image": "/assets/uploads/picture-10.jpg" },
+    { "image": "/assets/uploads/picture-11.jpg" },
+    { "image": "/assets/uploads/picture-12.jpg" },
+    { "image": "/assets/uploads/picture-13.jpg" }
   ],
-  "reviews": [],
   "partner": {
-    "title": "PARTNER WITH US",
-    "desc": "If you’re someone who’s looking to bring a space to life, share a few details so we can discuss your vision.",
-    "image": "/assets/uploads/picture-14.jpg"
-  },
-  "footer": {
-    "email": "hi@woodland.com",
-    "social": [
-      {
-        "label": "Twitter",
-        "url": "https://twitter.com"
-      },
-      {
-        "label": "LinkedIn",
-        "url": "https://linkedin.com"
-      }
-    ]
+    "title": { "en": "Partner with us", "ar": "" },
+    "desc": { "en": "You can reach us here:", "ar": "" },
+    "image": "/assets/uploads/picture-14.jpg",
+    "contact": {
+      "address": { "en": "Damascus, Syria — Your Address Here", "ar": "" },
+      "phoneLabel": { "en": "Phone", "ar": "" },
+      "phoneE164": "+963000000000",
+      "whatsappLabel": { "en": "WhatsApp", "ar": "" },
+      "whatsappNumberE164": "+963000000000",
+      "instagramLabel": { "en": "Instagram", "ar": "" },
+      "instagramName": "wmgroup",
+      "instagramUrl": "https://instagram.com/wmgroup"
+    }
   }
 }

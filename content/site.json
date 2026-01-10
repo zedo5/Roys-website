@@ -1,15 +1,40 @@
 {
-  "langDefault": "en",
   "brand": {
     "name": "WM GROUP",
     "logo": "/assets/uploads/logo.png"
   },
-  "hero": {
-    "word": {
-      "en": "WM GROUP",
-      "ar": "WM GROUP"
+  "partner": {
+    "title": {
+      "en": "Partner with us",
+      "ar": "تعاون معنا"
     },
-    "image": "/assets/uploads/picture-1.jpg"
+    "desc": {
+      "en": "You can reach us here:",
+      "ar": "يمكنكم التواصل معنا عبر:"
+    },
+    "image": "/assets/uploads/picture-14.jpg",
+    "contact": {
+      "address": {
+        "en": "Damascus, Syria — Your Address Here",
+        "ar": "دمشق، سوريا — العنوان هنا"
+      },
+      "phoneLabel": {
+        "en": "Phone",
+        "ar": "الهاتف"
+      },
+      "phoneE164": "+963000000000",
+      "whatsappLabel": {
+        "en": "WhatsApp",
+        "ar": "واتساب"
+      },
+      "whatsappNumberE164": "+963000000000",
+      "instagramLabel": {
+        "en": "Instagram",
+        "ar": "إنستغرام"
+      },
+      "instagramName": "wmgroup",
+      "instagramUrl": "https://instagram.com/wmgroup"
+    }
   },
   "about": {
     "p1": {
@@ -21,73 +46,35 @@
       "ar": "تشمل أعمالنا المشاريع السكنية، والعقارات التجارية، ومراكز الخدمات اللوجستية، والمشاريع الترفيهية، والمباني متعددة الطوابق. يتم التعامل مع كل مشروع انطلاقًا من الالتزام بالجودة والوظيفة والسلامة المعمارية، بهدف تلبية توقعات العملاء بل وتجاوزها."
     }
   },
-  "services": [
+  "gallery": [
     {
-      "num": "01",
-      "title": { "en": "Architecture", "ar": "الهندسة المعمارية" },
-      "text": {
-        "en": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings. Our architectural services combine creativity with technical rigor to deliver clear, buildable solutions.",
-        "ar": "نصمم مباني ذات أهداف واضحة، طويلة الأمد، ومرتبطة بعمق بمحيطها. تجمع خدماتنا المعمارية بين الإبداع والدقة التقنية لتقديم حلول واضحة وقابلة للتنفيذ."
-      },
-      "bullets": [
-        { "bullet": { "en": "Concept Design", "ar": "التصميم المفاهيمي" } },
-        { "bullet": { "en": "Architectural Planning", "ar": "التخطيط المعماري" } },
-        { "bullet": { "en": "3D Visualization & Modeling", "ar": "التصميم والنمذجة ثلاثية الأبعاد" } },
-        { "bullet": { "en": "Construction Documentation", "ar": "مخططات ووثائق التنفيذ" } }
-      ],
-      "image": "/assets/uploads/picture-3.jpg"
+      "image": "/assets/uploads/picture-9.jpg"
     },
     {
-      "num": "02",
-      "title": { "en": "Interior Design", "ar": "التصميم الداخلي" },
-      "text": {
-        "en": "We create refined interior environments that balance aesthetics, functionality, and material quality. Our interior design approach ensures cohesive spaces that enhance user experience and complement the architectural vision.",
-        "ar": "نبتكر بيئات داخلية راقية تحقق توازنًا بين الجمال والوظيفة وجودة المواد. يضمن نهجنا في التصميم الداخلي مساحات متكاملة تعزز تجربة المستخدم وتكمل الرؤية المعمارية."
-      },
-      "bullets": [
-        { "bullet": { "en": "Space Planning & Layout Design", "ar": "تخطيط المساحات والتوزيع الداخلي" } },
-        { "bullet": { "en": "Material & Finishes Selection", "ar": "اختيار المواد والتشطيبات" } },
-        { "bullet": { "en": "Custom Furniture & Joinery Design", "ar": "تصميم الأثاث والأعمال الخشبية الخاصة" } },
-        { "bullet": { "en": "Lighting & Interior Visualization", "ar": "تصميم الإضاءة والتصوير الداخلي" } }
-      ],
-      "image": "/assets/uploads/picture-4.jpg"
+      "image": "/assets/uploads/picture-10.jpg"
     },
     {
-      "num": "03",
-      "title": { "en": "Layout Planning", "ar": "تخطيط المساقط" },
-      "text": {
-        "en": "We develop efficient layout solutions that optimize circulation, usability, and spatial clarity. Each plan is carefully structured to support functionality, flexibility, and long-term performance.",
-        "ar": "نطور حلول تخطيط فعّالة تعزز سهولة الحركة وسلاسة الاستخدام ووضوح الفراغات. يتم إعداد كل مخطط بعناية لدعم الوظيفة والمرونة والأداء طويل الأمد."
-      },
-      "bullets": [
-        { "bullet": { "en": "Spatial Zoning & Circulation Studies", "ar": "تقسيم الفراغات ودراسات الحركة" } },
-        { "bullet": { "en": "Functional Area Planning", "ar": "تخطيط المناطق الوظيفية" } },
-        { "bullet": { "en": "Residential & Commercial Layouts", "ar": "مساقط سكنية وتجارية" } },
-        { "bullet": { "en": "Optimization for Code & Efficiency", "ar": "تحسين التصميم وفق الأنظمة والكفاءة" } }
-      ],
-      "image": "/assets/uploads/picture-5.jpg"
+      "image": "/assets/uploads/picture-11.jpg"
     },
     {
-      "num": "04",
-      "title": { "en": "Project Management", "ar": "إدارة المشاريع" },
-      "text": {
-        "en": "We provide comprehensive project management and construction supervision services to ensure projects are delivered on time, within budget, and to the highest quality standards.",
-        "ar": "نقدم خدمات متكاملة في إدارة المشاريع والإشراف على التنفيذ لضمان تسليم المشاريع في الوقت المحدد، وضمن الميزانية، وبأعلى معايير الجودة."
-      },
-      "bullets": [
-        { "bullet": { "en": "Construction Management & Supervision", "ar": "إدارة التنفيذ والإشراف الهندسي" } },
-        { "bullet": { "en": "Cost Control & Scheduling", "ar": "ضبط التكاليف والبرامج الزمنية" } },
-        { "bullet": { "en": "Multidisciplinary Coordination", "ar": "التنسيق بين التخصصات الهندسية" } },
-        { "bullet": { "en": "Quality Assurance & Site Follow-up", "ar": "ضمان الجودة والمتابعة الميدانية" } }
-      ],
-      "image": "/assets/uploads/picture-6.jpg"
+      "image": "/assets/uploads/picture-12.jpg"
+    },
+    {
+      "image": "/assets/uploads/picture-13.jpg"
     }
   ],
+  "langDefault": "en",
   "projects": [
     {
       "side": "right",
-      "title": { "en": "Villa concept in Yaffour", "ar": "تصميم فيلا في يعفور" },
-      "meta": { "en": "Syria • Residential • Yaffour", "ar": "سوريا • سكني • يعفور" },
+      "title": {
+        "en": "Villa concept in Yaffour",
+        "ar": "تصميم فيلا في يعفور"
+      },
+      "meta": {
+        "en": "Syria • Residential • Yaffour",
+        "ar": "سوريا • سكني • يعفور"
+      },
       "desc": {
         "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
         "ar": "تصميم معماري تصوري لفيلا فاخرة مخطط لها في يعفور، يتميز بأسلوب نيوكلاسيكي مع تناظر رسمي، ومساحات خضراء منسقة، ومدخل مسوّر."
@@ -96,8 +83,14 @@
     },
     {
       "side": "left",
-      "title": { "en": "Marota City", "ar": "مدينة ماروتا" },
-      "meta": { "en": "Syria • Residential • Block H10", "ar": "سوريا • سكني • بلوك H10" },
+      "title": {
+        "en": "Marota City",
+        "ar": "مدينة ماروتا"
+      },
+      "meta": {
+        "en": "Syria • Residential • Block H10",
+        "ar": "سوريا • سكني • بلوك H10"
+      },
       "desc": {
         "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
         "ar": "مشروع سكني تصوري في مدينة ماروتا، يعرض تصميمًا معماريًا معاصرًا يهدف إلى دعم أسلوب الحياة الحضرية الحديثة."
@@ -105,26 +98,165 @@
       "image": "/assets/uploads/picture-8.jpg"
     }
   ],
-  "gallery": [
-    { "image": "/assets/uploads/picture-9.jpg" },
-    { "image": "/assets/uploads/picture-10.jpg" },
-    { "image": "/assets/uploads/picture-11.jpg" },
-    { "image": "/assets/uploads/picture-12.jpg" },
-    { "image": "/assets/uploads/picture-13.jpg" }
-  ],
-  "partner": {
-    "title": { "en": "Partner with us", "ar": "تعاون معنا" },
-    "desc": { "en": "You can reach us here:", "ar": "يمكنكم التواصل معنا عبر:" },
-    "image": "/assets/uploads/picture-14.jpg",
-    "contact": {
-      "address": { "en": "Damascus, Syria — Your Address Here", "ar": "دمشق، سوريا — العنوان هنا" },
-      "phoneLabel": { "en": "Phone", "ar": "الهاتف" },
-      "phoneE164": "+963000000000",
-      "whatsappLabel": { "en": "WhatsApp", "ar": "واتساب" },
-      "whatsappNumberE164": "+963000000000",
-      "instagramLabel": { "en": "Instagram", "ar": "إنستغرام" },
-      "instagramName": "wmgroup",
-      "instagramUrl": "https://instagram.com/wmgroup"
+  "hero": {
+    "word": "Map { \"en\": \"\", \"ar\": \"\" }",
+    "image": "/assets/uploads/picture-1.jpg"
+  },
+  "footer": {
+    "social": []
+  },
+  "services": [
+    {
+      "num": "01",
+      "title": {
+        "en": "Architecture",
+        "ar": "الهندسة المعمارية"
+      },
+      "text": {
+        "en": "We design buildings that are purposeful, enduring, and deeply connected to their surroundings. Our architectural services combine creativity with technical rigor to deliver clear, buildable solutions.",
+        "ar": "نصمم مباني ذات أهداف واضحة، طويلة الأمد، ومرتبطة بعمق بمحيطها. تجمع خدماتنا المعمارية بين الإبداع والدقة التقنية لتقديم حلول واضحة وقابلة للتنفيذ."
+      },
+      "bullets": [
+        {
+          "bullet": {
+            "en": "Concept Design",
+            "ar": "التصميم المفاهيمي"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Architectural Planning",
+            "ar": "التخطيط المعماري"
+          }
+        },
+        {
+          "bullet": {
+            "en": "3D Visualization & Modeling",
+            "ar": "التصميم والنمذجة ثلاثية الأبعاد"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Construction Documentation",
+            "ar": "مخططات ووثائق التنفيذ"
+          }
+        }
+      ],
+      "image": "/assets/uploads/picture-3.jpg"
+    },
+    {
+      "num": "02",
+      "title": {
+        "en": "Interior Design",
+        "ar": "التصميم الداخلي"
+      },
+      "text": {
+        "en": "We create refined interior environments that balance aesthetics, functionality, and material quality. Our interior design approach ensures cohesive spaces that enhance user experience and complement the architectural vision.",
+        "ar": "نبتكر بيئات داخلية راقية تحقق توازنًا بين الجمال والوظيفة وجودة المواد. يضمن نهجنا في التصميم الداخلي مساحات متكاملة تعزز تجربة المستخدم وتكمل الرؤية المعمارية."
+      },
+      "bullets": [
+        {
+          "bullet": {
+            "en": "Space Planning & Layout Design",
+            "ar": "تخطيط المساحات والتوزيع الداخلي"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Material & Finishes Selection",
+            "ar": "اختيار المواد والتشطيبات"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Custom Furniture & Joinery Design",
+            "ar": "تصميم الأثاث والأعمال الخشبية الخاصة"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Lighting & Interior Visualization",
+            "ar": "تصميم الإضاءة والتصوير الداخلي"
+          }
+        }
+      ],
+      "image": "/assets/uploads/picture-4.jpg"
+    },
+    {
+      "num": "03",
+      "title": {
+        "en": "Layout Planning",
+        "ar": "تخطيط المساقط"
+      },
+      "text": {
+        "en": "We develop efficient layout solutions that optimize circulation, usability, and spatial clarity. Each plan is carefully structured to support functionality, flexibility, and long-term performance.",
+        "ar": "نطور حلول تخطيط فعّالة تعزز سهولة الحركة وسلاسة الاستخدام ووضوح الفراغات. يتم إعداد كل مخطط بعناية لدعم الوظيفة والمرونة والأداء طويل الأمد."
+      },
+      "bullets": [
+        {
+          "bullet": {
+            "en": "Spatial Zoning & Circulation Studies",
+            "ar": "تقسيم الفراغات ودراسات الحركة"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Functional Area Planning",
+            "ar": "تخطيط المناطق الوظيفية"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Residential & Commercial Layouts",
+            "ar": "مساقط سكنية وتجارية"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Optimization for Code & Efficiency",
+            "ar": "تحسين التصميم وفق الأنظمة والكفاءة"
+          }
+        }
+      ],
+      "image": "/assets/uploads/picture-5.jpg"
+    },
+    {
+      "num": "04",
+      "title": {
+        "en": "Project Management",
+        "ar": "إدارة المشاريع"
+      },
+      "text": {
+        "en": "We provide comprehensive project management and construction supervision services to ensure projects are delivered on time, within budget, and to the highest quality standards.",
+        "ar": "نقدم خدمات متكاملة في إدارة المشاريع والإشراف على التنفيذ لضمان تسليم المشاريع في الوقت المحدد، وضمن الميزانية، وبأعلى معايير الجودة."
+      },
+      "bullets": [
+        {
+          "bullet": {
+            "en": "Construction Management & Supervision",
+            "ar": "إدارة التنفيذ والإشراف الهندسي"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Cost Control & Scheduling",
+            "ar": "ضبط التكاليف والبرامج الزمنية"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Multidisciplinary Coordination",
+            "ar": "التنسيق بين التخصصات الهندسية"
+          }
+        },
+        {
+          "bullet": {
+            "en": "Quality Assurance & Site Follow-up",
+            "ar": "ضمان الجودة والمتابعة الميدانية"
+          }
+        }
+      ],
+      "image": "/assets/uploads/picture-6.jpg"
     }
-  }
+  ]
 }

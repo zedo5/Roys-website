@@ -274,7 +274,6 @@
             .right{justify-self:start; max-width: 720px;}
             .project .card{position:relative; top:auto; left:auto; right:auto; width: 100%; margin-top: 16px;}
             .gallery-stage{height: 720px;}
-            .g1,.g2,.g3,.g4,.g5{position:relative; left:auto; top:auto; width:100%; height:240px; margin-bottom:14px;}
             .gallery-word{display:none;}
             .navlinks{display:none;}
             .partner-grid{grid-template-columns:1fr}
@@ -291,56 +290,52 @@
 
         @media (max-width: 768px){
 
-            /* A) Hero text */
-            .hero-word{
-                font-size: clamp(42px, 12vw, 78px);
-                letter-spacing: .04em;
-                top: 70px;
-                opacity: .32;
-            }
-
-            /* B) Services accordion layout */
-            .acc-panel{
-                grid-template-columns: 1fr;
-                padding-left: 0;
-            }
-
-            .acc-panel img{
-                height: 200px;
-                margin-top: 12px;
-            }
-
-            /* C) Projects layout */
-            .project{
-                padding: 24px 0;
-            }
-
-            .project .card{
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                width: 100%;
-                margin-top: 14px;
-            }
-
-            .project .img{
-                height: 260px;
-            }
-
-            /* D) Partner contact spacing */
-            .contact-row{
+            /* Gallery: 2-column responsive grid */
+            .gallery-grid{
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 10px;
-                font-size: 14px;
             }
 
-            .contact-row svg{
-                width: 24px;
-                height: 24px;
+            .gallery-grid .g-item,
+            .gallery-grid a,
+            .gallery-grid img{
+                width: 100%;
+                display: block;
             }
 
-            .partner-title{
-                font-size: 48px;
+            .gallery-grid img{
+                height: 170px;          /* adjust as you like */
+                object-fit: cover;
+                border-radius: 14px;
+            }
+
+            /* Optional: make every 3rd image taller for a “designed” feel */
+            .gallery-grid .g-item:nth-child(3n) img{
+                height: 240px;
+            }
+
+            @media (max-width: 768px){
+
+                /* Keep collage layout on mobile */
+                .gallery-stage{
+                    height: 620px;       /* IMPORTANT: prevents collision with Partner section */
+                    overflow: hidden;
+                    margin-bottom: 24px; /* adds breathing room before Partner */
+                }
+
+                .gallery-word{ display: none; }
+
+                .g{ border-radius: 16px; }
+
+                /* Mobile collage positions (no negative tops to avoid overlap) */
+                .g4{ left: 6%;  top: 20px;  width: 46%; height: 150px; }
+                .g5{ left: 52%; top: 20px;  width: 42%; height: 150px; }
+
+                .g1{ left: 6%;  top: 190px; width: 42%; height: 190px; }
+                .g2{ left: 46%; top: 160px; width: 48%; height: 260px; }
+
+                .g3{ left: 10%; top: 400px; width: 84%; height: 200px; }
             }
         }
     </style>
@@ -729,7 +724,7 @@
                             trigger: el,
                             start: "top 85%",
                             end: "bottom 60%",
-                            toggleActions: "play reverse play reverse"
+                            toggleActions: "play none none none"
                         }
                     }
                 );

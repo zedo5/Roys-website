@@ -15,25 +15,25 @@
     "image": "/assets/uploads/picture-14.jpg",
     "contact": {
       "address": {
-        "en": "Damascus, Syria — Your Address Here",
-        "ar": "دمشق، سوريا — العنوان هنا"
+        "en": "Damascus, Syria — Abu Rummaneh, near the Franciscan School\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
+        "ar": "دمشق، سوريا — أبو رمانة، بالقرب من المدرسة الفرنسيسكانية\nدبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
       },
       "phoneLabel": {
         "en": "Phone",
         "ar": "الهاتف"
       },
-      "phoneE164": "+963000000000",
+      "phoneE164": "+963949066000",
       "whatsappLabel": {
         "en": "WhatsApp",
         "ar": "واتساب"
       },
-      "whatsappNumberE164": "+963000000000",
+      "whatsappNumberE164": "+963949066000",
       "instagramLabel": {
         "en": "Instagram",
         "ar": "إنستغرام"
       },
-      "instagramName": "wmgroup",
-      "instagramUrl": "https://instagram.com/wmgroup"
+      "instagramName": "wm_group_",
+      "instagramUrl": "https://www.instagram.com/wm_group_?igsh=ZXRyaDlrejhiYXJv"
     }
   },
   "about": {

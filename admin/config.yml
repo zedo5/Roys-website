@@ -33,13 +33,12 @@ collections:
             name: "hero"
             widget: "object"
             fields:
-              - label: "Hero Word"
-                name: "word"
-                widget: "object"
+              - label: "Hero Images (Slider)"
+                name: "images"
+                widget: "list"
+                summary: "{{fields.image}}"
                 fields:
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Arabic", name: "ar", widget: "string" }
-              - { label: "Hero Image", name: "image", widget: "image" }
+                  - { label: "Image", name: "image", widget: "image" }
 
           - label: "About"
             name: "about"
@@ -163,7 +162,7 @@ collections:
                     fields:
                       - { label: "English", name: "en", widget: "string" }
                       - { label: "Arabic", name: "ar", widget: "string" }
-                  - { label: "Phone (E.164)", name: "phoneE164", widget: "string", hint: "Example: +963XXXXXXXXX" }
+                  - { label: "Phone (E.164)", name: "phoneE164", widget: "string" }
 
                   - label: "WhatsApp Label"
                     name: "whatsappLabel"
@@ -171,7 +170,7 @@ collections:
                     fields:
                       - { label: "English", name: "en", widget: "string" }
                       - { label: "Arabic", name: "ar", widget: "string" }
-                  - { label: "WhatsApp Number (E.164)", name: "whatsappNumberE164", widget: "string", hint: "Example: +963XXXXXXXXX" }
+                  - { label: "WhatsApp Number (E.164)", name: "whatsappNumberE164", widget: "string" }
 
                   - label: "Instagram Label"
                     name: "instagramLabel"
@@ -179,5 +178,5 @@ collections:
                     fields:
                       - { label: "English", name: "en", widget: "string" }
                       - { label: "Arabic", name: "ar", widget: "string" }
-                  - { label: "Instagram Name", name: "instagramName", widget: "string", hint: "Example: wmgroup" }
-                  - { label: "Instagram URL", name: "instagramUrl", widget: "string", hint: "Example: https://instagram.com/wmgroup" }
+                  - { label: "Instagram Name", name: "instagramName", widget: "string" }
+                  - { label: "Instagram URL", name: "instagramUrl", widget: "string" }

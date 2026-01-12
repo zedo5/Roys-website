@@ -99,8 +99,13 @@
     }
   ],
   "hero": {
-    "word": "Map { \"en\": \"\", \"ar\": \"\" }",
-    "image": "/assets/uploads/picture-1.jpg"
+    "word": { "en": "", "ar": "" },
+    "images": [
+      { "image": "/assets/uploads/picture-1.jpg" },
+      { "image": "/assets/uploads/picture-2.jpg" },
+      { "image": "/assets/uploads/picture-3.jpg" }
+    ],
+    "intervalMs": 4500
   },
   "footer": {
     "social": []

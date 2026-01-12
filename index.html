@@ -59,7 +59,7 @@
         .navlinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
         .navlinks a{font-size:12px;opacity:.9}
 
-        /* Language toggle (more natural) */
+        /* Language toggle */
         .langbtn{
             font: inherit;
             font-size: 12px;
@@ -84,42 +84,118 @@
         /* HERO */
         .hero{padding:18px 0 0}
         .hero .container{max-width: 100%; padding: 0;}
-        .hero-media{position:relative; overflow:hidden; background:#eee;}
-        .hero-img{
-            width:100%;
-            height: clamp(520px, 82vh, 860px);
-            object-fit: cover;
-            transform-origin:center;
-            position: relative;
-            z-index: 1;
+
+        .hero-media{
+            position:relative;
+            overflow:hidden;
+            background:#eee;
+            border-bottom: 1px solid rgba(30,30,30,.08);
         }
 
         /* Center-split open wipes */
         .wipe{
             position:absolute; top:0; width:50%; height:100%;
-            background: var(--white); z-index: 5; pointer-events:none;
+            background: var(--white); z-index: 7; pointer-events:none;
             transform: scaleX(1);
         }
         .wipe.split.left{left:0; transform-origin:left;}
         .wipe.split.right{right:0; transform-origin:right;}
 
-        /* WM GROUP overlay (transparent but more visible) */
-        .hero-word{
-            position:absolute;
-            left: 60px;
-            top: 110px;
-            font-weight: 800;
-            font-size: clamp(64px, 10vw, 160px);
-            letter-spacing: .08em;
-            color: rgba(10,10,10,.30);
-            text-transform: uppercase;
-            pointer-events:none;
+        /* HERO carousel */
+        .hero-slider{
+            position: relative;
+            width: 100%;
+            height: clamp(520px, 82vh, 860px);
+            z-index: 1;
+        }
+
+        .hero-track{
+            display: flex;
+            height: 100%;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-snap-stop: always;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+        .hero-track::-webkit-scrollbar{ display:none; }
+        .hero-track.dragging{ cursor: grabbing; }
+
+        .hero-slide{
+            flex: 0 0 100%;
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+        }
+        .hero-slide img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin:center;
             user-select:none;
-            white-space:nowrap;
-            mix-blend-mode: multiply;
-            text-shadow: 0 2px 18px rgba(255,255,255,.18);
+            -webkit-user-drag:none;
+        }
+
+        /* Arrows (clean) */
+        .hero-arrow{
+            position:absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            max-width: 46px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(20,20,20,.35);
+            backdrop-filter: blur(10px);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color: rgba(255,255,255,.92);
+            cursor:pointer;
+            padding: 0;
+            appearance: none;
+            -webkit-appearance: none;
             z-index: 6;
-            display: none !important;
+            transition: transform .15s ease, opacity .2s ease;
+            opacity: .95;
+        }
+        .hero-arrow:hover{ opacity: 1; }
+        .hero-arrow:active{ transform: translateY(-50%) scale(.98); }
+        .hero-arrow.left{ left: 18px; }
+        .hero-arrow.right{ right: 18px; }
+        .hero-arrow svg{ width: 18px; height: 18px; }
+
+        /* Dots */
+        .hero-dots{
+            position:absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 16px;
+            z-index: 6;
+            display:flex;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(20,20,20,.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,.18);
+        }
+        .hero-dot{
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.55);
+            opacity: .9;
+            cursor: pointer;
+        }
+        .hero-dot.active{
+            width: 18px;
+            background: rgba(255,255,255,.92);
+            opacity: 1;
         }
 
         section{padding: 80px 0;}
@@ -128,6 +204,10 @@
             grid-template-columns: 1fr 520px;
             gap: 60px;
             align-items:start;
+        }
+        #services .split{
+            grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
+            gap: 40px;
         }
         .big-title{
             font-size: clamp(44px, 6vw, 74px);
@@ -143,7 +223,7 @@
             margin: 0 0 14px;
             color: var(--grey);
             font-size: 14px;
-            max-width: 52ch;
+            max-width: 58ch;
             white-space: pre-wrap;
         }
 
@@ -163,19 +243,41 @@
         .acc-plus{font-size: 22px; line-height: 1; justify-self:end; transition: transform .25s ease;}
         .acc-panel{
             display:grid;
-            grid-template-columns: 1fr 220px;
-            gap: 16px;
-            padding: 12px 0 0 70px;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 460px);
+            gap: 22px;
+            padding: 14px 0 0 70px;
             overflow:hidden;
             max-height: 0;
             opacity: 0;
             transition: max-height .45s ease, opacity .35s ease;
+            align-items: start;
         }
-        .acc-item.open .acc-panel{max-height: 520px; opacity: 1}
+        .acc-item.open .acc-panel{max-height: 900px; opacity: 1}
         .acc-item.open .acc-plus{transform: rotate(45deg)}
-        .acc-panel p{margin:0 0 10px;color:var(--grey);font-size:13px;max-width:46ch;white-space:pre-wrap}
-        .bullets{margin:0;padding-left:16px;color:var(--grey);font-size:12px;display:grid;gap:6px}
-        .acc-panel img{width:100%;height:160px;object-fit:cover;border-radius:10px;box-shadow: var(--soft-shadow);}
+        .acc-panel p{
+            margin:0 0 12px;
+            color:var(--grey);
+            font-size:13px;
+            line-height: 1.75;
+            max-width: none;              /* FIX: no skinny column */
+            white-space:pre-wrap;
+        }
+        .bullets{
+            margin:0;
+            padding-left:16px;
+            color:var(--grey);
+            font-size:12px;
+            display:grid;
+            gap:6px;
+            line-height: 1.65;
+        }
+        .acc-panel img{
+            width:100%;
+            height: 250px;               /* bigger service image */
+            object-fit:cover;
+            border-radius:14px;
+            box-shadow: var(--soft-shadow);
+        }
 
         /* Projects */
         .projects-wrap{margin-top: 20px;}
@@ -216,7 +318,7 @@
             user-select:none;
             pointer-events:none;
         }
-        .g{position:absolute; box-shadow: var(--soft-shadow); overflow:hidden; background:#f2f2f2;}
+        .g{position:absolute; box-shadow: var(--soft-shadow); overflow:hidden; background:#f2f2f2; border-radius:16px;}
         .g img{width:100%;height:100%;object-fit:cover}
         .g1{left: 14%; top: 160px; width: 260px; height: 260px;}
         .g2{left: 42%; top: 12px;  width: 340px; height: 380px;}
@@ -236,7 +338,6 @@
         }
         .partner-desc{margin:0 0 18px;color: var(--grey);font-size: 14px;max-width: 62ch;white-space:pre-wrap}
 
-        /* Contact rows (icon + text; links open apps) */
         .contact-list{display:grid; gap: 14px; margin-top: 10px; max-width: 600px;}
         .contact-row{
             display:flex;
@@ -260,9 +361,8 @@
         .reveal-right{opacity:0; transform: translateX(22px);}
 
         /* RTL adjustments */
-        html[dir="rtl"] .hero-word{left:auto; right:60px; letter-spacing:.04em;}
         html[dir="rtl"] .about-copy, html[dir="rtl"] .partner-left{ text-align:right; }
-        html[dir="rtl"] .acc-panel{padding: 12px 70px 0 0;}
+        html[dir="rtl"] .acc-panel{padding: 14px 70px 0 0;}
         html[dir="rtl"] .bullets{padding-left:0; padding-right:16px;}
         html[dir="rtl"] .project.right .card{right:auto; left:0;}
         html[dir="rtl"] .project.left  .card{left:auto; right:0;}
@@ -271,6 +371,7 @@
 
         @media (max-width: 980px){
             .split{grid-template-columns: 1fr; gap: 22px;}
+            #services .split{grid-template-columns: 1fr; gap: 22px;}
             .right{justify-self:start; max-width: 720px;}
             .project .card{position:relative; top:auto; left:auto; right:auto; width: 100%; margin-top: 16px;}
             .gallery-stage{height: 720px;}
@@ -279,64 +380,32 @@
             .partner-grid{grid-template-columns:1fr}
             .partner-left{padding: 64px 22px}
             .partner-title{font-size: 56px}
-            .hero-word{left:22px; top: 90px;}
-            html[dir="rtl"] .hero-word{left:auto; right:22px;}
+
+            /* Services: stack on mobile */
+            .acc-panel{grid-template-columns: 1fr; padding-left: 0;}
+            .acc-head{grid-template-columns: 58px 1fr 28px;}
+            .acc-panel img{height: 240px;}
         }
+
         @media (max-width: 520px){
             section{padding: 64px 0;}
-            .hero-img{height: 72vh;}
             .brand strong{font-size:16px}
+            .hero-arrow{ display:none; } /* swipe on phone, no arrows */
         }
 
         @media (max-width: 768px){
-
-            /* Gallery: 2-column responsive grid */
-            .gallery-grid{
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
+            /* Mobile collage positions (avoid overlap) */
+            .gallery-stage{
+                height: 620px;
+                overflow: hidden;
+                margin-bottom: 24px;
             }
-
-            .gallery-grid .g-item,
-            .gallery-grid a,
-            .gallery-grid img{
-                width: 100%;
-                display: block;
-            }
-
-            .gallery-grid img{
-                height: 170px;          /* adjust as you like */
-                object-fit: cover;
-                border-radius: 14px;
-            }
-
-            /* Optional: make every 3rd image taller for a “designed” feel */
-            .gallery-grid .g-item:nth-child(3n) img{
-                height: 240px;
-            }
-
-            @media (max-width: 768px){
-
-                /* Keep collage layout on mobile */
-                .gallery-stage{
-                    height: 620px;       /* IMPORTANT: prevents collision with Partner section */
-                    overflow: hidden;
-                    margin-bottom: 24px; /* adds breathing room before Partner */
-                }
-
-                .gallery-word{ display: none; }
-
-                .g{ border-radius: 16px; }
-
-                /* Mobile collage positions (no negative tops to avoid overlap) */
-                .g4{ left: 6%;  top: 20px;  width: 46%; height: 150px; }
-                .g5{ left: 52%; top: 20px;  width: 42%; height: 150px; }
-
-                .g1{ left: 6%;  top: 190px; width: 42%; height: 190px; }
-                .g2{ left: 46%; top: 160px; width: 48%; height: 260px; }
-
-                .g3{ left: 10%; top: 400px; width: 84%; height: 200px; }
-            }
+            .gallery-word{ display: none; }
+            .g4{ left: 6%;  top: 20px;  width: 46%; height: 150px; }
+            .g5{ left: 52%; top: 20px;  width: 42%; height: 150px; }
+            .g1{ left: 6%;  top: 190px; width: 42%; height: 190px; }
+            .g2{ left: 46%; top: 160px; width: 48%; height: 260px; }
+            .g3{ left: 10%; top: 400px; width: 84%; height: 200px; }
         }
     </style>
 </head>
@@ -375,9 +444,23 @@
             <div class="wipe split left" data-wipe-left></div>
             <div class="wipe split right" data-wipe-right></div>
 
-            <div class="hero-word" id="heroWord">WM GROUP</div>
+            <div class="hero-slider" id="heroSlider">
+                <div class="hero-track" id="heroTrack" aria-label="Hero images"></div>
 
-            <img class="hero-img" id="heroImg" src="/assets/uploads/picture-1.jpg" alt="Hero" />
+                <button class="hero-arrow left" id="heroPrev" type="button" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                </button>
+
+                <button class="hero-arrow right" id="heroNext" type="button" aria-label="Next">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 6l6 6-6 6"></path>
+                    </svg>
+                </button>
+
+                <div class="hero-dots" id="heroDots" aria-label="Hero dots"></div>
+            </div>
         </div>
     </div>
 </main>
@@ -435,7 +518,6 @@
         <div class="partner-left">
             <h2 class="partner-title reveal-left" id="partnerTitle"></h2>
             <p class="partner-desc reveal" id="partnerDesc"></p>
-
             <div class="contact-list reveal" id="contactList"></div>
         </div>
 
@@ -489,7 +571,182 @@
         return (LANG === "ar") ? toArabicIndicDigits(str) : String(str ?? "");
     }
 
-    // ---------- services ----------
+    /* ---------------- HERO CAROUSEL ---------------- */
+
+    const HERO = {
+        index: 0,
+        timer: null,
+        intervalMs: 4500,
+        userInteractedAt: 0,
+    };
+
+    function heroImages(){
+        const fromNew = Array.isArray(SITE?.hero?.images) ? SITE.hero.images : [];
+        const fallbackSingle = SITE?.hero?.image ? [{ image: SITE.hero.image }] : [];
+        const list = (fromNew.length ? fromNew : fallbackSingle)
+            .map(x => x?.image)
+            .filter(Boolean);
+        return list;
+    }
+
+    function heroBuild(){
+        const track = document.getElementById("heroTrack");
+        const dots = document.getElementById("heroDots");
+        if (!track || !dots) return;
+
+        const imgs = heroImages();
+        track.innerHTML = "";
+        dots.innerHTML = "";
+
+        imgs.forEach((src, i) => {
+            const slide = document.createElement("div");
+            slide.className = "hero-slide";
+            slide.innerHTML = `<img ${i===0 ? 'loading="eager"' : 'loading="lazy"'} src="${escapeHtml(src)}" alt="Hero ${i+1}">`;
+            track.appendChild(slide);
+
+            const dot = document.createElement("div");
+            dot.className = "hero-dot" + (i===0 ? " active" : "");
+            dot.setAttribute("role","button");
+            dot.setAttribute("tabindex","0");
+            dot.setAttribute("aria-label", "Go to slide " + (i+1));
+            dot.onclick = () => heroGo(i, true);
+            dot.onkeydown = (e) => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); heroGo(i, true);} };
+            dots.appendChild(dot);
+        });
+
+        HERO.index = 0;
+        heroUpdateDots();
+        heroBindDrag(track);
+        heroBindButtons();
+        heroStartAutoplay();
+    }
+
+    function heroSlideCount(){
+        return heroImages().length;
+    }
+
+    function heroUpdateDots(){
+        const dots = Array.from(document.querySelectorAll("#heroDots .hero-dot"));
+        dots.forEach((d,i) => d.classList.toggle("active", i===HERO.index));
+    }
+
+    function heroGo(idx, user=false){
+        const track = document.getElementById("heroTrack");
+        if (!track) return;
+
+        const count = heroSlideCount();
+        if (!count) return;
+
+        HERO.index = (idx + count) % count;
+        heroUpdateDots();
+
+        const x = HERO.index * track.clientWidth;
+        track.scrollTo({ left: x, behavior: "smooth" });
+
+        if (user){
+            HERO.userInteractedAt = Date.now();
+        }
+    }
+
+    function heroNext(user=false){ heroGo(HERO.index + 1, user); }
+    function heroPrev(user=false){ heroGo(HERO.index - 1, user); }
+
+    function heroStartAutoplay(){
+        heroStopAutoplay();
+        if (heroSlideCount() <= 1) return;
+
+        HERO.timer = setInterval(() => {
+            const now = Date.now();
+            // pause briefly after user interaction
+            if (now - HERO.userInteractedAt < 3500) return;
+            heroNext(false);
+        }, HERO.intervalMs);
+    }
+
+    function heroStopAutoplay(){
+        if (HERO.timer){ clearInterval(HERO.timer); HERO.timer = null; }
+    }
+
+    function heroBindButtons(){
+        const next = document.getElementById("heroNext");
+        const prev = document.getElementById("heroPrev");
+        if (next) next.onclick = () => heroNext(true);
+        if (prev) prev.onclick = () => heroPrev(true);
+
+        // Keyboard arrows when hero is visible
+        window.onkeydown = (e) => {
+            const hero = document.getElementById("heroMedia");
+            if (!hero) return;
+            const r = hero.getBoundingClientRect();
+            const visible = r.top < window.innerHeight && r.bottom > 0;
+            if (!visible) return;
+
+            if (e.key === "ArrowRight") heroNext(true);
+            if (e.key === "ArrowLeft") heroPrev(true);
+        };
+    }
+
+    function heroBindDrag(track){
+        let isDown = false;
+        let startX = 0;
+        let startScroll = 0;
+
+        const pointerDown = (e) => {
+            isDown = true;
+            track.classList.add("dragging");
+            startX = (e.touches ? e.touches[0].pageX : e.pageX);
+            startScroll = track.scrollLeft;
+            HERO.userInteractedAt = Date.now();
+            heroStopAutoplay();
+        };
+
+        const pointerMove = (e) => {
+            if (!isDown) return;
+            const x = (e.touches ? e.touches[0].pageX : e.pageX);
+            const dx = x - startX;
+            track.scrollLeft = startScroll - dx;
+        };
+
+        const pointerUp = () => {
+            if (!isDown) return;
+            isDown = false;
+            track.classList.remove("dragging");
+
+            // snap to nearest slide
+            const w = track.clientWidth || 1;
+            const idx = Math.round(track.scrollLeft / w);
+            heroGo(idx, true);
+
+            heroStartAutoplay();
+        };
+
+        // Mouse
+        track.addEventListener("mousedown", pointerDown);
+        window.addEventListener("mousemove", pointerMove);
+        window.addEventListener("mouseup", pointerUp);
+
+        // Touch: rely on native scroll-snap; just pause autoplay on interaction
+        track.addEventListener("touchstart", () => {
+            HERO.userInteractedAt = Date.now();
+            heroStopAutoplay();
+        }, { passive: true });
+        track.addEventListener("touchend", () => {
+            heroStartAutoplay();
+        }, { passive: true });
+
+        // When user scrolls track via inertia
+        track.addEventListener("scroll", () => {
+            const w = track.clientWidth || 1;
+            const idx = Math.round(track.scrollLeft / w);
+            if (idx !== HERO.index){
+                HERO.index = idx;
+                heroUpdateDots();
+            }
+        }, { passive: true });
+    }
+
+    /* ---------------- SERVICES ---------------- */
+
     function renderServices(services){
         const wrap = document.getElementById("servicesAccordion");
         if (!wrap) return;
@@ -508,22 +765,22 @@
             const img = s?.image ?? "";
 
             return `
-          <div class="acc-item ${open}">
-            <div class="acc-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? "true" : "false"}">
-              <div class="acc-num">${escapeHtml(num)}</div>
-              <div class="acc-title">${escapeHtml(title)}</div>
-              <div class="acc-plus">+</div>
-            </div>
-
-            <div class="acc-panel">
-              <div>
-                <p>${escapeHtml(text)}</p>
-                <ul class="bullets">${bulletsHtml}</ul>
-              </div>
-              <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" />
-            </div>
+        <div class="acc-item ${open}">
+          <div class="acc-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? "true" : "false"}">
+            <div class="acc-num">${escapeHtml(num)}</div>
+            <div class="acc-title">${escapeHtml(title)}</div>
+            <div class="acc-plus">+</div>
           </div>
-        `;
+
+          <div class="acc-panel">
+            <div>
+              <p>${escapeHtml(text)}</p>
+              <ul class="bullets">${bulletsHtml}</ul>
+            </div>
+            <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" />
+          </div>
+        </div>
+      `;
         }).join("");
     }
 
@@ -539,6 +796,8 @@
                 item.classList.add('open');
                 item.querySelector('.acc-head')?.setAttribute('aria-expanded','true');
             }
+            // Recompute ScrollTrigger positions after accordion changes
+            if (window.ScrollTrigger) ScrollTrigger.refresh();
         };
 
         items.forEach(item => {
@@ -551,7 +810,8 @@
         });
     }
 
-    // ---------- projects ----------
+    /* ---------------- PROJECTS ---------------- */
+
     function renderProjects(projects){
         const wrap = document.getElementById("projectsWrap");
         if (!wrap) return;
@@ -565,19 +825,20 @@
             const img = p?.image ?? "";
 
             return `
-          <div class="project ${side}" data-side="${side}">
-            <img class="img reveal" src="${escapeHtml(img)}" alt="${escapeHtml(title)}" />
-            <div class="card ${side === "left" ? "reveal-left" : "reveal-right"}">
-              <h3>${escapeHtml(title)}</h3>
-              <div class="meta">${escapeHtml(meta)}</div>
-              <p class="desc">${escapeHtml(desc)}</p>
-            </div>
+        <div class="project ${side}" data-side="${side}">
+          <img class="img reveal" src="${escapeHtml(img)}" alt="${escapeHtml(title)}" />
+          <div class="card ${side === "left" ? "reveal-left" : "reveal-right"}">
+            <h3>${escapeHtml(title)}</h3>
+            <div class="meta">${escapeHtml(meta)}</div>
+            <p class="desc">${escapeHtml(desc)}</p>
           </div>
-        `;
+        </div>
+      `;
         }).join("");
     }
 
-    // ---------- gallery ----------
+    /* ---------------- GALLERY ---------------- */
+
     function renderGallery(gallery){
         const stage = document.getElementById("galleryStage");
         if (!stage) return;
@@ -594,41 +855,41 @@
             const cls = slots[i];
             const div = document.createElement("div");
             div.className = `g ${cls} ${i % 2 ? "reveal-right" : "reveal-left"}`;
-            div.innerHTML = `<img src="${escapeHtml(srcs[i])}" alt="">`;
+            div.innerHTML = `<img loading="lazy" src="${escapeHtml(srcs[i])}" alt="">`;
             stage.appendChild(div);
         }
     }
 
-    // ---------- contact icons (inline SVG) ----------
+    /* ---------------- CONTACT ICONS ---------------- */
+
     function iconPin(){
         return `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11Z"></path>
-          <circle cx="12" cy="10" r="2.5"></circle>
-        </svg>`;
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11Z"></path>
+        <circle cx="12" cy="10" r="2.5"></circle>
+      </svg>`;
     }
     function iconPhone(){
         return `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.9 19.9 0 0 1-8.7-3.1A19.5 19.5 0 0 1 5.2 13a19.9 19.9 0 0 1-3.1-8.8A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.5a16 16 0 0 0 6.4 6.4l1.1-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9Z"></path>
-        </svg>`;
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.9 19.9 0 0 1-8.7-3.1A19.5 19.5 0 0 1 5.2 13a19.9 19.9 0 0 1-3.1-8.8A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.5a16 16 0 0 0 6.4 6.4l1.1-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9Z"></path>
+      </svg>`;
     }
     function iconInstagram(){
         return `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-          <circle cx="12" cy="12" r="4"></circle>
-          <circle cx="17.5" cy="6.5" r="1"></circle>
-        </svg>`;
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1"></circle>
+      </svg>`;
     }
     function iconWhatsApp(){
         return `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M20 11.8a8 8 0 0 1-11.7 7.1L4 20l1.1-4.1A8 8 0 1 1 20 11.8Z"></path>
-          <path d="M9.2 9.1c.2-.5.5-.5.8-.5.2 0 .4 0 .6.1.2.1.4.2.5.5.1.3.3 1 .3 1.1 0 .2 0 .4-.2.6l-.3.4c-.1.1-.2.2-.1.4.1.2.4.7.9 1.2.6.6 1.1.9 1.3 1 .2.1.3.1.4-.1l.4-.5c.2-.2.4-.2.6-.1.2.1 1 .5 1.1.6.2.1.3.2.3.3 0 .1 0 .7-.3 1.1-.3.4-.8.7-1.3.7-.5 0-1.6-.2-3-1.2-1.7-1.2-2.7-2.8-3-3.3-.3-.6-.1-1 .1-1.2l.4-.5Z"></path>
-        </svg>`;
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 11.8a8 8 0 0 1-11.7 7.1L4 20l1.1-4.1A8 8 0 1 1 20 11.8Z"></path>
+        <path d="M9.2 9.1c.2-.5.5-.5.8-.5.2 0 .4 0 .6.1.2.1.4.2.5.5.1.3.3 1 .3 1.1 0 .2 0 .4-.2.6l-.3.4c-.1.1-.2.2-.1.4.1.2.4.7.9 1.2.6.6 1.1.9 1.3 1 .2.1.3.1.4-.1l.4-.5c.2-.2.4-.2.6-.1.2.1 1 .5 1.1.6.2.1.3.2.3.3 0 .1 0 .7-.3 1.1-.3.4-.8.7-1.3.7-.5 0-1.6-.2-3-1.2-1.7-1.2-2.7-2.8-3-3.3-.3-.6-.1-1 .1-1.2l.4-.5Z"></path>
+      </svg>`;
     }
-
     function whatsappUrlFromE164(e164){
         const digits = String(e164 || "").replace(/[^\d]/g, "");
         return digits ? `https://wa.me/${digits}` : "#";
@@ -639,7 +900,6 @@
         if (!wrap) return;
 
         const c = SITE?.partner?.contact || {};
-
         const address = t(c.address);
         const phoneLabel = t(c.phoneLabel) || (LANG === "ar" ? "الهاتف" : "Phone");
         const phone = c.phoneE164 || "";
@@ -655,53 +915,53 @@
         const phoneDisplay = (LANG === "ar") ? toArabicIndicDigits(phone) : phone;
         const waDisplay = (LANG === "ar") ? toArabicIndicDigits(waNumber) : waNumber;
 
-        // Address is static text (not a button/link)
         const rows = [];
 
         if (address.trim()){
             rows.push(`
-          <div class="contact-row">
-            ${iconPin()}
-            <div class="label">${escapeHtml(LANG === "ar" ? "العنوان" : "Address")}</div>
-            <div class="value">${escapeHtml(address)}</div>
-          </div>
-        `);
+        <div class="contact-row">
+          ${iconPin()}
+          <div class="label">${escapeHtml(LANG === "ar" ? "العنوان" : "Address")}</div>
+          <div class="value">${escapeHtml(address)}</div>
+        </div>
+      `);
         }
 
         if (phone.trim()){
             rows.push(`
-          <div class="contact-row">
-            ${iconPhone()}
-            <div class="label">${escapeHtml(phoneLabel)}</div>
-            <div class="value"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phoneDisplay)}</a></div>
-          </div>
-        `);
+        <div class="contact-row">
+          ${iconPhone()}
+          <div class="label">${escapeHtml(phoneLabel)}</div>
+          <div class="value"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phoneDisplay)}</a></div>
+        </div>
+      `);
         }
 
         if (waNumber.trim()){
             rows.push(`
-          <div class="contact-row">
-            ${iconWhatsApp()}
-            <div class="label">${escapeHtml(waLabel)}</div>
-            <div class="value"><a href="${escapeHtml(waUrl)}" target="_blank" rel="noreferrer">${escapeHtml(waDisplay)}</a></div>
-          </div>
-        `);
+        <div class="contact-row">
+          ${iconWhatsApp()}
+          <div class="label">${escapeHtml(waLabel)}</div>
+          <div class="value"><a href="${escapeHtml(waUrl)}" target="_blank" rel="noreferrer">${escapeHtml(waDisplay)}</a></div>
+        </div>
+      `);
         }
 
         if (igUrl && igUrl !== "#"){
             rows.push(`
-          <div class="contact-row">
-            ${iconInstagram()}
-            <div class="label">${escapeHtml(igLabel)}</div>
-            <div class="value"><a href="${escapeHtml(igUrl)}" target="_blank" rel="noreferrer">@${escapeHtml(igName || "instagram")}</a></div>
-          </div>
-        `);
+        <div class="contact-row">
+          ${iconInstagram()}
+          <div class="label">${escapeHtml(igLabel)}</div>
+          <div class="value"><a href="${escapeHtml(igUrl)}" target="_blank" rel="noreferrer">@${escapeHtml(igName || "instagram")}</a></div>
+        </div>
+      `);
         }
 
         wrap.innerHTML = rows.join("");
     }
 
-    // ---------- animations ----------
+    /* ---------------- ANIMATIONS ---------------- */
+
     function clearScrollTriggers(){
         if (!window.ScrollTrigger) return;
         ScrollTrigger.getAll().forEach(t => t.kill());
@@ -715,7 +975,11 @@
         const revealTo = (selector) => {
             document.querySelectorAll(selector).forEach((el) => {
                 gsap.fromTo(el,
-                    { opacity: 0, x: el.classList.contains("reveal-left") ? -22 : el.classList.contains("reveal-right") ? 22 : 0, y: el.classList.contains("reveal") ? 18 : 0 },
+                    {
+                        opacity: 0,
+                        x: el.classList.contains("reveal-left") ? -22 : el.classList.contains("reveal-right") ? 22 : 0,
+                        y: el.classList.contains("reveal") ? 18 : 0
+                    },
                     {
                         opacity: 1, x: 0, y: 0,
                         duration: 0.75,
@@ -723,7 +987,6 @@
                         scrollTrigger: {
                             trigger: el,
                             start: "top 85%",
-                            end: "bottom 60%",
                             toggleActions: "play none none none"
                         }
                     }
@@ -734,22 +997,18 @@
         revealTo(".reveal-left");
         revealTo(".reveal-right");
 
+        // initial wipes
         gsap.fromTo('[data-wipe-left]',  { scaleX: 1 }, { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 });
         gsap.fromTo('[data-wipe-right]', { scaleX: 1 }, { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 });
 
-        gsap.fromTo("#heroImg", { scale: 1.06 }, { scale: 1.0, duration: 1.1, ease: "power2.out" });
-
-        gsap.to("#heroWord", {
-            y: 70,
-            ease: "none",
-            scrollTrigger: { trigger: "#heroMedia", start: "top top", end: "bottom top", scrub: true }
-        });
-        gsap.to("#heroImg", {
-            y: 30,
+        // subtle hero parallax
+        gsap.to("#heroTrack", {
+            y: 18,
             ease: "none",
             scrollTrigger: { trigger: "#heroMedia", start: "top top", end: "bottom top", scrub: true }
         });
 
+        // projects
         gsap.utils.toArray(".project").forEach((proj) => {
             const img = proj.querySelector(".img");
             const card = proj.querySelector(".card");
@@ -762,20 +1021,17 @@
 
             gsap.fromTo(card,
                 {opacity:0, x: side === "right" ? 26 : -26},
-                {
-                    opacity:1, x:0, duration: .8, ease:"power2.out",
+                {opacity:1, x:0, duration: .8, ease:"power2.out",
                     scrollTrigger: { trigger: proj, start: "top 78%" }
                 }
             );
         });
 
+        // gallery
         gsap.utils.toArray("#galleryStage .g").forEach((el, idx) => {
             gsap.fromTo(el,
                 { opacity: 0, y: 26, rotate: (idx % 2 ? 1.0 : -1.0) },
-                {
-                    opacity: 1, y: 0, rotate: 0,
-                    duration: .8,
-                    ease: "power2.out",
+                { opacity: 1, y: 0, rotate: 0, duration: .8, ease: "power2.out",
                     scrollTrigger: { trigger: "#galleryStage", start: "top 78%" }
                 }
             );
@@ -811,9 +1067,8 @@
         document.getElementById("brandName").textContent = SITE?.brand?.name || "WM GROUP";
         if (SITE?.brand?.logo) document.getElementById("brandLogo").src = SITE.brand.logo;
 
-        // Hero
-        document.getElementById("heroWord").textContent = t(SITE?.hero?.word) || "WM GROUP";
-        if (SITE?.hero?.image) document.getElementById("heroImg").src = SITE.hero.image;
+        // HERO
+        heroBuild();
 
         // About
         document.getElementById("aboutP1").textContent = t(SITE?.about?.p1);
@@ -859,7 +1114,7 @@
     });
 </script>
 
-<!-- Netlify Identity (required for Decap CMS auth) -->
+<!-- Netlify Identity (Decap CMS auth) -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </body>
 </html>

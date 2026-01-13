@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "WM GROUP",
-    "logo": "/assets/uploads/logo.png"
+    "logo": "./assets/uploads/logo.png"
   },
   "partner": {
     "title": {
@@ -12,7 +12,7 @@
       "en": "You can reach us here:",
       "ar": "يمكنكم التواصل معنا عبر:"
     },
-    "image": "/assets/uploads/picture-14.jpg",
+    "image": "./assets/uploads/picture-14.jpg",
     "contact": {
       "address": {
         "en": "Damascus, Syria — Abu Rummaneh, near the Franciscan School\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
@@ -52,19 +52,19 @@
   },
   "gallery": [
     {
-      "image": "/assets/uploads/picture-9.jpg"
+      "image": "./assets/uploads/picture-9.jpg"
     },
     {
-      "image": "/assets/uploads/picture-10.jpg"
+      "image": "./assets/uploads/picture-10.jpg"
     },
     {
-      "image": "/assets/uploads/picture-11.jpg"
+      "image": "./assets/uploads/picture-11.jpg"
     },
     {
-      "image": "/assets/uploads/picture-12.jpg"
+      "image": "./assets/uploads/picture-12.jpg"
     },
     {
-      "image": "/assets/uploads/picture-13.jpg"
+      "image": "./assets/uploads/picture-13.jpg"
     }
   ],
   "langDefault": "en",
@@ -83,7 +83,7 @@
         "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
         "ar": "تصميم معماري تصوري لفيلا فاخرة مخطط لها في يعفور، يتميز بأسلوب نيوكلاسيكي مع تناظر رسمي، ومساحات خضراء منسقة، ومدخل مسوّر."
       },
-      "image": "/assets/uploads/picture-7.jpg"
+      "image": "./assets/uploads/picture-7.jpg"
     },
     {
       "side": "left",
@@ -99,15 +99,15 @@
         "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
         "ar": "مشروع سكني تصوري في مدينة ماروتا، يعرض تصميمًا معماريًا معاصرًا يهدف إلى دعم أسلوب الحياة الحضرية الحديثة."
       },
-      "image": "/assets/uploads/picture-8.jpg"
+      "image": "./assets/uploads/picture-8.jpg"
     }
   ],
   "hero": {
     "word": { "en": "", "ar": "" },
     "images": [
-      { "image": "/assets/uploads/picture-1.jpg" },
-      { "image": "/assets/uploads/picture-2.jpg" },
-      { "image": "/assets/uploads/picture-3.jpg" }
+      { "image": "./assets/uploads/picture-1.jpg" },
+      { "image": "./assets/uploads/picture-2.jpg" },
+      { "image": "./assets/uploads/picture-3.jpg" }
     ],
     "intervalMs": 4500
   },
@@ -151,7 +151,7 @@
           }
         }
       ],
-      "image": "/assets/uploads/picture-3.jpg"
+      "image": "./assets/uploads/picture-3.jpg"
     },
     {
       "num": "02",
@@ -189,7 +189,7 @@
           }
         }
       ],
-      "image": "/assets/uploads/picture-4.jpg"
+      "image": "./assets/uploads/picture-4.jpg"
     },
     {
       "num": "03",
@@ -227,7 +227,7 @@
           }
         }
       ],
-      "image": "/assets/uploads/picture-5.jpg"
+      "image": "./assets/uploads/picture-5.jpg"
     },
     {
       "num": "04",
@@ -265,7 +265,7 @@
           }
         }
       ],
-      "image": "/assets/uploads/picture-6.jpg"
+      "image": "./assets/uploads/picture-6.jpg"
     }
   ]
 }

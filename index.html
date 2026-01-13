@@ -119,6 +119,7 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             cursor: grab;
+            touch-action: pan-y;
         }
         .hero-track::-webkit-scrollbar{ display:none; }
         .hero-track.dragging{ cursor: grabbing; }
@@ -578,6 +579,7 @@
         timer: null,
         intervalMs: 4500,
         userInteractedAt: 0,
+        isWrapping: false,
     };
 
     function heroImages(){
@@ -630,12 +632,79 @@
         dots.forEach((d,i) => d.classList.toggle("active", i===HERO.index));
     }
 
+    function heroClearClones(track){
+        Array.from(track.querySelectorAll(".hero-clone")).forEach((n) => n.remove());
+    }
+
+    function heroWrapSlide(direction){
+        const track = document.getElementById("heroTrack");
+        if (!track || HERO.isWrapping) return;
+        const count = heroSlideCount();
+        if (count <= 1) return;
+
+        const slides = Array.from(track.querySelectorAll(".hero-slide"));
+        if (!slides.length) return;
+
+        const w = track.clientWidth || 1;
+        HERO.isWrapping = true;
+        track.style.scrollSnapType = "none";
+
+        if (direction === "next"){
+            const clone = slides[0].cloneNode(true);
+            clone.classList.add("hero-clone");
+            track.appendChild(clone);
+            track.scrollTo({ left: count * w, behavior: "smooth" });
+            setTimeout(() => {
+                heroClearClones(track);
+                heroJump(0);
+                track.style.scrollSnapType = "x mandatory";
+                HERO.isWrapping = false;
+            }, 360);
+        } else {
+            const clone = slides[slides.length - 1].cloneNode(true);
+            clone.classList.add("hero-clone");
+            track.insertBefore(clone, slides[0]);
+            track.scrollLeft = track.scrollLeft + w;
+            track.scrollTo({ left: 0, behavior: "smooth" });
+            setTimeout(() => {
+                heroClearClones(track);
+                heroJump(count - 1);
+                track.style.scrollSnapType = "x mandatory";
+                HERO.isWrapping = false;
+            }, 360);
+        }
+    }
+
+    function heroJump(idx){
+        const track = document.getElementById("heroTrack");
+        if (!track) return;
+        const count = heroSlideCount();
+        if (!count) return;
+
+        HERO.index = (idx + count) % count;
+        heroUpdateDots();
+
+        track.style.scrollSnapType = "none";
+        track.style.scrollBehavior = "auto";
+        track.scrollLeft = HERO.index * track.clientWidth;
+
+        requestAnimationFrame(() => {
+            track.style.scrollSnapType = "x mandatory";
+            track.style.scrollBehavior = "";
+        });
+    }
+
     function heroGo(idx, user=false){
         const track = document.getElementById("heroTrack");
         if (!track) return;
 
         const count = heroSlideCount();
         if (!count) return;
+
+        if (user && count > 1 && (idx < 0 || idx >= count)){
+            heroWrapSlide(idx < 0 ? "prev" : "next");
+            return;
+        }
 
         HERO.index = (idx + count) % count;
         heroUpdateDots();
@@ -690,6 +759,11 @@
         let isDown = false;
         let startX = 0;
         let startScroll = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartIndex = 0;
+        let touchStartScroll = 0;
+        let isTouching = false;
 
         const pointerDown = (e) => {
             isDown = true;
@@ -726,11 +800,59 @@
         window.addEventListener("mouseup", pointerUp);
 
         // Touch: rely on native scroll-snap; just pause autoplay on interaction
-        track.addEventListener("touchstart", () => {
+        track.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches ? e.touches[0].pageX : 0;
+            touchStartY = e.touches ? e.touches[0].pageY : 0;
+            touchStartScroll = track.scrollLeft;
+            const w = track.clientWidth || 1;
+            touchStartIndex = Math.round(touchStartScroll / w);
+            isTouching = true;
             HERO.userInteractedAt = Date.now();
             heroStopAutoplay();
         }, { passive: true });
-        track.addEventListener("touchend", () => {
+        track.addEventListener("touchmove", (e) => {
+            if (!isTouching || !e.touches || !e.touches[0]) return;
+            const currentX = e.touches[0].pageX;
+            const currentY = e.touches[0].pageY;
+            const dx = currentX - touchStartX;
+            const dy = currentY - touchStartY;
+            const isHorizontal = Math.abs(dx) > Math.abs(dy) + 6;
+            if (!isHorizontal) return;
+            e.preventDefault();
+            track.scrollLeft = touchStartScroll - dx;
+        }, { passive: false });
+        track.addEventListener("touchend", (e) => {
+            if (!isTouching) return;
+            isTouching = false;
+            const endX = e.changedTouches ? e.changedTouches[0].pageX : 0;
+            const dx = endX ? (touchStartX - endX) : 0;
+            const swipeThreshold = 24;
+            const count = heroSlideCount();
+            if (!count){
+                heroStartAutoplay();
+                return;
+            }
+            const w = track.clientWidth || 1;
+            const maxScroll = track.scrollWidth - w;
+            const atStart = touchStartIndex === 0;
+            const atEnd = touchStartIndex === count - 1;
+
+            if (dx > swipeThreshold){
+                if (atEnd){
+                    heroWrapSlide("next");
+                } else {
+                    heroGo(touchStartIndex + 1, true);
+                }
+            } else if (dx < -swipeThreshold){
+                if (atStart){
+                    heroWrapSlide("prev");
+                } else {
+                    heroGo(touchStartIndex - 1, true);
+                }
+            } else {
+                const idx = Math.round(track.scrollLeft / w);
+                heroGo(idx, true);
+            }
             heroStartAutoplay();
         }, { passive: true });
 
@@ -890,9 +1012,12 @@
         <path d="M9.2 9.1c.2-.5.5-.5.8-.5.2 0 .4 0 .6.1.2.1.4.2.5.5.1.3.3 1 .3 1.1 0 .2 0 .4-.2.6l-.3.4c-.1.1-.2.2-.1.4.1.2.4.7.9 1.2.6.6 1.1.9 1.3 1 .2.1.3.1.4-.1l.4-.5c.2-.2.4-.2.6-.1.2.1 1 .5 1.1.6.2.1.3.2.3.3 0 .1 0 .7-.3 1.1-.3.4-.8.7-1.3.7-.5 0-1.6-.2-3-1.2-1.7-1.2-2.7-2.8-3-3.3-.3-.6-.1-1 .1-1.2l.4-.5Z"></path>
       </svg>`;
     }
-    function whatsappUrlFromE164(e164){
+    function whatsappUrlFromE164(e164, message){
         const digits = String(e164 || "").replace(/[^\d]/g, "");
-        return digits ? `https://wa.me/${digits}` : "#";
+        if (!digits) return "#";
+        const text = String(message || "").trim();
+        const query = text ? `?text=${encodeURIComponent(text)}` : "";
+        return `https://wa.me/${digits}${query}`;
     }
 
     function renderContact(){
@@ -906,7 +1031,8 @@
 
         const waLabel = t(c.whatsappLabel) || (LANG === "ar" ? "واتساب" : "WhatsApp");
         const waNumber = c.whatsappNumberE164 || "";
-        const waUrl = whatsappUrlFromE164(waNumber);
+        const waMessage = t(c.whatsappMessage);
+        const waUrl = whatsappUrlFromE164(waNumber, waMessage);
 
         const igLabel = t(c.instagramLabel) || (LANG === "ar" ? "إنستغرام" : "Instagram");
         const igName = c.instagramName || "";

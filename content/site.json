@@ -27,6 +27,10 @@
         "en": "WhatsApp",
         "ar": "واتساب"
       },
+      "whatsappMessage": {
+        "en": "Hello, I would like to inquire about your services.",
+        "ar": "مرحبًا، أود الاستفسار عن خدماتكم."
+      },
       "whatsappNumberE164": "+963949066000",
       "instagramLabel": {
         "en": "Instagram",

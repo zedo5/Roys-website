@@ -371,11 +371,12 @@
         html[dir="rtl"] .contact-row .label{min-width: 120px; text-align:right;}
 
         @media (max-width: 980px){
-            .split{grid-template-columns: 1fr; gap: 22px;}
-            #services .split{grid-template-columns: 1fr; gap: 22px;}
+            .split{grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 24px;}
+            #services .split{grid-template-columns: minmax(170px, 240px) minmax(0, 1fr); gap: 28px;}
+            .big-title{font-size: clamp(36px, 8.4vw, 58px);}
             .right{justify-self:start; max-width: 720px;}
             .project .card{position:relative; top:auto; left:auto; right:auto; width: 100%; margin-top: 16px;}
-            .gallery-stage{height: 720px;}
+            .gallery-stage{height: 680px;}
             .gallery-word{display:none;}
             .navlinks{display:none;}
             .partner-grid{grid-template-columns:1fr}
@@ -383,21 +384,27 @@
             .partner-title{font-size: 56px}
 
             /* Services: stack on mobile */
-            .acc-panel{grid-template-columns: 1fr; padding-left: 0;}
+            .acc-panel{grid-template-columns: 1fr; padding-left: 0; gap: 18px;}
             .acc-head{grid-template-columns: 58px 1fr 28px;}
-            .acc-panel img{height: 240px;}
+            .acc-panel img{height: 220px;}
         }
 
         @media (max-width: 520px){
-            section{padding: 64px 0;}
-            .brand strong{font-size:16px}
+            section{padding: 56px 0;}
+            .brand strong{font-size:15px}
             .hero-arrow{ display:none; } /* swipe on phone, no arrows */
+            .split{grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: 18px;}
+            #services .split{grid-template-columns: minmax(140px, 200px) minmax(0, 1fr); gap: 22px;}
+            .partner-left{padding: 48px 18px}
+            .partner-title{font-size: 42px}
+            .contact-row .label{min-width: 90px;}
+            .acc-panel img{height: 200px;}
         }
 
         @media (max-width: 768px){
             /* Mobile collage positions (avoid overlap) */
             .gallery-stage{
-                height: 620px;
+                height: 600px;
                 overflow: hidden;
                 margin-bottom: 24px;
             }

@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "WM GROUP",
-    "logo": "./assets/uploads/logo.png"
+    "logo": "assets/uploads/logo.png"
   },
   "partner": {
     "title": {
@@ -14,30 +14,30 @@
     },
     "image": "./assets/uploads/picture-14.jpg",
     "contact": {
-      "address": {
-        "en": "Damascus, Syria — Abu Rummaneh, near the Franciscan School\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
-        "ar": "دمشق، سوريا — أبو رمانة، بالقرب من المدرسة الفرنسيسكانية\nدبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
+      "whatsappLabel": {
+        "en": "WhatsApp",
+        "ar": "واتساب"
       },
+      "instagramLabel": {
+        "en": "Instagram",
+        "ar": "إنستغرام"
+      },
+      "whatsappNumberE164": "+963949066000",
       "phoneLabel": {
         "en": "Phone",
         "ar": "الهاتف"
       },
-      "phoneE164": "+963949066000",
-      "whatsappLabel": {
-        "en": "WhatsApp",
-        "ar": "واتساب"
+      "address": {
+        "en": "Damascus, Syria — Malki, Mohammad Al Bizem street\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
+        "ar": "دمشق، سوريا — أبو رمانة، بالقرب من المدرسة الفرنسيسكانية\nدبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
       },
       "whatsappMessage": {
         "en": "Hello, I would like to inquire about your services.",
         "ar": "مرحبًا، أود الاستفسار عن خدماتكم."
       },
-      "whatsappNumberE164": "+963949066000",
-      "instagramLabel": {
-        "en": "Instagram",
-        "ar": "إنستغرام"
-      },
-      "instagramName": "wm_group_",
-      "instagramUrl": "https://www.instagram.com/wm_group_?igsh=ZXRyaDlrejhiYXJv"
+      "phoneE164": "+963949066000",
+      "instagramUrl": "https://www.instagram.com/wm_group_?igsh=ZXRyaDlrejhiYXJv",
+      "instagramName": "wm_group_"
     }
   },
   "about": {
@@ -103,11 +103,20 @@
     }
   ],
   "hero": {
-    "word": { "en": "", "ar": "" },
+    "word": {
+      "en": "",
+      "ar": ""
+    },
     "images": [
-      { "image": "./assets/uploads/picture-1.jpg" },
-      { "image": "./assets/uploads/picture-2.jpg" },
-      { "image": "./assets/uploads/picture-3.jpg" }
+      {
+        "image": "./assets/uploads/picture-1.jpg"
+      },
+      {
+        "image": "./assets/uploads/picture-2.jpg"
+      },
+      {
+        "image": "./assets/uploads/picture-3.jpg"
+      }
     ],
     "intervalMs": 4500
   },

@@ -70,7 +70,7 @@
   "langDefault": "en",
   "projects": [
     {
-      "side": "right",
+      "side": "left",
       "title": {
         "en": "Villa concept in Yaffour",
         "ar": "تصميم فيلا في يعفور"
@@ -86,7 +86,7 @@
       "image": "assets/uploads/picture-14.jpg"
     },
     {
-      "side": "left",
+      "side": "right",
       "title": {
         "en": "Marota City",
         "ar": "مدينة ماروتا"
@@ -102,7 +102,7 @@
       "image": "assets/uploads/img_0470.jpg"
     },
     {
-      "side": "right",
+      "side": "left",
       "title": {
         "en": "Galliard Restaurant ",
         "ar": "مطعم غاليارد"

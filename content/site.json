@@ -80,10 +80,10 @@
         "ar": "سوريا • سكني • يعفور"
       },
       "desc": {
-        "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a neoclassical design with formal symmetry, landscaped grounds, and gated access.",
-        "ar": "تصميم معماري تصوري لفيلا فاخرة مخطط لها في يعفور، يتميز بأسلوب نيوكلاسيكي مع تناظر رسمي، ومساحات خضراء منسقة، ومدخل مسوّر."
+        "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a modern luxury villa defined by clean lines, full-height glass, and warm architectural lighting. Featuring open, light-filled interiors, elegant finishes, and a private swimming pool surrounded by landscaped gardens—designed for comfort, style, and refined living.",
+        "ar": "هذه صورة تصميمية معمارية لفيلا فاخرة مخطط لها في منطقة يافور، تُظهر فيلا فاخرة حديثة تتميز بخطوط تصميمية أنيقة، ونوافذ زجاجية ممتدة من الأرض إلى السقف، وإضاءة معمارية دافئة. تتميز الفيلا بتصميم داخلي مفتوح ومضاء بشكل طبيعي، وتشطيبات أنيقة، ومسبح خاص محاط بحدائق منسقة، مصممة لتوفير الراحة والأناقة والحياة الراقية."
       },
-      "image": "./assets/uploads/picture-7.jpg"
+      "image": "assets/uploads/picture-14.jpg"
     },
     {
       "side": "left",
@@ -99,7 +99,23 @@
         "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
         "ar": "مشروع سكني تصوري في مدينة ماروتا، يعرض تصميمًا معماريًا معاصرًا يهدف إلى دعم أسلوب الحياة الحضرية الحديثة."
       },
-      "image": "./assets/uploads/picture-8.jpg"
+      "image": "assets/uploads/img_0470.jpg"
+    },
+    {
+      "side": "right",
+      "title": {
+        "en": "Galliard Restaurant ",
+        "ar": "مطعم غاليارد"
+      },
+      "meta": {
+        "en": "Syria • Restaurant • Malki Avenue",
+        "ar": "سوريا • مطعم • شارع المالكي"
+      },
+      "image": "assets/uploads/picture-11.jpg",
+      "desc": {
+        "en": "A contemporary fine-dining restaurant defined by bold ceiling geometry, warm ambient lighting, and panoramic glass views. Featuring elegant seating, refined finishes, and a luxurious atmosphere—designed to blend modern design with an elevated dining experience.",
+        "ar": "مطعم عصري فاخر يتميز بتصميم هندسي جريء للسقف، وإضاءة دافئة، وإطلالات بانورامية خلابة. يضم المطعم جلسات أنيقة، وتشطيبات راقية، وأجواءً فاخرة، مصمم ليمزج بين التصميم العصري وتجربة طعام راقية."
+      }
     }
   ],
   "hero": {

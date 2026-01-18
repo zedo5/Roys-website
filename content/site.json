@@ -12,7 +12,7 @@
       "en": "You can reach us here:",
       "ar": "يمكنكم التواصل معنا عبر:"
     },
-    "image": "./assets/uploads/picture-14.jpg",
+    "image": "assets/uploads/logo.png",
     "contact": {
       "whatsappLabel": {
         "en": "WhatsApp",

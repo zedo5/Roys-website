@@ -41,15 +41,46 @@
             background: rgba(255,255,255,.92);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(30,30,30,.08);
-            transition: opacity .25s ease, transform .25s ease;
-        }
-        .topbar.hidden{
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-100%);
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
         }
         body{padding-top: var(--topbar-h, 64px);}
-        body.hero-full{padding-top: 0;}
+        .topbar.on-hero{
+            background: transparent;
+            border-bottom-color: transparent;
+            backdrop-filter: none;
+            color: #fff;
+        }
+        .topbar.on-hero .navlinks a,
+        .topbar.on-hero .brand strong,
+        .topbar.on-hero .langbtn{
+            color: #fff;
+        }
+        .topbar.on-hero .langbtn{
+            background: rgba(20,20,20,.35);
+            border-color: rgba(255,255,255,.35);
+        }
+        .topbar.on-hero .logo{display:none;}
+        .topbar.on-hero .brand strong{
+            display:inline-block;
+            font-weight: 800;
+            letter-spacing: .06em;
+        }
+        .header-wa{
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid rgba(30,30,30,.15);
+            background: rgba(255,255,255,.9);
+            display:grid;
+            place-items:center;
+            color: #1e1e1e;
+        }
+        .topbar.on-hero .header-wa{
+            border-color: rgba(255,255,255,.35);
+            background: rgba(20,20,20,.35);
+            color: #fff;
+        }
+        .header-wa svg{width:18px;height:18px;}
         .nav{
             display:flex; align-items:center; justify-content:space-between;
             gap: 16px; padding: 14px 0;
@@ -93,7 +124,10 @@
         .langbtn:active{transform: translateY(1px);}
 
         /* HERO */
-        .hero{padding:18px 0 0}
+        .hero{
+            padding:0;
+            margin-top: calc(-1 * var(--topbar-h, 64px));
+        }
         .hero .container{max-width: 100%; padding: 0;}
 
         .hero-media{
@@ -101,6 +135,7 @@
             overflow:hidden;
             background:#eee;
             border-bottom: 1px solid rgba(30,30,30,.08);
+            height: 100svh;
         }
 
         /* Center-split open wipes */
@@ -116,7 +151,7 @@
         .hero-video{
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             z-index: 1;
         }
         .hero-video-bg{
@@ -141,38 +176,6 @@
             position: relative;
             z-index: 1;
         }
-        .hero-overlay{
-            position:absolute;
-            top: 18px;
-            left: 18px;
-            right: 18px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            z-index: 7;
-            pointer-events:none;
-        }
-        .hero-brand{
-            font-weight: 800;
-            letter-spacing: .06em;
-            font-size: 12px;
-            color: rgba(255,255,255,.92);
-            text-transform: uppercase;
-            text-shadow: 0 2px 12px rgba(0,0,0,.25);
-        }
-        .hero-wa{
-            width: 34px;
-            height: 34px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,.35);
-            background: rgba(20,20,20,.35);
-            backdrop-filter: blur(10px);
-            display:grid;
-            place-items:center;
-            color: rgba(255,255,255,.92);
-            pointer-events:auto;
-        }
-        .hero-wa svg{width:18px;height:18px;}
         .hero-mute{
             position:absolute;
             right: 18px;
@@ -581,7 +584,7 @@
 </head>
 
 <body>
-<header class="topbar">
+<header class="topbar on-hero">
     <div class="container">
         <div class="nav">
             <a class="brand" href="#top">
@@ -597,6 +600,12 @@
                     <a href="#gallery" id="navGallery">Gallery</a>
                     <a href="#partner" id="navPartner">Partner</a>
                 </nav>
+
+                <a class="header-wa" id="headerWa" href="#" aria-label="WhatsApp" target="_blank" rel="noreferrer">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.05.5C5.5.5.17 5.83.17 12.39c0 2.1.55 4.14 1.59 5.95L0 24l5.77-1.51a11.86 11.86 0 0 0 6.28 1.8h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.43-8.92Zm-8.47 18.3h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.23c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88Zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.21 5.08 4.5.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"></path>
+                    </svg>
+                </a>
 
                 <button id="langToggle" class="langbtn" type="button" aria-label="Change language">
                     <span class="langdot" aria-hidden="true"></span>
@@ -617,14 +626,6 @@
             <div class="hero-video">
                 <div class="hero-video-bg" aria-hidden="true">
                     <video id="heroVideoBg" muted autoplay loop playsinline preload="auto" src="./assets/uploads/video.MP4"></video>
-                </div>
-                <div class="hero-overlay">
-                    <div class="hero-brand">WMGROUP</div>
-                    <a class="hero-wa" id="heroWaLink" href="#" aria-label="WhatsApp" target="_blank" rel="noreferrer">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M20.52 3.48A11.82 11.82 0 0 0 12.05.5C5.5.5.17 5.83.17 12.39c0 2.1.55 4.14 1.59 5.95L0 24l5.77-1.51a11.86 11.86 0 0 0 6.28 1.8h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.43-8.92Zm-8.47 18.3h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.23c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88Zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.21 5.08 4.5.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"></path>
-                        </svg>
-                    </a>
                 </div>
                 <video id="heroVideo" muted autoplay loop playsinline preload="auto" src="./assets/uploads/video.MP4"></video>
                 <button class="hero-mute" id="heroMute" type="button" aria-label="Toggle sound">
@@ -772,7 +773,7 @@
         const scrollBtn = document.getElementById("heroScroll");
         const heroMedia = document.getElementById("heroMedia");
         const about = document.getElementById("about");
-        const heroWaLink = document.getElementById("heroWaLink");
+        const headerWa = document.getElementById("headerWa");
         if (!video) return;
 
         let src = SITE?.hero?.video || "";
@@ -806,11 +807,11 @@
             if (!document.hidden) tryPlay();
         });
 
-        if (heroWaLink){
+        if (headerWa){
             const waNumber = SITE?.partner?.contact?.whatsappNumberE164 || "";
             const waMessage = t(SITE?.partner?.contact?.whatsappMessage);
             const waUrl = whatsappUrlFromE164(waNumber, waMessage);
-            heroWaLink.href = waUrl || "#";
+            headerWa.href = waUrl || "#";
         }
 
         const stopVideo = () => {
@@ -898,44 +899,27 @@
             scrollBtn.addEventListener("touchstart", doScroll, { capture: true });
         }
 
-        let heroSnapped = false;
-        const snapToAbout = () => {
-            if (heroSnapped || !about) return;
-            heroSnapped = true;
-            about.scrollIntoView({ behavior: "smooth" });
-            window.removeEventListener("wheel", onWheel);
-            heroMedia?.removeEventListener("touchmove", onTouchMove);
-            heroMedia?.removeEventListener("touchstart", onTouchStart);
-        };
-
-        const onWheel = (e) => {
-            if (heroSnapped || !heroMedia) return;
-            const r = heroMedia.getBoundingClientRect();
-            const visible = r.top <= 0 && r.bottom > window.innerHeight * 0.4;
-            if (!visible || e.deltaY <= 0) return;
-            e.preventDefault();
-            snapToAbout();
-        };
-
-        let touchStartY = 0;
-        const onTouchStart = (e) => {
-            touchStartY = e.touches && e.touches[0] ? e.touches[0].clientY : 0;
-        };
-        const onTouchMove = (e) => {
-            if (heroSnapped || !heroMedia) return;
-            const r = heroMedia.getBoundingClientRect();
-            const visible = r.top <= 0 && r.bottom > window.innerHeight * 0.4;
-            if (!visible || !e.touches || !e.touches[0]) return;
-            const dy = touchStartY - e.touches[0].clientY;
-            if (dy > 24){
-                e.preventDefault();
-                snapToAbout();
+        if (heroMedia){
+            const updateHeaderState = (inView) => {
+                const topbar = document.querySelector(".topbar");
+                if (!topbar) return;
+                if (inView) topbar.classList.add("on-hero");
+                else topbar.classList.remove("on-hero");
+            };
+            if ("IntersectionObserver" in window){
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => updateHeaderState(entry.isIntersecting));
+                }, { threshold: [0, 0.01, 0.1] });
+                io.observe(heroMedia);
+            } else {
+                const onScroll = () => {
+                    const r = heroMedia.getBoundingClientRect();
+                    updateHeaderState(r.bottom > 0 && r.top < window.innerHeight);
+                };
+                window.addEventListener("scroll", onScroll, { passive: true });
+                onScroll();
             }
-        };
-
-        window.addEventListener("wheel", onWheel, { passive: false });
-        heroMedia?.addEventListener("touchstart", onTouchStart, { passive: true });
-        heroMedia?.addEventListener("touchmove", onTouchMove, { passive: false });
+        }
     }
 
     /* ---------------- SERVICES ---------------- */

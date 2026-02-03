@@ -51,12 +51,7 @@ collections:
             name: "hero"
             widget: "object"
             fields:
-              - label: "Hero Images (Slider)"
-                name: "images"
-                widget: "list"
-                summary: "{{fields.image}}"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
+              - { label: "Hero Video", name: "video", widget: "file" }
 
           - label: "About"
             name: "about"
@@ -106,7 +101,7 @@ collections:
                       - { label: "Arabic", name: "ar", widget: "string" }
               - { label: "Image", name: "image", widget: "image" }
 
-          - label: "Projects"
+          - label: "Completed Projects"
             name: "projects"
             widget: "list"
             summary: "{{fields.side}} — {{fields.title.en}}"
@@ -134,7 +129,47 @@ collections:
                 fields:
                   - { label: "English", name: "en", widget: "text" }
                   - { label: "Arabic", name: "ar", widget: "text" }
-              - { label: "Image", name: "image", widget: "image" }
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                summary: "{{fields.image}}"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+
+          - label: "Upcoming Projects"
+            name: "upcomingProjects"
+            widget: "list"
+            summary: "{{fields.side}} — {{fields.title.en}}"
+            fields:
+              - label: "Side"
+                name: "side"
+                widget: "select"
+                options: ["left", "right"]
+                default: "right"
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Meta"
+                name: "meta"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Description"
+                name: "desc"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "Arabic", name: "ar", widget: "text" }
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                summary: "{{fields.image}}"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
 
           - label: "Gallery"
             name: "gallery"
@@ -173,6 +208,18 @@ collections:
                     fields:
                       - { label: "English", name: "en", widget: "text" }
                       - { label: "Arabic", name: "ar", widget: "text" }
+                  - label: "Address Links"
+                    name: "addressLinks"
+                    widget: "list"
+                    summary: "{{fields.text.en}}"
+                    fields:
+                      - label: "Text"
+                        name: "text"
+                        widget: "object"
+                        fields:
+                          - { label: "English", name: "en", widget: "string" }
+                          - { label: "Arabic", name: "ar", widget: "string" }
+                      - { label: "Map URL", name: "url", widget: "string" }
 
                   - label: "Phone Label"
                     name: "phoneLabel"

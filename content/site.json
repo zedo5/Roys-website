@@ -3,6 +3,9 @@
     "name": "WM GROUP",
     "logo": "assets/uploads/logo.png"
   },
+  "hero": {
+    "video": "assets/uploads/video.MP4"
+  },
   "partner": {
     "title": {
       "en": "Partner with us",
@@ -31,6 +34,22 @@
         "en": "Damascus, Syria — Malki, Mohammad Al Bizem street\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
         "ar": "دمشق، سوريا — مالكي، شارع محمد البزم\nدبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
       },
+      "addressLinks": [
+        {
+          "text": {
+            "en": "Damascus, Syria — Malki, Mohammad Al Bizem street",
+            "ar": "دمشق، سوريا — مالكي، شارع محمد البزم"
+          },
+          "url": "https://maps.app.goo.gl/hE4bMpKnd5asQzRP9?g_st=ic"
+        },
+        {
+          "text": {
+            "en": "Dubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
+            "ar": "دبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
+          },
+          "url": "https://maps.app.goo.gl/HVLPedxMhMjuVaxP6?g_st=ic"
+        }
+      ],
       "whatsappMessage": {
         "en": "Hello, I would like to inquire about your services.",
         "ar": "مرحبًا، أود الاستفسار عن خدماتكم."
@@ -83,7 +102,17 @@
         "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a modern luxury villa defined by clean lines, full-height glass, and warm architectural lighting. Featuring open, light-filled interiors, elegant finishes, and a private swimming pool surrounded by landscaped gardens—designed for comfort, style, and refined living.",
         "ar": "هذه صورة تصميمية معمارية لفيلا فاخرة مخطط لها في منطقة يافور، تُظهر فيلا فاخرة حديثة تتميز بخطوط تصميمية أنيقة، ونوافذ زجاجية ممتدة من الأرض إلى السقف، وإضاءة معمارية دافئة. تتميز الفيلا بتصميم داخلي مفتوح ومضاء بشكل طبيعي، وتشطيبات أنيقة، ومسبح خاص محاط بحدائق منسقة، مصممة لتوفير الراحة والأناقة والحياة الراقية."
       },
-      "image": "assets/uploads/picture-14.jpg"
+      "images": [
+        {
+          "image": "assets/uploads/picture-14.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-10.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-12.jpg"
+        }
+      ]
     },
     {
       "side": "right",
@@ -99,7 +128,17 @@
         "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
         "ar": "مشروع سكني تصوري في مدينة ماروتا، يعرض تصميمًا معماريًا معاصرًا يهدف إلى دعم أسلوب الحياة الحضرية الحديثة."
       },
-      "image": "assets/uploads/img_0470.jpg"
+      "images": [
+        {
+          "image": "assets/uploads/img_0470.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-9.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-7.jpg"
+        }
+      ]
     },
     {
       "side": "left",
@@ -111,11 +150,75 @@
         "en": "Syria • Restaurant • Malki Avenue",
         "ar": "سوريا • مطعم • شارع المالكي"
       },
-      "image": "assets/uploads/picture-11.jpg",
+      "images": [
+        {
+          "image": "assets/uploads/picture-11.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-5.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-6.jpg"
+        }
+      ],
       "desc": {
         "en": "A contemporary fine-dining restaurant defined by bold ceiling geometry, warm ambient lighting, and panoramic glass views. Featuring elegant seating, refined finishes, and a luxurious atmosphere—designed to blend modern design with an elevated dining experience.",
         "ar": "مطعم عصري فاخر يتميز بتصميم هندسي جريء للسقف، وإضاءة دافئة، وإطلالات بانورامية خلابة. يضم المطعم جلسات أنيقة، وتشطيبات راقية، وأجواءً فاخرة، مصمم ليمزج بين التصميم العصري وتجربة طعام راقية."
       }
+    }
+  ],
+  "upcomingProjects": [
+    {
+      "side": "right",
+      "title": {
+        "en": "Residential Tower Concept",
+        "ar": "تصور برج سكني"
+      },
+      "meta": {
+        "en": "Syria • Mixed-use • Damascus",
+        "ar": "سوريا • متعدد الاستخدام • دمشق"
+      },
+      "desc": {
+        "en": "A forward-looking concept for a mixed-use residential tower with retail at ground level and landscaped terraces above.",
+        "ar": "تصور حديث لبرج سكني متعدد الاستخدام مع مساحات تجارية في الطابق الأرضي وتراسات خضراء في الأعلى."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/picture-1.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-3.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-4.jpg"
+        }
+      ]
+    },
+    {
+      "side": "left",
+      "title": {
+        "en": "Boutique Hotel Interior",
+        "ar": "تصميم داخلي لفندق بوتيك"
+      },
+      "meta": {
+        "en": "Syria • Hospitality • Old City",
+        "ar": "سوريا • ضيافة • المدينة القديمة"
+      },
+      "desc": {
+        "en": "An upcoming interior concept focused on warm materials, curated lighting, and refined guest experiences.",
+        "ar": "تصميم داخلي قادم يركز على المواد الدافئة، والإضاءة المدروسة، وتجربة ضيافة راقية."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/picture-8.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-9.jpg"
+        },
+        {
+          "image": "assets/uploads/picture-10.jpg"
+        }
+      ]
     }
   ],
   "hero": {

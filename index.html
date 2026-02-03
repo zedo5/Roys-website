@@ -213,7 +213,8 @@
             padding: 0;
             appearance: none;
             -webkit-appearance: none;
-            z-index: 6;
+            z-index: 8;
+            pointer-events: auto;
         }
         .hero-scroll svg{ width: 18px; height: 18px; }
 
@@ -353,6 +354,8 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             cursor: grab;
+            position: relative;
+            z-index: 1;
         }
         .project-track.dragging{scroll-behavior: auto; cursor: grabbing;}
         .project-track::-webkit-scrollbar{display:none;}
@@ -367,12 +370,15 @@
         }
         .project-slide .img-blur{width:100%; height:100%; border-radius: 0; box-shadow: none;}
         .project-arrow{
-            position:absolute; top:50%; transform: translateY(-50%);
+            position:absolute; bottom: 52px;
+            transform: none;
             width:40px; height:40px; border-radius:999px;
             border:0; background: rgba(255,255,255,.9);
             display:grid; place-items:center; cursor:pointer;
             box-shadow: var(--shadow);
             color: #1e1e1e;
+            z-index: 6;
+            pointer-events: auto;
         }
         .project-arrow.left{left:14px;}
         .project-arrow.right{right:14px;}
@@ -383,6 +389,7 @@
             background: rgba(255,255,255,.65);
             border-radius:999px;
             backdrop-filter: blur(4px);
+            z-index: 5;
         }
         .project-dot{
             width:8px; height:8px; border-radius:999px;
@@ -397,7 +404,7 @@
             border: 1px solid rgba(30,30,30,.10);
             box-shadow: var(--shadow);
             padding: 22px;
-            z-index: 3;
+            z-index: 2;
         }
         .project.right .card{right: 0;}
         .project.left  .card{left: 0;}
@@ -627,12 +634,12 @@
                         <line x1="17" y1="9" x2="23" y2="15"></line>
                     </svg>
                 </button>
-                <button class="hero-scroll" id="heroScroll" type="button" aria-label="Scroll down">
+                <a class="hero-scroll" id="heroScroll" href="#about" aria-label="Scroll down">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 5v14"></path>
                         <path d="M18 13l-6 6-6-6"></path>
                     </svg>
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -880,9 +887,15 @@
         }
 
         if (scrollBtn){
-            scrollBtn.onclick = () => {
-                if (about) about.scrollIntoView({ behavior: "smooth" });
+            const doScroll = (e) => {
+                if (about){
+                    e.preventDefault();
+                    about.scrollIntoView({ behavior: "smooth" });
+                }
             };
+            scrollBtn.addEventListener("click", doScroll, { capture: true });
+            scrollBtn.addEventListener("pointerdown", doScroll, { capture: true });
+            scrollBtn.addEventListener("touchstart", doScroll, { capture: true });
         }
 
         let heroSnapped = false;

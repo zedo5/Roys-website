@@ -1282,7 +1282,6 @@
         const addressLinks = Array.isArray(c.addressLinks) ? c.addressLinks : [];
         const phoneLabel = t(c.phoneLabel) || (LANG === "ar" ? "الهاتف" : "Phone");
         const phone = c.phoneE164 || "";
-        const phone2Label = t(c.phone2Label) || (LANG === "ar" ? "هاتف إضافي" : "Phone 2");
         const phone2 = c.phone2E164 || "";
         const emailLabel = t(c.emailLabel) || (LANG === "ar" ? "البريد الإلكتروني" : "Email");
         const email = c.email || "";
@@ -1336,7 +1335,7 @@
             rows.push(`
         <div class="contact-row">
           ${iconPhone()}
-          <div class="label">${escapeHtml(phone2Label)}</div>
+          <div class="label">${escapeHtml(phoneLabel)}</div>
           <div class="value"><a href="tel:${escapeHtml(phone2)}">${escapeHtml(phone2Display)}</a></div>
         </div>
       `);

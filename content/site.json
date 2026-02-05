@@ -34,6 +34,16 @@
         "en": "Damascus, Syria — Malki, Mohammad Al Bizem street\n\nDubai, UAE — Sheikh Zayed Road, near Interchange 2 (Al Matloub area)",
         "ar": "دمشق، سوريا — مالكي، شارع محمد البزم\nدبي، الإمارات العربية المتحدة — شارع الشيخ زايد، بالقرب من التقاطع الثاني (منطقة المطلوب)"
       },
+      "phone2Label": {
+        "en": "Phone 2",
+        "ar": "هاتف إضافي"
+      },
+      "phone2E164": "",
+      "emailLabel": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+      },
+      "email": "",
       "addressLinks": [
         {
           "text": {

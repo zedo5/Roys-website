@@ -228,6 +228,21 @@ collections:
                       - { label: "English", name: "en", widget: "string" }
                       - { label: "Arabic", name: "ar", widget: "string" }
                   - { label: "Phone (E.164)", name: "phoneE164", widget: "string" }
+                  - label: "Phone 2 Label"
+                    name: "phone2Label"
+                    widget: "object"
+                    fields:
+                      - { label: "English", name: "en", widget: "string" }
+                      - { label: "Arabic", name: "ar", widget: "string" }
+                  - { label: "Phone 2 (E.164)", name: "phone2E164", widget: "string" }
+
+                  - label: "Email Label"
+                    name: "emailLabel"
+                    widget: "object"
+                    fields:
+                      - { label: "English", name: "en", widget: "string" }
+                      - { label: "Arabic", name: "ar", widget: "string" }
+                  - { label: "Email", name: "email", widget: "string" }
 
                   - label: "WhatsApp Label"
                     name: "whatsappLabel"

@@ -135,7 +135,9 @@
         const img = imgs[i];
         if (!img) { tick(); continue; }
         const layers = await processImage(img, workW);
-        out.push({ ...list[i], img, ...layers, height: 24 + ((i * 37) % 5) * 9.5 });
+        const ch = { ...list[i], img, ...layers, height: 24 + ((i * 37) % 5) * 9.5 };
+        this.prepare(ch);
+        out.push(ch);
         tick();
       }
       this.chapters = out;
@@ -145,7 +147,8 @@
     }
 
     resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      const mobile = Math.min(window.innerWidth, window.innerHeight) < 700;
+      const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75);
       const r = this.canvas.getBoundingClientRect();
       const W = Math.max(1, Math.round(r.width * dpr));
       const H = Math.max(1, Math.round(r.height * dpr));
@@ -153,6 +156,7 @@
       this.canvas.width = W; this.canvas.height = H;
       this.dpr = dpr;
       this.makeGrid();
+      this.chapters.forEach((ch) => this.prepare(ch));
       this.dirty = true;
       this.render();
     }
@@ -186,23 +190,50 @@
     setIntro(v) { v = clamp(v); if (v !== this.intro) { this.intro = v; this.dirty = true; } }
 
     /** Normalised source rect for "cover" fit with zoom + horizontal focus. */
-    coverRect(ch, zoom) {
+    /** Normalised crop of the source image that "covers" the canvas at zoom 1. */
+    baseRect(ch) {
       const { width: W, height: H } = this.canvas;
       const ia = ch.img.naturalWidth / ch.img.naturalHeight, ca = W / H;
       let w = 1, h = 1;
       if (ia > ca) w = ca / ia; else h = ia / ca;
       const fx = ch.focusX ?? 0.5;
-      let x = (1 - w) * fx, y = (1 - h) * 0.5;
-      const zw = w / zoom, zh = h / zoom;
-      x += (w - zw) * 0.5; y += (h - zh) * 0.62;
-      return { x, y, w: zw, h: zh };
+      return { x: (1 - w) * fx, y: (1 - h) * 0.5, w, h };
+    }
+
+    /**
+     * Pre-crop and pre-scale every layer to (just over) canvas size once per resize,
+     * so each frame only draws near 1:1 instead of shrinking a 2000px image three times.
+     */
+    prepare(ch) {
+      const MAXZ = 1.12;
+      const { width: W } = this.canvas;
+      const r = this.baseRect(ch);
+      const srcW = ch.img.naturalWidth * r.w, srcH = ch.img.naturalHeight * r.h;
+      const scale = Math.min(1, (W * MAXZ) / srcW);
+      const PW = Math.max(1, Math.round(srcW * scale)), PH = Math.max(1, Math.round(srcH * scale));
+      ch.pre = {};
+      for (const key of ["img", "gray", "edge"]) {
+        const src = ch[key];
+        const sw = src.naturalWidth || src.width, sh = src.naturalHeight || src.height;
+        const c = document.createElement("canvas");
+        c.width = PW; c.height = PH;
+        const cx = c.getContext("2d");
+        cx.imageSmoothingQuality = "high";
+        cx.drawImage(src, r.x * sw, r.y * sh, r.w * sw, r.h * sh, 0, 0, PW, PH);
+        ch.pre[key] = c;
+      }
+    }
+
+    coverRect(ch, zoom) {
+      const w = 1 / zoom, h = 1 / zoom;
+      return { x: (1 - w) * 0.5, y: (1 - h) * 0.62, w, h };
     }
 
     drawSrc(src, r, alpha, y0, y1) {
       if (alpha <= 0.001 || y1 - y0 < 0.5) return;
       const { ctx } = this;
       const { width: W, height: H } = this.canvas;
-      const sw = src.naturalWidth || src.width, sh = src.naturalHeight || src.height;
+      const sw = src.width, sh = src.height;
       ctx.save();
       if (y0 > 0 || y1 < H) { ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip(); }
       ctx.globalAlpha = alpha;
@@ -258,21 +289,24 @@
 
       // 1. drafting grid
       const gridA = (1 - s.st) * 0.9 + 0.1 * (1 - s.co);
-      if (this.grid) { ctx.globalAlpha = gridA; ctx.drawImage(this.grid, 0, 0); ctx.globalAlpha = 1; }
+      const done = s.co >= 0.999 && s.st >= 0.999; // colour image covers everything
+      if (this.grid && !done) { ctx.globalAlpha = gridA; ctx.drawImage(this.grid, 0, 0); ctx.globalAlpha = 1; }
 
       const yB = H * (1 - s.bp); // blueprint drawn below this line
       const yS = H * (1 - s.st); // structure risen below this line
 
       // 2. blueprint linework (only above structure)
-      this.drawSrc(ch.edge, r, 0.95, Math.max(yB, 0), Math.max(yB, Math.min(yS, H)));
+      this.drawSrc(ch.pre.edge, r, 0.95, Math.max(yB, 0), Math.max(yB, Math.min(yS, H)));
 
       // 3. raw structure (grayscale) rising from the ground
-      this.drawSrc(ch.gray, r, 1, yS, H);
-      // linework ghosting over fresh structure
-      this.drawSrc(ch.edge, r, 0.32 * (1 - s.co), yS, H);
+      if (!done) {
+        this.drawSrc(ch.pre.gray, r, 1, yS, H);
+        // linework ghosting over fresh structure
+        this.drawSrc(ch.pre.edge, r, 0.32 * (1 - s.co), yS, H);
+      }
 
       // 4. colour floods in
-      this.drawSrc(ch.img, r, s.co, yS, H);
+      this.drawSrc(ch.pre.img, r, s.co, yS, H);
 
       // 5. scan lines
       if (s.bp > 0 && s.bp < 1) this.scanLine(yB, "236,230,218", 70, 1 - s.bp * 0.3);
@@ -281,7 +315,7 @@
       // 6. outgoing chapter fades away revealing the new blueprint
       if (s.inT < 1 && s.i > 0) {
         const prev = this.chapters[s.i - 1];
-        this.drawSrc(prev.img, this.coverRect(prev, 1), 1 - s.inT, 0, H);
+        this.drawSrc(prev.pre.img, this.coverRect(prev, 1), 1 - s.inT, 0, H);
       }
 
       this.onFrame({ ...s, chapter: ch, level: ch.height * s.st });

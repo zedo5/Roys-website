@@ -74,6 +74,15 @@
     return "./" + p;
   };
 
+
+  /** src + srcset for images that have a 1000px copy in portfolio/sm/ (smaller download on phones). */
+  function imgAttrs(path, sizes) {
+    const src = asset(path);
+    const m = src.match(/^(.*uploads\/portfolio\/)([^/]+\.jpe?g)$/i);
+    if (!m) return `src="${esc(src)}"`;
+    return `src="${esc(src)}" srcset="${esc(m[1] + "sm/" + m[2])} 1000w, ${esc(src)} 2000w" sizes="${sizes}"`;
+  }
+
   /** "Let's shape tomorrow together." → "Let's shape<br><em>tomorrow together.</em>" */
   function emSplit(text) {
     text = String(text || "").trim();
@@ -150,7 +159,7 @@
     const list = Array.isArray(SITE.services) ? SITE.services : [];
     $("#svcList").innerHTML = list.map((s, i) => `
       <article class="svc rv">
-        <div class="ph">${s.image ? `<img src="${esc(asset(s.image))}" alt="${esc(t(s.title))}" loading="lazy">` : ""}</div>
+        <div class="ph">${s.image ? `<img ${imgAttrs(s.image, "(max-width:860px) 78vw, (max-width:1100px) 50vw, 25vw")} alt="${esc(t(s.title))}" loading="lazy">` : ""}</div>
         <span class="svc-n caps">${num(s.num || pad2(i + 1))}</span>
         <h3>${esc(t(s.title))}</h3>
         <p class="svc-body">${esc(t(s.text))}</p>
@@ -164,8 +173,14 @@
     if (!d || !d.render || !d.built) { sec.style.display = "none"; return; }
     $("#d2bTitle").innerHTML = emSplit(t(d.title));
     $("#d2bText").textContent = t(d.text);
-    $("#d2bRender").src = asset(d.render);
-    $("#d2bBuilt").src = asset(d.built);
+    for (const [id, path] of [["#d2bRender", d.render], ["#d2bBuilt", d.built]]) {
+      const el = $(id);
+      const tmp = document.createElement("div");
+      tmp.innerHTML = `<img ${imgAttrs(path, "(max-width:860px) 100vw, 50vw")}>`;
+      const im = tmp.firstChild;
+      if (im.srcset) { el.srcset = im.srcset; el.sizes = im.sizes; } else { el.removeAttribute("srcset"); }
+      el.src = im.getAttribute("src");
+    }
     $("#d2bRender").alt = t(d.renderLabel);
     $("#d2bBuilt").alt = t(d.builtLabel);
     $("#d2bRenderLabel").textContent = t(d.renderLabel);
@@ -185,7 +200,7 @@
       <article class="work rv" data-work="${i}">
         <div class="work-frame">
           ${imgs.length > 1 ? `<span class="work-count caps">${num(1)} / ${num(imgs.length)}</span>` : ""}
-          ${imgs.map((src, k) => `<img src="${esc(src)}" alt="${esc(title)}" class="${k === 0 ? "on" : ""}" loading="lazy" data-k="${k}">`).join("")}
+          ${imgs.map((src, k) => `<img ${imgAttrs(src, "(max-width:860px) 100vw, 50vw")} alt="${esc(title)}" class="${k === 0 ? "on" : ""}" loading="lazy" data-k="${k}">`).join("")}
         </div>
         <span class="work-n caps">${num(pad2(i + 1))}</span>
         <h3>${esc(title)}</h3>
@@ -211,7 +226,7 @@
       }
       frame.addEventListener("click", () => {
         clearInterval(timer);
-        openLightbox(imgs.map((im) => ({ src: im.src, cap: $("h3", w).textContent })), k);
+        openLightbox(imgs.map((im) => ({ src: im.getAttribute("src"), cap: $("h3", w).textContent })), k);
       });
     });
   }
@@ -225,7 +240,7 @@
     $("#galleryCount").textContent = L("images", GALLERY.length);
     $("#galleryTrack").innerHTML = GALLERY.map((g, i) => `
       <figure class="g-item clip-rv" data-i="${i}">
-        <img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy" decoding="async">
+        <img ${imgAttrs(g.src, i === 0 ? "(max-width:860px) 100vw, 50vw" : "(max-width:860px) 50vw, 25vw")} alt="${esc(g.cap)}" loading="lazy" decoding="async">
         ${g.cap ? `<figcaption class="caps">${esc(g.cap)}</figcaption>` : ""}
       </figure>`).join("");
     $$(".g-item").forEach((el) => el.addEventListener("click", () => openLightbox(GALLERY, +el.dataset.i)));
@@ -336,10 +351,8 @@
     function styleLine(el, a, out) {
       const o = a * out;
       const y = (1 - a) * 36 - (1 - out) * 26;
-      const blur = (1 - a) * 10 + (1 - out) * 8;
       el.style.opacity = o.toFixed(3);
       el.style.transform = `translate3d(0,${y.toFixed(1)}px,0)`;
-      el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : "none";
     }
 
     function onFrame(s) {
@@ -401,9 +414,13 @@
       sizeSection();
       if (REDUCED) { seq.setIntro(1); seq.setProgress(0.9 / chapters.length); }
       setText(0);
+      let visible = true;
+      new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(sec);
       const loop = () => {
-        if (!REDUCED) seq.setProgress(progress());
-        seq.render();
+        if (visible) {
+          if (!REDUCED) seq.setProgress(progress());
+          seq.render();
+        }
         requestAnimationFrame(loop);
       };
       requestAnimationFrame(loop);
@@ -511,6 +528,7 @@
   function initAnimations() {
     if (!window.gsap || !window.ScrollTrigger) return;
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     if (mm) mm.revert();
     ScrollTrigger.getAll().forEach((st) => st.kill());
     mm = gsap.matchMedia();
@@ -617,8 +635,12 @@
       initAnimations();
     });
 
-    let rz;
-    window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => ScrollTrigger.refresh(), 200); });
+    let rz, lastW = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth === lastW) return; // address-bar show/hide on phones
+      lastW = window.innerWidth;
+      clearTimeout(rz); rz = setTimeout(() => ScrollTrigger.refresh(), 200);
+    });
   }
 
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";

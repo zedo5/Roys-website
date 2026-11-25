@@ -59,13 +59,13 @@ collections:
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Film Video (shown in the film section)", name: "video", widget: "file" }
+              - { label: "Video (not currently shown on the site)", name: "video", widget: "file", required: false }
 
           - label: "Cinematic Intro (scroll-to-build chapters)"
             name: "chapters"
             widget: "list"
             summary: "{{fields.project.en}} — {{fields.line1.en}} {{fields.line2.en}}"
-            hint: "Each image is turned into a blueprint drawing automatically, then 'built' as visitors scroll. Use wide, high-resolution renders (2000px+)."
+            hint: "Each image is turned into a blueprint drawing automatically, then 'built' as visitors scroll. Use wide, high-resolution renders (2000px+). One chapter works best; more chapters make the page longer."
             fields:
               - { label: "Image", name: "image", widget: "image" }
               - label: "Headline line 1"
@@ -114,23 +114,6 @@ collections:
               - { label: "Suffix (e.g. + or M)", name: "suffix", widget: "string", required: false }
               - label: "Label"
                 name: "label"
-                widget: "object"
-                fields:
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Arabic", name: "ar", widget: "string" }
-
-          - label: "Film Section"
-            name: "film"
-            widget: "object"
-            fields:
-              - label: "Title"
-                name: "title"
-                widget: "object"
-                fields:
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Arabic", name: "ar", widget: "string" }
-              - label: "Caption"
-                name: "caption"
                 widget: "object"
                 fields:
                   - { label: "English", name: "en", widget: "string" }
@@ -217,41 +200,6 @@ collections:
 
           - label: "Projects (Selected Works)"
             name: "projects"
-            widget: "list"
-            summary: "{{fields.side}} — {{fields.title.en}}"
-            fields:
-              - label: "Side"
-                name: "side"
-                widget: "select"
-                options: ["left", "right"]
-                default: "right"
-              - label: "Title"
-                name: "title"
-                widget: "object"
-                fields:
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Arabic", name: "ar", widget: "string" }
-              - label: "Meta"
-                name: "meta"
-                widget: "object"
-                fields:
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Arabic", name: "ar", widget: "string" }
-              - label: "Description"
-                name: "desc"
-                widget: "object"
-                fields:
-                  - { label: "English", name: "en", widget: "text" }
-                  - { label: "Arabic", name: "ar", widget: "text" }
-              - label: "Images"
-                name: "images"
-                widget: "list"
-                summary: "{{fields.image}}"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-
-          - label: "In Development (Upcoming Projects)"
-            name: "upcomingProjects"
             widget: "list"
             summary: "{{fields.side}} — {{fields.title.en}}"
             fields:

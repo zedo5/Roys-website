@@ -96,67 +96,10 @@
   },
   "gallery": [
     {
-      "image": "./assets/uploads/picture-9.jpg"
-    },
-    {
-      "image": "./assets/uploads/picture-10.jpg"
-    },
-    {
-      "image": "./assets/uploads/picture-11.jpg"
-    },
-    {
-      "image": "./assets/uploads/picture-12.jpg"
-    },
-    {
-      "image": "./assets/uploads/picture-13.jpg"
-    },
-    {
-      "image": "assets/uploads/portfolio/qasyoun-hotel-evening.jpg",
+      "image": "assets/uploads/portfolio/hotel-erbil-lobby.jpg",
       "caption": {
-        "en": "Qasyoun Hotel — Damascus",
-        "ar": "فندق قاسيون — دمشق"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/balena-hq-showroom.jpg",
-      "caption": {
-        "en": "Balena HQ — Dubai",
-        "ar": "مقر بالينا — دبي"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/villa-yaafour-living.jpg",
-      "caption": {
-        "en": "Private Villa — Yaafour, Damascus",
-        "ar": "فيلا خاصة — يعفور، دمشق"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/hotel-erbil-room.jpg",
-      "caption": {
-        "en": "Hotel — Erbil",
-        "ar": "فندق — أربيل"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/galliard-restaurant.jpg",
-      "caption": {
-        "en": "Galliard Restaurant — Damascus",
-        "ar": "مطعم غاليارد — دمشق"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/private-villa-built-2.jpg",
-      "caption": {
-        "en": "Private Villa — Built",
-        "ar": "فيلا خاصة — منفّذة"
-      }
-    },
-    {
-      "image": "assets/uploads/portfolio/private-office-damascus.jpg",
-      "caption": {
-        "en": "Private Office — Damascus",
-        "ar": "مكتب خاص — دمشق"
+        "en": "Hotel lobby — Erbil",
+        "ar": "ردهة فندق — أربيل"
       }
     },
     {
@@ -167,24 +110,45 @@
       }
     },
     {
-      "image": "assets/uploads/portfolio/villa-yaafour-interior.jpg",
+      "image": "assets/uploads/portfolio/private-office-damascus.jpg",
       "caption": {
-        "en": "Private Villa — Yaafour, Damascus",
-        "ar": "فيلا خاصة — يعفور، دمشق"
+        "en": "Private Office — Damascus",
+        "ar": "مكتب خاص — دمشق"
       }
     },
     {
-      "image": "assets/uploads/portfolio/private-office-erbil.jpg",
+      "image": "assets/uploads/portfolio/hotel-erbil-room.jpg",
       "caption": {
-        "en": "Private Office — Erbil",
-        "ar": "مكتب خاص — أربيل"
+        "en": "Hotel suite — Erbil",
+        "ar": "جناح فندقي — أربيل"
       }
     },
     {
-      "image": "assets/uploads/portfolio/bremer-showroom-erbil.jpg",
+      "image": "assets/uploads/portfolio/qasyoun-hotel-night.jpg",
       "caption": {
-        "en": "Bremer Showroom — Erbil",
-        "ar": "معرض بريمر — أربيل"
+        "en": "Qasyoun Hotel — Damascus",
+        "ar": "فندق قاسيون — دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/balena-hq-interior.jpg",
+      "caption": {
+        "en": "Balena HQ — Dubai",
+        "ar": "مقر بالينا — دبي"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/private-villa-render.jpg",
+      "caption": {
+        "en": "Private Villa — Design",
+        "ar": "فيلا خاصة — التصميم"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/la-vida-complex.jpg",
+      "caption": {
+        "en": "La Vida Complex — Erbil",
+        "ar": "مجمع لا فيدا — أربيل"
       }
     }
   ],
@@ -212,7 +176,7 @@
           "image": "assets/uploads/portfolio/qasyoun-hotel-day.jpg"
         },
         {
-          "image": "assets/uploads/portfolio/qasyoun-hotel-mountain.jpg"
+          "image": "assets/uploads/portfolio/qasyoun-hotel-evening.jpg"
         }
       ]
     },
@@ -235,7 +199,7 @@
           "image": "assets/uploads/portfolio/balena-hq-aerial.jpg"
         },
         {
-          "image": "assets/uploads/portfolio/balena-hq-interior.jpg"
+          "image": "assets/uploads/portfolio/balena-hq-night.jpg"
         },
         {
           "image": "assets/uploads/portfolio/balena-hq-showroom.jpg"
@@ -261,36 +225,7 @@
           "image": "assets/uploads/portfolio/shopping-complex-aerial.jpg"
         },
         {
-          "image": "assets/uploads/portfolio/shopping-complex-erbil.jpg"
-        },
-        {
           "image": "assets/uploads/portfolio/shopping-complex-mall.jpg"
-        }
-      ]
-    },
-    {
-      "side": "right",
-      "title": {
-        "en": "La Vida Complex",
-        "ar": "مجمع لا فيدا"
-      },
-      "meta": {
-        "en": "Iraq • Mixed-use • Erbil",
-        "ar": "العراق • متعدد الاستخدامات • أربيل"
-      },
-      "desc": {
-        "en": "A mixed-use urban quarter of hotel, retail and public plazas, organised around shaded courtyards and pedestrian streets.",
-        "ar": "حي حضري متعدد الاستخدامات يضم فندقًا ومحلات تجارية وساحات عامة، منظمًا حول باحات مظللة وشوارع للمشاة."
-      },
-      "images": [
-        {
-          "image": "assets/uploads/portfolio/la-vida-complex.jpg"
-        },
-        {
-          "image": "assets/uploads/portfolio/la-vida-complex-aerial.jpg"
-        },
-        {
-          "image": "assets/uploads/portfolio/hotel-erbil-lobby.jpg"
         }
       ]
     },
@@ -301,8 +236,8 @@
         "ar": "تصميم فيلا في يعفور"
       },
       "meta": {
-        "en": "Syria • Residential • Yaffour",
-        "ar": "سوريا • سكني • يعفور"
+        "en": "Syria • Residential & Interiors • Yaafour",
+        "ar": "سوريا • سكني وتصميم داخلي • يعفور"
       },
       "desc": {
         "en": "This is a conceptual architectural rendering of a luxury villa planned for Yaafour, showcasing a modern luxury villa defined by clean lines, full-height glass, and warm architectural lighting. Featuring open, light-filled interiors, elegant finishes, and a private swimming pool surrounded by landscaped gardens—designed for comfort, style, and refined living.",
@@ -313,116 +248,10 @@
           "image": "assets/uploads/picture-14.jpg"
         },
         {
-          "image": "assets/uploads/picture-10.jpg"
+          "image": "assets/uploads/portfolio/villa-yaafour-living.jpg"
         },
         {
-          "image": "assets/uploads/picture-12.jpg"
-        }
-      ]
-    },
-    {
-      "side": "right",
-      "title": {
-        "en": "Marota City",
-        "ar": "مدينة ماروتا"
-      },
-      "meta": {
-        "en": "Syria • Residential • Block H10",
-        "ar": "سوريا • سكني • بلوك H10"
-      },
-      "desc": {
-        "en": "A conceptual residential development in Marota City, showcasing a contemporary architectural design intended to support modern urban living.",
-        "ar": "مشروع سكني تصوري في مدينة ماروتا، يعرض تصميمًا معماريًا معاصرًا يهدف إلى دعم أسلوب الحياة الحضرية الحديثة."
-      },
-      "images": [
-        {
-          "image": "assets/uploads/img_0470.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-9.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-7.jpg"
-        }
-      ]
-    },
-    {
-      "side": "left",
-      "title": {
-        "en": "Galliard Restaurant ",
-        "ar": "مطعم غاليارد"
-      },
-      "meta": {
-        "en": "Syria • Restaurant • Malki Avenue",
-        "ar": "سوريا • مطعم • شارع المالكي"
-      },
-      "images": [
-        {
-          "image": "assets/uploads/picture-11.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-5.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-6.jpg"
-        }
-      ],
-      "desc": {
-        "en": "A contemporary fine-dining restaurant defined by bold ceiling geometry, warm ambient lighting, and panoramic glass views. Featuring elegant seating, refined finishes, and a luxurious atmosphere—designed to blend modern design with an elevated dining experience.",
-        "ar": "مطعم عصري فاخر يتميز بتصميم هندسي جريء للسقف، وإضاءة دافئة، وإطلالات بانورامية خلابة. يضم المطعم جلسات أنيقة، وتشطيبات راقية، وأجواءً فاخرة، مصمم ليمزج بين التصميم العصري وتجربة طعام راقية."
-      }
-    }
-  ],
-  "upcomingProjects": [
-    {
-      "side": "right",
-      "title": {
-        "en": "Residential Tower Concept",
-        "ar": "تصور برج سكني"
-      },
-      "meta": {
-        "en": "Syria • Mixed-use • Damascus",
-        "ar": "سوريا • متعدد الاستخدام • دمشق"
-      },
-      "desc": {
-        "en": "A forward-looking concept for a mixed-use residential tower with retail at ground level and landscaped terraces above.",
-        "ar": "تصور حديث لبرج سكني متعدد الاستخدام مع مساحات تجارية في الطابق الأرضي وتراسات خضراء في الأعلى."
-      },
-      "images": [
-        {
-          "image": "assets/uploads/picture-1.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-3.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-4.jpg"
-        }
-      ]
-    },
-    {
-      "side": "left",
-      "title": {
-        "en": "Boutique Hotel Interior",
-        "ar": "تصميم داخلي لفندق بوتيك"
-      },
-      "meta": {
-        "en": "Syria • Hospitality • Old City",
-        "ar": "سوريا • ضيافة • المدينة القديمة"
-      },
-      "desc": {
-        "en": "An upcoming interior concept focused on warm materials, curated lighting, and refined guest experiences.",
-        "ar": "تصميم داخلي قادم يركز على المواد الدافئة، والإضاءة المدروسة، وتجربة ضيافة راقية."
-      },
-      "images": [
-        {
-          "image": "assets/uploads/picture-8.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-9.jpg"
-        },
-        {
-          "image": "assets/uploads/picture-10.jpg"
+          "image": "assets/uploads/portfolio/villa-yaafour-interior.jpg"
         }
       ]
     }
@@ -467,7 +296,7 @@
           }
         }
       ],
-      "image": "./assets/uploads/picture-3.jpg"
+      "image": "assets/uploads/portfolio/shopping-complex-erbil.jpg"
     },
     {
       "num": "02",
@@ -505,7 +334,7 @@
           }
         }
       ],
-      "image": "./assets/uploads/picture-4.jpg"
+      "image": "assets/uploads/portfolio/villa-yaafour-living.jpg"
     },
     {
       "num": "03",
@@ -543,7 +372,7 @@
           }
         }
       ],
-      "image": "./assets/uploads/picture-5.jpg"
+      "image": "assets/uploads/portfolio/private-office-erbil.jpg"
     },
     {
       "num": "04",
@@ -581,7 +410,7 @@
           }
         }
       ],
-      "image": "./assets/uploads/picture-6.jpg"
+      "image": "assets/uploads/portfolio/la-vida-complex-aerial.jpg"
     }
   ],
   "chapters": [
@@ -604,86 +433,6 @@
         "ar": "جبل قاسيون، دمشق"
       },
       "focusX": 0.45
-    },
-    {
-      "image": "assets/uploads/portfolio/balena-hq-night.jpg",
-      "line1": {
-        "en": "Every detail,",
-        "ar": "كل تفصيلٍ"
-      },
-      "line2": {
-        "en": "deliberate.",
-        "ar": "مدروس."
-      },
-      "project": {
-        "en": "Balena Headquarters",
-        "ar": "مقر بالينا"
-      },
-      "location": {
-        "en": "Dubai, UAE",
-        "ar": "دبي، الإمارات"
-      },
-      "focusX": 0.5
-    },
-    {
-      "image": "assets/uploads/portfolio/shopping-complex-erbil.jpg",
-      "line1": {
-        "en": "Where the city",
-        "ar": "حيث تلتقي"
-      },
-      "line2": {
-        "en": "gathers.",
-        "ar": "المدينة."
-      },
-      "project": {
-        "en": "Shopping Complex",
-        "ar": "مجمع تجاري"
-      },
-      "location": {
-        "en": "Erbil, Iraq",
-        "ar": "أربيل، العراق"
-      },
-      "focusX": 0.5
-    },
-    {
-      "image": "assets/uploads/portfolio/private-villa-render.jpg",
-      "line1": {
-        "en": "Made to be",
-        "ar": "صُمّمت"
-      },
-      "line2": {
-        "en": "lived in.",
-        "ar": "لتُعاش."
-      },
-      "project": {
-        "en": "Private Villa",
-        "ar": "فيلا خاصة"
-      },
-      "location": {
-        "en": "Design & Build",
-        "ar": "تصميم وتنفيذ"
-      },
-      "focusX": 0.55
-    },
-    {
-      "image": "assets/uploads/portfolio/qasyoun-hotel-night.jpg",
-      "line1": {
-        "en": "A skyline",
-        "ar": "أفقٌ"
-      },
-      "line2": {
-        "en": "worth keeping.",
-        "ar": "يستحق البقاء."
-      },
-      "project": {
-        "en": "Qasyoun Hotel & Mall",
-        "ar": "فندق ومول قاسيون"
-      },
-      "location": {
-        "en": "Damascus, by night",
-        "ar": "دمشق ليلاً"
-      },
-      "focusX": 0.6
     }
   ],
   "intro": {
@@ -726,16 +475,6 @@
       }
     }
   ],
-  "film": {
-    "title": {
-      "en": "The Qasioun Complex",
-      "ar": "مجمع قاسيون"
-    },
-    "caption": {
-      "en": "A walk through the design — Damascus, 2028",
-      "ar": "جولة في التصميم — دمشق، ٢٠٢٨"
-    }
-  },
   "designBuilt": {
     "title": {
       "en": "Designed. Then delivered.",
@@ -746,7 +485,7 @@
       "ar": "ما نبنيه يبدو أجمل مما نصممه. فمع جمع التصميم والتنفيذ تحت سقف واحد، ينتقل كل تفصيل من التصور إلى المنزل المنجز."
     },
     "render": "assets/uploads/portfolio/private-villa-render.jpg",
-    "built": "assets/uploads/portfolio/private-villa-built.jpg",
+    "built": "assets/uploads/portfolio/private-villa-built-2.jpg",
     "renderLabel": {
       "en": "The design",
       "ar": "التصميم"

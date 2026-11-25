@@ -32,7 +32,7 @@
       localTime: "Local time", maps: "Open in Maps", menuFoot: "Damascus · Dubai",
       images: (n) => `${n} images`, projects: (n) => `${n} projects`,
       address: "Address", copyright: (y) => `© ${y} Waleed Medaa Group`,
-      phone: "Phone",
+      phone: "Phone", featured: "Featured project",
     },
     ar: {
       loading: "جارٍ رسم المخطط",
@@ -52,7 +52,7 @@
       localTime: "التوقيت المحلي", maps: "افتح في الخرائط", menuFoot: "دمشق · دبي",
       images: (n) => `${toArabicDigits(n)} صورة`, projects: (n) => `${toArabicDigits(n)} مشاريع`,
       address: "العنوان", copyright: (y) => `© ${toArabicDigits(y)} مجموعة وليد ميدع`,
-      phone: "الهاتف",
+      phone: "الهاتف", featured: "مشروع مميز",
     },
   };
 
@@ -146,47 +146,16 @@
     $("#stats").style.display = stats.length ? "" : "none";
   }
 
-  function renderFilm() {
-    const src = SITE.hero?.video;
-    const sec = $("#film");
-    if (!src) { sec.style.display = "none"; return; }
-    const v = $("#filmVideo");
-    if (!v.getAttribute("src")) v.src = asset(src);
-    $("#filmTitle").textContent = t(SITE.film?.title);
-    $("#filmCaption").textContent = t(SITE.film?.caption);
-    updateSoundLabel();
-  }
-  function updateSoundLabel() {
-    const v = $("#filmVideo");
-    $("#filmSoundLabel").textContent = v.muted ? L("soundOff") : L("soundOn");
-    $("#filmSoundWave").setAttribute("opacity", v.muted ? ".35" : "1");
-  }
-
   function renderServices() {
     const list = Array.isArray(SITE.services) ? SITE.services : [];
     $("#svcList").innerHTML = list.map((s, i) => `
-      <article class="svc" data-i="${i}">
-        <div class="svc-thumb">${s.image ? `<img src="${esc(asset(s.image))}" alt="" loading="lazy">` : ""}</div>
+      <article class="svc rv">
+        <div class="ph">${s.image ? `<img src="${esc(asset(s.image))}" alt="${esc(t(s.title))}" loading="lazy">` : ""}</div>
         <span class="svc-n caps">${num(s.num || pad2(i + 1))}</span>
         <h3>${esc(t(s.title))}</h3>
         <p class="svc-body">${esc(t(s.text))}</p>
         <ul class="svc-tags">${(s.bullets || []).map((b) => `<li>${esc(t(b.bullet ?? b))}</li>`).join("")}</ul>
       </article>`).join("");
-    const media = $("#svcMedia");
-    $$("img", media).forEach((i) => i.remove());
-    list.forEach((s, i) => {
-      if (!s.image) return;
-      const img = new Image();
-      img.src = asset(s.image); img.alt = ""; img.loading = "lazy"; img.dataset.i = i;
-      media.insertBefore(img, $("#svcNumBig"));
-    });
-    setService(0);
-  }
-  function setService(i) {
-    $$(".svc").forEach((el) => el.classList.toggle("on", +el.dataset.i === i));
-    $$("#svcMedia img").forEach((el) => el.classList.toggle("on", +el.dataset.i === i));
-    const s = (SITE.services || [])[i];
-    $("#svcNumBig").textContent = num(s?.num || pad2(i + 1));
   }
 
   function renderD2B() {
@@ -213,49 +182,38 @@
       const imgs = imagesOf(p);
       const title = t(p.title).trim();
       return `
-      <article class="work ${p.side === "right" ? "right" : "left"}" data-work="${i}">
-        <div class="work-media">
-          <div class="work-frame clip-rv" data-lb-group="work-${i}">
-            ${imgs.map((src, k) => `<img src="${esc(src)}" alt="${esc(title)}" class="${k === 0 ? "on" : ""}" loading="lazy" data-k="${k}">`).join("")}
-          </div>
-          ${imgs.length > 1 ? `<div class="work-thumbs">${imgs.map((src, k) => `<button type="button" class="${k === 0 ? "on" : ""}" data-k="${k}" aria-label="${esc(title)} ${k + 1}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+      <article class="work rv" data-work="${i}">
+        <div class="work-frame">
+          ${imgs.length > 1 ? `<span class="work-count caps">${num(1)} / ${num(imgs.length)}</span>` : ""}
+          ${imgs.map((src, k) => `<img src="${esc(src)}" alt="${esc(title)}" class="${k === 0 ? "on" : ""}" loading="lazy" data-k="${k}">`).join("")}
         </div>
-        <div class="work-info rv">
-          <span class="work-n caps">${num(pad2(i + 1))} / ${num(pad2(list.length))}</span>
-          <h3>${esc(title)}</h3>
-          <span class="work-meta caps">${esc(t(p.meta))}</span>
-          <p class="work-desc">${esc(t(p.desc))}</p>
-        </div>
+        <span class="work-n caps">${num(pad2(i + 1))}</span>
+        <h3>${esc(title)}</h3>
+        <span class="work-meta caps">${esc(t(p.meta))}</span>
+        <p class="work-desc">${esc(t(p.desc))}</p>
       </article>`;
     }).join("");
 
+    // Hovering a project cycles through its images; clicking opens them full screen
     $$(".work").forEach((w) => {
       const imgs = $$(".work-frame img", w);
-      const btns = $$(".work-thumbs button", w);
-      const show = (k) => {
-        imgs.forEach((im) => im.classList.toggle("on", +im.dataset.k === k));
-        btns.forEach((b) => b.classList.toggle("on", +b.dataset.k === k));
-        w.dataset.cur = k;
+      const count = $(".work-count", w);
+      let k = 0, timer = null;
+      const show = (n) => {
+        k = (n + imgs.length) % imgs.length;
+        imgs.forEach((im, j) => im.classList.toggle("on", j === k));
+        if (count) count.textContent = `${num(k + 1)} / ${num(imgs.length)}`;
       };
-      btns.forEach((b) => b.addEventListener("click", () => show(+b.dataset.k)));
-      $(".work-frame", w).addEventListener("click", () => {
-        const items = imgs.map((im) => ({ src: im.src, cap: $("h3", w).textContent }));
-        openLightbox(items, +(w.dataset.cur || 0));
+      const frame = $(".work-frame", w);
+      if (imgs.length > 1) {
+        frame.addEventListener("mouseenter", () => { show(k + 1); timer = setInterval(() => show(k + 1), 1800); });
+        frame.addEventListener("mouseleave", () => clearInterval(timer));
+      }
+      frame.addEventListener("click", () => {
+        clearInterval(timer);
+        openLightbox(imgs.map((im) => ({ src: im.src, cap: $("h3", w).textContent })), k);
       });
     });
-
-    const dev = Array.isArray(SITE.upcomingProjects) ? SITE.upcomingProjects : [];
-    $("#devWrap").style.display = dev.length ? "" : "none";
-    $("#devCount").textContent = L("projects", dev.length);
-    $("#devGrid").innerHTML = dev.map((p) => {
-      const img = imagesOf(p)[0];
-      return `<article class="dev-card rv">
-        <div class="ph">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ""}</div>
-        <span class="caps" style="color:var(--muted)">${esc(t(p.meta))}</span>
-        <h4>${esc(t(p.title))}</h4>
-        <p>${esc(t(p.desc))}</p>
-      </article>`;
-    }).join("");
   }
 
   let GALLERY = [];
@@ -266,16 +224,11 @@
     $("#gallery").style.display = GALLERY.length ? "" : "none";
     $("#galleryCount").textContent = L("images", GALLERY.length);
     $("#galleryTrack").innerHTML = GALLERY.map((g, i) => `
-      <figure class="g-item" data-i="${i}">
-        <div class="ph"><img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="eager" decoding="async"></div>
+      <figure class="g-item clip-rv" data-i="${i}">
+        <img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy" decoding="async">
         ${g.cap ? `<figcaption class="caps">${esc(g.cap)}</figcaption>` : ""}
       </figure>`).join("");
     $$(".g-item").forEach((el) => el.addEventListener("click", () => openLightbox(GALLERY, +el.dataset.i)));
-    let pending;
-    $$(".g-item img").forEach((img) => img.addEventListener("load", () => {
-      clearTimeout(pending);
-      pending = setTimeout(() => window.ScrollTrigger && ScrollTrigger.refresh(), 150);
-    }));
   }
 
   function officeData() {
@@ -294,7 +247,7 @@
 
   function renderOffices() {
     const offices = officeData();
-    $("#offices").style.display = offices.length ? "" : "none";
+    $("#officesGrid").style.display = offices.length ? "" : "none";
     $("#officesGrid").innerHTML = offices.map((o, i) => `
       <div class="office rv">
         <span class="caps" style="color:var(--muted)">${num(pad2(i + 1))} — ${esc(o.country)}</span>
@@ -340,12 +293,6 @@
       </a>`;
     const rows = [];
     if (c.email) rows.push(row(t(c.emailLabel) || "Email", esc(c.email), `mailto:${c.email}`));
-    const offices = officeData();
-    [c.phoneE164, c.phone2E164].forEach((ph, i) => {
-      if (!ph || !ph.trim()) return;
-      const city = offices[i]?.city;
-      rows.push(row(`${t(c.phoneLabel) || L("phone")}${city ? ` — ${city}` : ""}`, `<span class="ltr">${esc(fmtPhone(ph))}</span>`, `tel:${ph.replace(/\s/g, "")}`));
-    });
     if (wa) rows.push(row(t(c.whatsappLabel) || "WhatsApp", `<span class="ltr">${esc(fmtPhone(c.whatsappNumberE164))}</span>`, wa, true));
     if (igUrl) rows.push(row(t(c.instagramLabel) || "Instagram", `<span class="ltr">@${esc(igName || "instagram")}</span>`, igUrl, true));
     $("#contactRows").innerHTML = rows.join("");
@@ -355,7 +302,6 @@
     renderStatic();
     renderBrand();
     renderAbout();
-    renderFilm();
     renderServices();
     renderD2B();
     renderWorks();
@@ -384,7 +330,7 @@
       l2.textContent = t(c.line2);
       name.textContent = t(c.project);
       loc.textContent = t(c.location);
-      idx.textContent = `${num(pad2(i + 1))} / ${num(pad2(chapters.length))}`;
+      idx.textContent = chapters.length > 1 ? `${num(pad2(i + 1))} / ${num(pad2(chapters.length))}` : L("featured");
     }
 
     function styleLine(el, a, out) {
@@ -441,7 +387,7 @@
 
     function sizeSection() {
       const n = chapters.length || 1;
-      sec.style.height = REDUCED ? "100svh" : `calc(${n * 150}svh + 100svh)`;
+      sec.style.height = REDUCED ? "100svh" : `calc(${n === 1 ? 170 : n * 150}svh + 100svh)`;
     }
 
     async function init(onLoad) {
@@ -560,21 +506,6 @@
     });
   }
 
-  /* ---------------- Film ---------------- */
-  function initFilm() {
-    const v = $("#filmVideo");
-    $("#filmSound").addEventListener("click", () => {
-      v.muted = !v.muted;
-      if (!v.muted) v.play().catch(() => {});
-      updateSoundLabel();
-    });
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); }
-      else v.pause();
-    }), { threshold: 0.15 });
-    io.observe($("#filmFrame"));
-  }
-
   /* ---------------- Scroll animations ---------------- */
   let mm = null;
   function initAnimations() {
@@ -587,7 +518,6 @@
     if (REDUCED) {
       $$(".count").forEach((el) => (el.textContent = num(el.dataset.to)));
       $$(".statement .w").forEach((w) => (w.style.opacity = 1));
-      initServicesTriggers();
       return;
     }
 
@@ -634,58 +564,14 @@
       });
     });
 
-    // Film opens up
-    gsap.fromTo("#filmFrame", { clipPath: "inset(10% 14% 10% 14% round 4px)" }, {
-      clipPath: "inset(0% 0% 0% 0% round 2px)", ease: "none",
-      scrollTrigger: { trigger: "#film", start: "top bottom", end: "center center", scrub: true },
-    });
-
-    initServicesTriggers();
-
     // Design → built parallax
     gsap.fromTo("#d2bRender", { yPercent: -6 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".d2b-pair", start: "top bottom", end: "bottom top", scrub: true } });
     gsap.fromTo("#d2bBuilt", { yPercent: -12 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".d2b-pair", start: "top bottom", end: "bottom top", scrub: true } });
 
-    // Work images drift
-    $$(".work-frame").forEach((f) => {
-      gsap.fromTo($$("img", f), { yPercent: -4 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: f, start: "top bottom", end: "bottom top", scrub: true } });
-    });
-
     // Contact background drift
     gsap.fromTo("#contactBg", { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: "#contact", start: "top bottom", end: "bottom top", scrub: true } });
 
-    // Gallery: horizontal travel on desktop
-    mm.add("(min-width: 861px)", () => {
-      const sec = $("#gallery"), track = $("#galleryTrack"), bar = $("#galleryBar");
-      const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
-      const setH = () => (sec.style.height = `${window.innerHeight + dist() * 0.5}px`);
-      setH();
-      ScrollTrigger.addEventListener("refreshInit", setH);
-      const sign = LANG === "ar" ? 1 : -1;
-      const tw = gsap.to(track, {
-        x: () => sign * dist(), ease: "none",
-        scrollTrigger: {
-          trigger: sec, start: "top top", end: "bottom bottom", scrub: true, invalidateOnRefresh: true,
-          onUpdate: (st) => gsap.set(bar, { scaleX: st.progress }),
-        },
-      });
-      return () => {
-        ScrollTrigger.removeEventListener("refreshInit", setH);
-        tw.kill(); gsap.set(track, { clearProps: "transform" });
-        sec.style.height = "";
-      };
-    });
-
     ScrollTrigger.refresh();
-  }
-
-  function initServicesTriggers() {
-    $$(".svc").forEach((el) => {
-      ScrollTrigger.create({
-        trigger: el, start: "top 55%", end: "bottom 55%",
-        onToggle: (st) => st.isActive && setService(+el.dataset.i),
-      });
-    });
   }
 
   /* ---------------- Boot ---------------- */
@@ -702,7 +588,6 @@
     renderAll();
     initScroll();
     initLightbox();
-    initFilm();
 
     const pctEl = $("#loaderPct"), bar = $("#loaderBar");
     let shown = 0;

@@ -46,12 +46,126 @@ collections:
             fields:
               - { label: "Brand Name", name: "name", widget: "string" }
               - { label: "Logo", name: "logo", widget: "image" }
+              - { label: "Logo for dark backgrounds (white on transparent PNG)", name: "logoLight", widget: "image", required: false }
+              - { label: "Established (year)", name: "established", widget: "string", required: false }
+              - label: "Tagline"
+                name: "tagline"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
 
           - label: "Hero"
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Hero Video", name: "video", widget: "file" }
+              - { label: "Film Video (shown in the film section)", name: "video", widget: "file" }
+
+          - label: "Cinematic Intro (scroll-to-build chapters)"
+            name: "chapters"
+            widget: "list"
+            summary: "{{fields.project.en}} — {{fields.line1.en}} {{fields.line2.en}}"
+            hint: "Each image is turned into a blueprint drawing automatically, then 'built' as visitors scroll. Use wide, high-resolution renders (2000px+)."
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - label: "Headline line 1"
+                name: "line1"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Headline line 2 (italic)"
+                name: "line2"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Project name"
+                name: "project"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Location"
+                name: "location"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - { label: "Horizontal focus on narrow screens (0 = left, 1 = right)", name: "focusX", widget: "number", value_type: "float", min: 0, max: 1, step: 0.05, default: 0.5, required: false }
+
+          - label: "Intro Statement"
+            name: "intro"
+            widget: "object"
+            fields:
+              - label: "Statement"
+                name: "statement"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "Arabic", name: "ar", widget: "text" }
+
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            summary: "{{fields.value}}{{fields.suffix}} — {{fields.label.en}}"
+            fields:
+              - { label: "Number", name: "value", widget: "string" }
+              - { label: "Suffix (e.g. + or M)", name: "suffix", widget: "string", required: false }
+              - label: "Label"
+                name: "label"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+
+          - label: "Film Section"
+            name: "film"
+            widget: "object"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Caption"
+                name: "caption"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+
+          - label: "Design → Built"
+            name: "designBuilt"
+            widget: "object"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Text"
+                name: "text"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "Arabic", name: "ar", widget: "text" }
+              - { label: "Render image", name: "render", widget: "image" }
+              - { label: "Built photo", name: "built", widget: "image" }
+              - label: "Render label"
+                name: "renderLabel"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
+              - label: "Built label"
+                name: "builtLabel"
+                widget: "object"
+                fields:
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "Arabic", name: "ar", widget: "string" }
 
           - label: "About"
             name: "about"
@@ -101,7 +215,7 @@ collections:
                       - { label: "Arabic", name: "ar", widget: "string" }
               - { label: "Image", name: "image", widget: "image" }
 
-          - label: "Completed Projects"
+          - label: "Projects (Selected Works)"
             name: "projects"
             widget: "list"
             summary: "{{fields.side}} — {{fields.title.en}}"
@@ -136,7 +250,7 @@ collections:
                 fields:
                   - { label: "Image", name: "image", widget: "image" }
 
-          - label: "Upcoming Projects"
+          - label: "In Development (Upcoming Projects)"
             name: "upcomingProjects"
             widget: "list"
             summary: "{{fields.side}} — {{fields.title.en}}"
@@ -174,9 +288,16 @@ collections:
           - label: "Gallery"
             name: "gallery"
             widget: "list"
-            summary: "{{fields.image}}"
+            summary: "{{fields.caption.en}} {{fields.image}}"
             fields:
               - { label: "Image", name: "image", widget: "image" }
+              - label: "Caption"
+                name: "caption"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "English", name: "en", widget: "string", required: false }
+                  - { label: "Arabic", name: "ar", widget: "string", required: false }
 
           - label: "Partner"
             name: "partner"
@@ -196,7 +317,7 @@ collections:
                   - { label: "English", name: "en", widget: "text" }
                   - { label: "Arabic", name: "ar", widget: "text" }
 
-              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Background image", name: "image", widget: "image" }
 
               - label: "Contact Info"
                 name: "contact"

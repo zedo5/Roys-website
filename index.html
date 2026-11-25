@@ -1,1545 +1,254 @@
 <!doctype html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>WM GROUP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>WM Group — Architecture · Engineering · Design-Build</title>
+  <meta name="description" content="Waleed Medaa Group — a Syrian architecture, engineering and design-build firm in Damascus and Dubai since 1998." />
+  <meta name="theme-color" content="#0b0c0f" />
+  <meta property="og:title" content="WM Group — Architecture · Engineering · Design-Build" />
+  <meta property="og:description" content="From blueprint to landmark — Damascus, Dubai and Erbil since 1998." />
+  <meta property="og:image" content="assets/uploads/portfolio/qasyoun-hotel-sunrise.jpg" />
+  <link rel="icon" href="assets/uploads/logo.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root{
-            --black:#1e1e1e;
-            --grey:#6f6f6f;
-            --white:#ffffff;
-            --container: 1200px;
-            --shadow: 0 18px 50px rgba(0,0,0,.14);
-            --soft-shadow: 0 12px 30px rgba(0,0,0,.10);
-            --topbar-h: 64px;
-            --img: none;
-        }
-
-        *{box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        html, body{overflow-x:hidden;}
-        body{
-            margin:0;
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-            color:var(--black);
-            background:var(--white);
-            line-height:1.45;
-        }
-        a{color:inherit;text-decoration:none}
-        img{max-width:100%;display:block}
-        .container{max-width: var(--container); margin: 0 auto; padding: 0 22px;}
-
-        /* Top bar */
-        .topbar{
-            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(255,255,255,.92);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(30,30,30,.08);
-            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
-        }
-        body{padding-top: var(--topbar-h, 64px);}
-        .topbar.on-hero{
-            background: transparent;
-            border-bottom-color: transparent;
-            backdrop-filter: none;
-            color: #fff;
-        }
-        .topbar.on-hero .navlinks a,
-        .topbar.on-hero .brand strong,
-        .topbar.on-hero .langbtn{
-            color: #fff;
-        }
-        .topbar.on-hero .langbtn{
-            background: rgba(20,20,20,.35);
-            border-color: rgba(255,255,255,.35);
-        }
-        .topbar.on-hero .logo{display:none;}
-        .topbar.on-hero .brand strong{
-            display:inline-block;
-            font-weight: 800;
-            letter-spacing: .06em;
-        }
-        .header-wa{
-            width: 34px;
-            height: 34px;
-            border-radius: 999px;
-            border: 1px solid rgba(30,30,30,.15);
-            background: rgba(255,255,255,.9);
-            display:grid;
-            place-items:center;
-            color: #1e1e1e;
-        }
-        .topbar.on-hero .header-wa{
-            border-color: rgba(255,255,255,.35);
-            background: rgba(20,20,20,.35);
-            color: #fff;
-        }
-        .header-wa svg{width:18px;height:18px;}
-        .nav{
-            display:flex; align-items:center; justify-content:space-between;
-            gap: 16px; padding: 14px 0;
-        }
-        .brand{
-            display:flex; align-items:center; gap:10px;
-            line-height:1.1;
-        }
-        .brand .logo{
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-        .brand strong{font-weight:800;letter-spacing:.02em;font-size:18px}
-
-        .navright{display:flex;gap:14px;align-items:center}
-        .navlinks{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-        .navlinks a{font-size:12px;opacity:.9}
-
-        /* Language toggle */
-        .langbtn{
-            font: inherit;
-            font-size: 12px;
-            font-weight: 700;
-            border: 1px solid rgba(30,30,30,.14);
-            background: #fff;
-            padding: 8px 12px;
-            border-radius: 999px;
-            cursor: pointer;
-            letter-spacing: .02em;
-            display:flex;
-            align-items:center;
-            gap:8px;
-            user-select:none;
-        }
-        .langdot{
-            width: 8px; height: 8px; border-radius: 999px;
-            background: rgba(30,30,30,.55);
-        }
-        .langbtn:active{transform: translateY(1px);}
-
-        /* HERO */
-        .hero{
-            padding:0;
-            margin-top: calc(-1 * var(--topbar-h, 64px));
-        }
-        .hero .container{max-width: 100%; padding: 0;}
-
-        .hero-media{
-            position:relative;
-            overflow:hidden;
-            background:#eee;
-            border-bottom: 1px solid rgba(30,30,30,.08);
-            height: 100svh;
-        }
-
-        /* Center-split open wipes */
-        .wipe{
-            position:absolute; top:0; width:50%; height:100%;
-            background: var(--white); z-index: 7; pointer-events:none;
-            transform: scaleX(1);
-        }
-        .wipe.split.left{left:0; transform-origin:left;}
-        .wipe.split.right{right:0; transform-origin:right;}
-
-        /* HERO video */
-        .hero-video{
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        .hero-video-bg{
-            position:absolute;
-            inset:0;
-            overflow:hidden;
-            z-index: 0;
-            display:none;
-        }
-        .hero-video-bg video{
-            width:100%;
-            height:100%;
-            object-fit: cover;
-            filter: blur(36px);
-            transform: scale(1.08);
-        }
-        .hero-video video{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display:block;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-mute{
-            position:absolute;
-            right: 18px;
-            bottom: 88px;
-            width: 44px;
-            height: 44px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,.35);
-            background: rgba(20,20,20,.35);
-            backdrop-filter: blur(10px);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color: rgba(255,255,255,.92);
-            cursor:pointer;
-            padding: 0;
-            appearance: none;
-            -webkit-appearance: none;
-            z-index: 6;
-        }
-        .hero-mute svg{width:20px;height:20px;}
-
-        section{padding: 80px 0;}
-        .split{
-            display:grid;
-            grid-template-columns: 1fr 520px;
-            gap: 60px;
-            align-items:start;
-        }
-        #services .split{
-            grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
-            gap: 40px;
-        }
-        .big-title{
-            font-size: clamp(44px, 6vw, 74px);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .right{justify-self:end;width:100%}
-
-        /* About */
-        .about-copy p{
-            margin: 0 0 14px;
-            color: var(--grey);
-            font-size: 14px;
-            max-width: 58ch;
-            white-space: pre-wrap;
-        }
-
-        /* Services accordion */
-        .accordion{border-top: 1px solid rgba(30,30,30,.12); padding-right: 6px;}
-        .acc-item{border-bottom: 1px solid rgba(30,30,30,.12); padding: 18px 0}
-        .acc-head{
-            display:grid;
-            grid-template-columns: 58px 1fr;
-            gap: 12px;
-            align-items:center;
-            cursor:pointer;
-            user-select:none;
-            padding-right: 28px;
-            position: relative;
-        }
-        .acc-num{font-size: 12px;color: var(--grey); font-weight:700;}
-        .acc-title{
-            font-weight: 700;
-            font-size: 14px;
-            padding-right: 18px;
-        }
-        .acc-plus{
-            font-size: 22px;
-            line-height: 1;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--black);
-            font-weight: 800;
-            transition: transform .25s ease;
-        }
-        .acc-panel{
-            display:grid;
-            grid-template-columns: minmax(0, 1fr) minmax(260px, 460px);
-            gap: 22px;
-            padding: 14px 0 0 70px;
-            overflow:hidden;
-            max-height: 0;
-            opacity: 0;
-            transition: max-height .45s ease, opacity .35s ease;
-            align-items: start;
-        }
-        .acc-item.open .acc-panel{max-height: 900px; opacity: 1}
-        .acc-item.open .acc-plus{transform: rotate(45deg)}
-        .acc-panel p{
-            margin:0 0 12px;
-            color:var(--grey);
-            font-size:13px;
-            line-height: 1.75;
-            max-width: none;              /* FIX: no skinny column */
-            white-space:pre-wrap;
-        }
-        .bullets{
-            margin:0;
-            padding-left:16px;
-            color:var(--grey);
-            font-size:12px;
-            display:grid;
-            gap:6px;
-            line-height: 1.65;
-        }
-        .img-blur{
-            position: relative;
-            overflow: hidden;
-            border-radius: 14px;
-            box-shadow: var(--soft-shadow);
-            background: #f2f2f2;
-        }
-        .img-blur::before{
-            content:"";
-            position:absolute;
-            inset:-10%;
-            background-image: var(--img);
-            background-size: cover;
-            background-position: center;
-            filter: blur(32px);
-            transform: scale(1.08);
-        }
-        .img-blur img{
-            position: relative;
-            z-index: 1;
-            width:100%;
-            height:100%;
-            object-fit: contain;
-            display:block;
-        }
-        .service-blur{height: 250px;} /* bigger service image */
-
-        /* Projects */
-        .projects-wrap{margin-top: 20px;}
-        .project{position: relative; padding: 38px 0;}
-        .project-slider{
-            position: relative;
-            width: 100%;
-            height: clamp(340px, 50vh, 520px);
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: var(--soft-shadow);
-            background: #f2f2f2;
-        }
-        .project-track{
-            display:flex;
-            height:100%;
-            overflow-x:auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            cursor: grab;
-            position: relative;
-            z-index: 1;
-        }
-        .project-track.dragging{scroll-behavior: auto; cursor: grabbing;}
-        .project-track::-webkit-scrollbar{display:none;}
-        .project-slide{
-            flex: 0 0 100%;
-            height:100%;
-            scroll-snap-align: start;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background: #f2f2f2;
-        }
-        .project-slide .img-blur{width:100%; height:100%; border-radius: 0; box-shadow: none;}
-        .project-arrow{
-            position:absolute; bottom: 52px;
-            transform: none;
-            width:40px; height:40px; border-radius:999px;
-            border:0; background: rgba(255,255,255,.9);
-            display:grid; place-items:center; cursor:pointer;
-            box-shadow: var(--shadow);
-            color: #1e1e1e;
-            z-index: 6;
-            pointer-events: auto;
-        }
-        .project-arrow.left{left:14px;}
-        .project-arrow.right{right:14px;}
-        .project-arrow svg{width:20px;height:20px;}
-        .project-dots{
-            position:absolute; left:50%; bottom:12px; transform: translateX(-50%);
-            display:flex; gap:8px; padding:6px 10px;
-            background: rgba(255,255,255,.65);
-            border-radius:999px;
-            backdrop-filter: blur(4px);
-            z-index: 5;
-        }
-        .project-dot{
-            width:8px; height:8px; border-radius:999px;
-            background: rgba(30,30,30,.25); cursor:pointer;
-        }
-        .project-dot.active{background: rgba(30,30,30,.85);}
-        .project-slider.single .project-arrow,
-        .project-slider.single .project-dots{display:none;}
-        .project .card{
-            position:absolute; top: 88px; width: 340px;
-            background: rgba(255,255,255,.92);
-            border: 1px solid rgba(30,30,30,.10);
-            box-shadow: var(--shadow);
-            padding: 22px;
-            z-index: 2;
-        }
-        .project.right .card{right: 0;}
-        .project.left  .card{left: 0;}
-        .project h3{margin:0 0 8px;font-size:14px;font-weight:800}
-        .project .meta{font-size:11px;color:var(--grey);margin:0 0 10px}
-        .project .desc{margin:0;color:var(--grey);font-size:12px;line-height:1.6;white-space:pre-wrap}
-
-        /* Gallery */
-        .gallery-title-center{
-            text-align:center;
-            font-size: clamp(64px, 10vw, 150px);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin: 0;
-            padding: 0 0 40px;
-            text-transform: uppercase;
-        }
-        .gallery-stage{position: relative; height: 560px; margin-top: 10px; overflow: visible;}
-        .gallery-word{
-            position:absolute; left: 50%; top: 48%;
-            transform: translate(-50%,-50%);
-            font-size: clamp(70px, 10vw, 160px);
-            font-weight: 800; letter-spacing: .06em;
-            color: rgba(30,30,30,.18);
-            text-transform: uppercase;
-            white-space:nowrap;
-            user-select:none;
-            pointer-events:none;
-        }
-        .g{position:absolute; box-shadow: var(--soft-shadow); overflow:hidden; background:#f2f2f2; border-radius:16px;}
-        .g::before{
-            content:"";
-            position:absolute;
-            inset:-10%;
-            background-image: var(--img);
-            background-size: cover;
-            background-position: center;
-            filter: blur(28px);
-            transform: scale(1.08);
-        }
-        .g img{width:100%;height:100%;object-fit:contain; position:relative; z-index:1;}
-        .g1{left: 14%; top: 160px; width: 260px; height: 260px;}
-        .g2{left: 42%; top: 12px;  width: 340px; height: 380px;}
-        .g3{left: 72%; top: 260px; width: 260px; height: 260px;}
-        .g4{left: 30%; top: -40px; width: 320px; height: 220px;}
-        .g5{left: 66%; top: -60px; width: 320px; height: 220px;}
-
-        /* Partner */
-        .partner{padding: 0; background: var(--white);}
-        .partner-grid{display:grid; grid-template-columns: 1fr 1fr; min-height: 720px;}
-        .partner-left{padding: 90px 70px 60px 70px;}
-        .partner-title{
-            margin:0 0 18px;
-            font-size: 76px; line-height: 0.95;
-            font-weight: 800; letter-spacing: -0.04em;
-            text-transform: uppercase;
-        }
-        .partner-desc{margin:0 0 18px;color: var(--grey);font-size: 14px;max-width: 62ch;white-space:pre-wrap}
-
-        .contact-list{display:grid; gap: 14px; margin-top: 10px; max-width: 600px;}
-        .contact-row{
-            display:flex;
-            align-items:flex-start;
-            gap: 12px;
-            color: rgba(30,30,30,.78);
-            font-weight: 700;
-        }
-        .contact-row svg{width: 22px; height: 22px; flex: 0 0 auto; margin-top: 2px; opacity:.85;}
-        .contact-row .label{min-width: 110px; color: rgba(30,30,30,.55); font-weight: 800;}
-        .contact-row a{
-            color: #1d5fd3;
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 3px;
-        }
-        .contact-row .value a{display:block;}
-        .contact-row .value a + a{margin-top:6px;}
-        .contact-row a:hover{opacity:.85}
-        .contact-row .value{font-weight: 700; color: rgba(30,30,30,.78); white-space: pre-wrap;}
-
-        .partner-right{position: relative; overflow:hidden; background:#eee;}
-        .partner-right::before{
-            content:"";
-            position:absolute;
-            inset:-10%;
-            background-image: var(--img);
-            background-size: cover;
-            background-position: center;
-            filter: blur(28px);
-            transform: scale(1.08);
-        }
-        .partner-right img{width:100%; height:100%; object-fit: contain; transform-origin:center; position:relative; z-index:1;}
-
-        /* Reveals */
-        .reveal{opacity:0; transform: translateY(18px);}
-        .reveal-left{opacity:0; transform: translateX(-22px);}
-        .reveal-right{opacity:0; transform: translateX(22px);}
-
-        /* RTL adjustments */
-        html[dir="rtl"] .about-copy, html[dir="rtl"] .partner-left{ text-align:right; }
-        html[dir="rtl"] .acc-panel{padding: 14px 70px 0 0;}
-        html[dir="rtl"] .bullets{padding-left:0; padding-right:16px;}
-        html[dir="rtl"] .acc-head{padding-right:0; padding-left:28px;}
-        html[dir="rtl"] .acc-plus{right:auto; left:0;}
-        html[dir="rtl"] .project.right .card{right:auto; left:0;}
-        html[dir="rtl"] .project.left  .card{left:auto; right:0;}
-        html[dir="rtl"] .project-arrow.left{left:auto; right:14px;}
-        html[dir="rtl"] .project-arrow.right{right:auto; left:14px;}
-        html[dir="rtl"] .contact-row{flex-direction: row-reverse;}
-        html[dir="rtl"] .contact-row .label{min-width: 120px; text-align:right;}
-
-        @media (max-width: 980px){
-            .split{grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 24px;}
-            #services .split{grid-template-columns: minmax(170px, 240px) minmax(0, 1fr); gap: 28px;}
-            .big-title{font-size: clamp(36px, 8.4vw, 58px);}
-            .right{justify-self:start; max-width: 720px;}
-            .project .card{position:relative; top:auto; left:auto; right:auto; width: 100%; margin-top: 16px;}
-            .gallery-stage{height: 680px;}
-            .gallery-word{display:none;}
-            .navlinks{display:none;}
-            .partner-grid{grid-template-columns:1fr}
-            .partner-left{padding: 64px 22px}
-            .partner-title{font-size: 56px}
-
-            /* Services: stack on mobile */
-            .acc-panel{grid-template-columns: 1fr; padding-left: 0; gap: 18px;}
-            .acc-head{grid-template-columns: 58px 1fr 28px;}
-            .service-blur{height: 220px;}
-        }
-
-        @media (max-width: 520px){
-            section{padding: 56px 0;}
-            .brand strong{font-size:15px}
-            .project-arrow{ display:none; }
-            .split{grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: 18px;}
-            #services .split{grid-template-columns: minmax(140px, 200px) minmax(0, 1fr); gap: 22px;}
-            .partner-left{padding: 48px 18px}
-            .partner-title{font-size: 42px}
-            .contact-row .label{min-width: 90px;}
-            .service-blur{height: 200px;}
-            .acc-head{grid-template-columns: 44px 1fr; gap: 8px;}
-        }
-
-        @media (max-width: 768px){
-            .hero-video{height: 100svh;}
-            .hero-video-bg{display:none;}
-            .hero-video video{
-                object-fit: cover;
-            }
-        }
-        @media (min-width: 769px){
-            .hero-overlay{display:none;}
-        }
-
-        @media (min-width: 769px){
-            .hero-mute{bottom: 140px;}
-            .hero-scroll{bottom: 140px;}
-        }
-
-
-        @media (max-width: 768px){
-            /* Mobile collage positions (avoid overlap) */
-            .gallery-stage{
-                height: 600px;
-                overflow: hidden;
-                margin-bottom: 24px;
-            }
-            .gallery-word{ display: none; }
-            .g4{ left: 6%;  top: 20px;  width: 46%; height: 150px; }
-            .g5{ left: 52%; top: 20px;  width: 42%; height: 150px; }
-            .g1{ left: 6%;  top: 190px; width: 42%; height: 190px; }
-            .g2{ left: 46%; top: 160px; width: 48%; height: 260px; }
-            .g3{ left: 10%; top: 400px; width: 84%; height: 200px; }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/uploads/portfolio/qasyoun-hotel-sunrise.jpg" />
+  <link rel="stylesheet" href="assets/css/site.css" />
 </head>
+<body class="is-loading">
 
-<body>
-<header class="topbar on-hero">
-    <div class="container">
-        <div class="nav">
-            <a class="brand" href="#top">
-                <img class="logo" id="brandLogo" src="./assets/uploads/logo.png" alt="Logo" />
-                <strong id="brandName">WM GROUP</strong>
-            </a>
+<!-- Loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <img class="loader-logo" src="assets/uploads/logo-light.png" alt="" />
+    <div class="loader-pct" id="loaderPct">00</div>
+    <div class="loader-bar"><i id="loaderBar"></i></div>
+    <div class="loader-note caps" data-i18n="loading">Drafting the blueprint</div>
+  </div>
+</div>
 
-            <div class="navright">
-                <nav class="navlinks" aria-label="Primary">
-                    <a href="#about" id="navAbout">About</a>
-                    <a href="#services" id="navServices">Services</a>
-                    <a href="#projects" id="navProjects">Completed Projects</a>
-                    <a href="#gallery" id="navGallery">Gallery</a>
-                    <a href="#partner" id="navPartner">Partner</a>
-                </nav>
-
-                <a class="header-wa" id="headerWa" href="#" aria-label="WhatsApp" target="_blank" rel="noreferrer">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.05.5C5.5.5.17 5.83.17 12.39c0 2.1.55 4.14 1.59 5.95L0 24l5.77-1.51a11.86 11.86 0 0 0 6.28 1.8h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.43-8.92Zm-8.47 18.3h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.23c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88Zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.21 5.08 4.5.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"></path>
-                    </svg>
-                </a>
-
-                <button id="langToggle" class="langbtn" type="button" aria-label="Change language">
-                    <span class="langdot" aria-hidden="true"></span>
-                    <span id="langLabel">English</span>
-                </button>
-            </div>
-        </div>
-    </div>
+<!-- Header -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#top" data-scroll>
+    <img class="nav-logo" id="brandLogo" src="assets/uploads/logo-light.png" alt="WM Group logo" />
+    <span class="nav-word" id="brandName">WM GROUP</span>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <span class="nav-tag caps" id="brandTagline">Architecture · Engineering · Design-Build</span>
+  </a>
+  <nav class="nav-links caps" aria-label="Primary">
+    <a href="#about" data-scroll data-i18n="navAbout">About</a>
+    <a href="#services" data-scroll data-i18n="navServices">Services</a>
+    <a href="#projects" data-scroll data-i18n="navWorks">Projects</a>
+    <a href="#gallery" data-scroll data-i18n="navGallery">Gallery</a>
+    <a href="#contact" data-scroll data-i18n="navContact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-est caps" id="navEst">Est. 1998</span>
+    <button class="lang-btn" id="langToggle" type="button" aria-label="Switch language"><span id="langLabel">عربي</span></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
 </header>
 
-<!-- HERO -->
-<main id="top" class="hero">
-    <div class="container">
-        <div class="hero-media" id="heroMedia">
-            <div class="wipe split left" data-wipe-left></div>
-            <div class="wipe split right" data-wipe-right></div>
+<nav class="menu" id="menu" aria-label="Mobile">
+  <a href="#about" data-scroll><small>01</small><span data-i18n="navAbout">About</span></a>
+  <a href="#services" data-scroll><small>02</small><span data-i18n="navServices">Services</span></a>
+  <a href="#projects" data-scroll><small>03</small><span data-i18n="navWorks">Projects</span></a>
+  <a href="#gallery" data-scroll><small>04</small><span data-i18n="navGallery">Gallery</span></a>
+  <a href="#contact" data-scroll><small>05</small><span data-i18n="navContact">Contact</span></a>
+  <div class="menu-foot caps" id="menuFoot">Damascus · Dubai</div>
+</nav>
 
-            <div class="hero-video">
-                <div class="hero-video-bg" aria-hidden="true">
-                    <video id="heroVideoBg" muted autoplay loop playsinline preload="auto" src="./assets/uploads/video.MP4"></video>
-                </div>
-                <video id="heroVideo" muted autoplay loop playsinline preload="auto" src="./assets/uploads/video.MP4"></video>
-                <button class="hero-mute" id="heroMute" type="button" aria-label="Toggle sound">
-                    <svg id="heroMuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M11 5 6 9H3v6h3l5 4V5z"></path>
-                        <line x1="23" y1="9" x2="17" y2="15"></line>
-                        <line x1="17" y1="9" x2="23" y2="15"></line>
-                    </svg>
-                </button>
-            </div>
+<main id="top">
+
+  <!-- 1. Build sequence (scroll-driven) -->
+  <section class="build" id="build" aria-label="Featured projects">
+    <div class="build-pin">
+      <canvas id="buildCanvas" aria-hidden="true"></canvas>
+      <div class="build-shade"></div>
+
+      <div class="build-headline">
+        <h1 class="h1" id="buildTitle"><span id="buildL1"></span><em id="buildL2"></em></h1>
+      </div>
+
+      <div class="build-ticks" id="buildTicks" aria-hidden="true"></div>
+
+      <div class="build-meta">
+        <div class="build-project">
+          <span class="build-index caps" id="buildIndex">01 / 05</span>
+          <span class="build-name" id="buildName"></span>
+          <span class="build-loc caps" id="buildLoc"></span>
         </div>
+        <div class="build-status" aria-hidden="true">
+          <div class="build-stages caps" id="buildStages">
+            <span data-i18n="stageBlueprint">Blueprint</span>
+            <span data-i18n="stageStructure">Structure</span>
+            <span data-i18n="stageComplete">Complete</span>
+          </div>
+          <div class="build-level" id="buildLevel">+ 00.00 m</div>
+        </div>
+      </div>
+
+      <div class="build-hint caps" id="buildHint" aria-hidden="true">
+        <span data-i18n="scrollHint">Scroll to build</span><i></i>
+      </div>
     </div>
+  </section>
+
+  <!-- 2. About -->
+  <section class="section intro" id="about">
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowAbout">About the studio</span></p>
+      <p class="statement" id="introStatement"></p>
+      <div class="about-grid">
+        <div class="about-mark rv"><img src="assets/uploads/logo-light.png" alt="" /></div>
+        <div class="about-cols">
+          <p class="rv" id="aboutP1"></p>
+          <p class="rv" id="aboutP2"></p>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <!-- 3. Film -->
+  <section class="film" id="film">
+    <div class="wrap">
+      <div class="film-frame" id="filmFrame">
+        <video id="filmVideo" muted loop playsinline preload="metadata"></video>
+        <div class="film-cap">
+          <div>
+            <span class="caps" id="filmCaption" style="color:var(--muted)"></span>
+            <h2 class="film-title" id="filmTitle"></h2>
+          </div>
+          <button class="film-sound caps" id="filmSound" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="filmSoundWave" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" opacity=".35"/></svg>
+            <span id="filmSoundLabel">Sound off</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Services -->
+  <section class="section services" id="services">
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowServices">Services</span></p>
+      <div class="svc-head">
+        <h2 class="h2 rv" id="servicesTitle"></h2>
+        <p class="rv" data-i18n="servicesLead"></p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-media" id="svcMedia"><span class="svc-num-big" id="svcNumBig">01</span></div>
+        <div class="svc-list" id="svcList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Design → Built -->
+  <section class="section d2b" id="design-built">
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowD2B">From design to reality</span></p>
+      <div class="d2b-top">
+        <h2 class="h2 rv" id="d2bTitle"></h2>
+        <p class="rv" id="d2bText"></p>
+      </div>
+      <div class="d2b-pair">
+        <figure class="d2b-fig render">
+          <div class="ph clip-rv"><img id="d2bRender" alt="" loading="lazy" /></div>
+          <figcaption class="caps"><span id="d2bRenderLabel"></span><span>01</span></figcaption>
+        </figure>
+        <figure class="d2b-fig built">
+          <div class="ph clip-rv"><img id="d2bBuilt" alt="" loading="lazy" /></div>
+          <figcaption class="caps"><span id="d2bBuiltLabel"></span><span>02</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Projects -->
+  <section class="section works" id="projects">
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowWorks">Selected works</span></p>
+      <h2 class="h2 works-head rv" id="worksTitle"></h2>
+      <div id="worksList"></div>
+
+      <div class="dev" id="devWrap">
+        <div class="dev-head">
+          <h3 data-i18n="devTitle">In development</h3>
+          <span class="caps" style="color:var(--muted)" id="devCount"></span>
+        </div>
+        <div class="dev-grid" id="devGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-pin">
+      <div class="wrap gallery-head">
+        <div>
+          <p class="eyebrow caps" style="margin-bottom:18px"><span data-i18n="eyebrowGallery">Gallery</span></p>
+          <h2 class="h2" id="galleryTitle"></h2>
+        </div>
+        <span class="gallery-count caps" id="galleryCount"></span>
+      </div>
+      <div class="gallery-track" id="galleryTrack"></div>
+      <div class="wrap"><div class="gallery-progress"><i id="galleryBar"></i></div></div>
+    </div>
+  </section>
+
+  <!-- 8. Offices -->
+  <section class="section offices" id="offices">
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowOffices">Offices</span></p>
+      <div class="offices-grid" id="officesGrid"></div>
+    </div>
+  </section>
+
+  <!-- 9. Contact -->
+  <section class="contact" id="contact">
+    <div class="contact-bg" id="contactBg"></div>
+    <div class="wrap">
+      <p class="eyebrow caps"><span data-i18n="eyebrowContact">Partner with us</span></p>
+      <h2 class="contact-title rv" id="contactTitle"></h2>
+      <p class="contact-desc rv" id="contactDesc"></p>
+      <a class="cta caps" id="contactCta" href="#" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+        <span data-i18n="ctaWhatsapp">Start a conversation</span>
+      </a>
+      <div class="contact-rows" id="contactRows"></div>
+    </div>
+  </section>
 </main>
 
-<!-- ABOUT -->
-<section id="about">
-    <div class="container">
-        <div class="split">
-            <h2 class="big-title reveal-left" id="aboutTitle">ABOUT</h2>
-            <div class="right about-copy">
-                <p id="aboutP1" class="reveal"></p>
-                <p id="aboutP2" class="reveal"></p>
-            </div>
-        </div>
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer-word">WM <em>Group</em></p>
+    <div class="footer-row caps">
+      <span id="footCopy">© 2026 Waleed Medaa Group</span>
+      <div class="footer-links">
+        <a id="footIg" href="#" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="#top" data-scroll data-i18n="backTop">Back to top</a>
+      </div>
     </div>
-</section>
+  </div>
+</footer>
 
-<!-- SERVICES -->
-<section id="services">
-    <div class="container">
-        <div class="split">
-            <h2 class="big-title reveal-left" id="servicesTitle">SERVICES</h2>
-            <div class="right reveal">
-                <div class="accordion" id="servicesAccordion"></div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <img id="lbImg" alt="" />
+  <div class="lb-cap caps" id="lbCap"></div>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button class="lb-close caps" id="lbClose" type="button" data-i18n="close">Close</button>
+</div>
 
-<!-- PROJECTS -->
-<section id="projects">
-    <div class="container">
-        <div class="split">
-            <h2 class="big-title reveal-left" id="projectsTitle">COMPLETED PROJECTS</h2>
-            <div class="right"></div>
-        </div>
-        <div class="projects-wrap" id="projectsWrap"></div>
-    </div>
-</section>
-
-<!-- UPCOMING PROJECTS -->
-<section id="upcoming-projects">
-    <div class="container">
-        <div class="split">
-            <h2 class="big-title reveal-left" id="upcomingProjectsTitle">UPCOMING PROJECTS</h2>
-            <div class="right"></div>
-        </div>
-        <div class="projects-wrap" id="upcomingProjectsWrap"></div>
-    </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-    <div class="container">
-        <h2 class="gallery-title-center reveal" id="galleryTitle">GALLERY</h2>
-
-        <div class="gallery-stage" id="galleryStage">
-            <div class="gallery-word reveal" id="galleryWord">GALLERY</div>
-        </div>
-    </div>
-</section>
-
-<!-- PARTNER -->
-<section id="partner" class="partner">
-    <div class="partner-grid">
-        <div class="partner-left">
-            <h2 class="partner-title reveal-left" id="partnerTitle"></h2>
-            <p class="partner-desc reveal" id="partnerDesc"></p>
-            <div class="contact-list reveal" id="contactList"></div>
-        </div>
-
-        <div class="partner-right reveal-right">
-            <img id="partnerImg" src="./assets/uploads/picture-14.jpg" alt="Partner" />
-        </div>
-    </div>
-</section>
-
-<!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-<script>
-    function escapeHtml(s){
-        return String(s ?? "")
-            .replaceAll("&","&amp;")
-            .replaceAll("<","&lt;")
-            .replaceAll(">","&gt;")
-            .replaceAll('"',"&quot;")
-            .replaceAll("'","&#039;");
-    }
-
-    // Arabic-Indic digits: ٠١٢٣٤٥٦٧٨٩
-    const AR_DIGITS = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
-    function toArabicIndicDigits(str){
-        return String(str ?? "").replace(/\d/g, d => AR_DIGITS[Number(d)]);
-    }
-
-    let SITE = null;
-    let LANG = "en";
-
-    function getLang(){
-        return localStorage.getItem("lang") || (SITE?.langDefault ?? "en");
-    }
-    function setLang(lang){
-        LANG = (lang === "ar") ? "ar" : "en";
-        localStorage.setItem("lang", LANG);
-        document.documentElement.lang = LANG;
-        document.documentElement.dir = (LANG === "ar") ? "rtl" : "ltr";
-    }
-
-    // localized field: string OR {en, ar}
-    function t(value){
-        if (value == null) return "";
-        if (typeof value === "string") return value;
-        return value[LANG] ?? value.en ?? value.ar ?? "";
-    }
-
-    function maybeLocalizeDigits(str){
-        return (LANG === "ar") ? toArabicIndicDigits(str) : String(str ?? "");
-    }
-
-    /* ---------------- HERO VIDEO ---------------- */
-
-    function initHeroVideo(){
-        const video = document.getElementById("heroVideo");
-        const videoBg = document.getElementById("heroVideoBg");
-        const muteBtn = document.getElementById("heroMute");
-        const muteIcon = document.getElementById("heroMuteIcon");
-        const heroMedia = document.getElementById("heroMedia");
-        const about = document.getElementById("about");
-        const headerWa = document.getElementById("headerWa");
-        if (!video) return;
-
-        let src = SITE?.hero?.video || "";
-        if (src && !/^https?:\/\//i.test(src) && !src.startsWith(".")){
-            src = `./${src}`;
-        }
-        video.muted = true;
-        video.setAttribute("muted", "");
-        video.setAttribute("playsinline", "");
-        video.setAttribute("autoplay", "");
-        video.setAttribute("loop", "");
-        video.preload = "auto";
-
-        if (src){
-            video.src = src;
-            if (videoBg) videoBg.src = src;
-            video.load();
-        }
-
-        const tryPlay = () => {
-            video.play().catch(() => {});
-            if (videoBg) videoBg.play().catch(() => {});
-        };
-        video.addEventListener("canplay", tryPlay, { once: true });
-        tryPlay();
-        if (heroMedia){
-            heroMedia.addEventListener("click", tryPlay, { passive: true });
-            heroMedia.addEventListener("touchstart", tryPlay, { passive: true });
-        }
-        document.addEventListener("visibilitychange", () => {
-            if (!document.hidden) tryPlay();
-        });
-
-        if (headerWa){
-            const waNumber = SITE?.partner?.contact?.whatsappNumberE164 || "";
-            const waMessage = t(SITE?.partner?.contact?.whatsappMessage);
-            const waUrl = whatsappUrlFromE164(waNumber, waMessage);
-            headerWa.href = waUrl || "#";
-        }
-
-        const stopVideo = () => {
-            video.pause();
-            if (videoBg) videoBg.pause();
-        };
-        const startVideo = () => {
-            tryPlay();
-        };
-
-        if ("IntersectionObserver" in window && heroMedia){
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.01){
-                        startVideo();
-                    } else {
-                        stopVideo();
-                    }
-                });
-            }, { threshold: [0, 0.01, 0.1] });
-            observer.observe(heroMedia);
-        } else {
-            const onScroll = () => {
-                const r = heroMedia?.getBoundingClientRect();
-                if (!r) return;
-                const visible = r.bottom > 0 && r.top < window.innerHeight;
-                if (visible) startVideo();
-                else stopVideo();
-            };
-            window.addEventListener("scroll", onScroll, { passive: true });
-            onScroll();
-        }
-
-        const topbar = document.querySelector(".topbar");
-        if (topbar){
-            document.documentElement.style.setProperty("--topbar-h", `${topbar.offsetHeight}px`);
-            topbar.classList.add("hidden");
-            document.body.classList.add("hero-full");
-
-            const revealTopbar = () => {
-                if (!heroMedia) return;
-                const r = heroMedia.getBoundingClientRect();
-                if (r.bottom <= 0){
-                    topbar.classList.remove("hidden");
-                    document.body.classList.remove("hero-full");
-                    window.removeEventListener("scroll", revealTopbar);
-                }
-            };
-            window.addEventListener("scroll", revealTopbar, { passive: true });
-        }
-
-        const setIcon = () => {
-            if (!muteIcon) return;
-            if (video.muted){
-                muteIcon.innerHTML = `
-          <path d="M11 5 6 9H3v6h3l5 4V5z"></path>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>`;
-            } else {
-                muteIcon.innerHTML = `
-          <path d="M11 5 6 9H3v6h3l5 4V5z"></path>
-          <path d="M15.5 8.5a4.5 4.5 0 0 1 0 7"></path>
-          <path d="M18.5 6a8 8 0 0 1 0 12"></path>`;
-            }
-        };
-        setIcon();
-
-        if (muteBtn){
-            muteBtn.onclick = () => {
-                video.muted = !video.muted;
-                if (!video.muted) video.volume = 1;
-                setIcon();
-            };
-        }
-
-
-        if (heroMedia){
-            const updateHeaderState = (inView) => {
-                const topbar = document.querySelector(".topbar");
-                if (!topbar) return;
-                if (inView) topbar.classList.add("on-hero");
-                else topbar.classList.remove("on-hero");
-            };
-            if ("IntersectionObserver" in window){
-                const io = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => updateHeaderState(entry.isIntersecting));
-                }, { threshold: [0, 0.01, 0.1] });
-                io.observe(heroMedia);
-            } else {
-                const onScroll = () => {
-                    const r = heroMedia.getBoundingClientRect();
-                    updateHeaderState(r.bottom > 0 && r.top < window.innerHeight);
-                };
-                window.addEventListener("scroll", onScroll, { passive: true });
-                onScroll();
-            }
-        }
-    }
-
-    /* ---------------- SERVICES ---------------- */
-
-    function renderServices(services){
-        const wrap = document.getElementById("servicesAccordion");
-        if (!wrap) return;
-
-        const list = Array.isArray(services) ? services : [];
-        wrap.innerHTML = list.map((s, idx) => {
-            const open = idx === 0 ? "open" : "";
-            const numRaw = s?.num ?? String(idx+1).padStart(2,"0");
-            const num = (LANG === "ar") ? toArabicIndicDigits(numRaw) : String(numRaw);
-
-            const bullets = Array.isArray(s?.bullets) ? s.bullets : [];
-            const bulletsHtml = bullets.map(b => `<li>${escapeHtml(t(b?.bullet ?? b))}</li>`).join("");
-
-            const title = t(s?.title);
-            const text = t(s?.text);
-            const img = s?.image ?? "";
-
-            return `
-        <div class="acc-item ${open}">
-          <div class="acc-head" role="button" tabindex="0" aria-expanded="${idx === 0 ? "true" : "false"}">
-            <div class="acc-num">${escapeHtml(num)}</div>
-            <div class="acc-title">${escapeHtml(title)}</div>
-            <div class="acc-plus">+</div>
-          </div>
-
-          <div class="acc-panel">
-            <div>
-              <p>${escapeHtml(text)}</p>
-              <ul class="bullets">${bulletsHtml}</ul>
-            </div>
-            <div class="img-blur service-blur" style="--img:url('${escapeHtml(img)}')">
-              <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" />
-            </div>
-          </div>
-        </div>
-      `;
-        }).join("");
-    }
-
-    function initAccordion(){
-        const items = Array.from(document.querySelectorAll('#servicesAccordion .acc-item'));
-        const toggle = (item) => {
-            const isOpen = item.classList.contains('open');
-            items.forEach(i => {
-                i.classList.remove('open');
-                i.querySelector('.acc-head')?.setAttribute('aria-expanded','false');
-            });
-            if (!isOpen){
-                item.classList.add('open');
-                item.querySelector('.acc-head')?.setAttribute('aria-expanded','true');
-            }
-            // Recompute ScrollTrigger positions after accordion changes
-            if (window.ScrollTrigger) ScrollTrigger.refresh();
-        };
-
-        items.forEach(item => {
-            const head = item.querySelector('.acc-head');
-            if (!head) return;
-            head.onclick = () => toggle(item);
-            head.onkeydown = (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(item); }
-            };
-        });
-    }
-
-    /* ---------------- PROJECTS ---------------- */
-
-    let projectSliderResizeBound = false;
-    const PROJECT_SLIDERS = { timers: [] };
-
-    function projectImageList(p){
-        const list = Array.isArray(p?.images) ? p.images : [];
-        const fromList = list.map(x => x?.image).filter(Boolean);
-        if (fromList.length) return fromList;
-        if (p?.image) return [p.image];
-        return [];
-    }
-
-    function clearProjectSliders(){
-        PROJECT_SLIDERS.timers.forEach((t) => clearInterval(t));
-        PROJECT_SLIDERS.timers = [];
-    }
-
-    function initProjectSliders(){
-        clearProjectSliders();
-        const sliders = Array.from(document.querySelectorAll("[data-project-slider]"));
-        sliders.forEach((slider) => {
-            const track = slider.querySelector(".project-track");
-            const dots = slider.querySelector(".project-dots");
-            const prev = slider.querySelector(".project-arrow.left");
-            const next = slider.querySelector(".project-arrow.right");
-            if (!track || !dots) return;
-
-            const slides = Array.from(track.querySelectorAll(".project-slide"));
-            const count = slides.length;
-            const state = {
-                index: 0,
-                timer: null,
-                intervalMs: 4500,
-                userInteractedAt: 0
-            };
-            slider.dataset.index = "0";
-            dots.innerHTML = "";
-
-            if (count <= 1){
-                slider.classList.add("single");
-                return;
-            }
-
-            const updateDots = (idx) => {
-                Array.from(dots.children).forEach((d, i) => d.classList.toggle("active", i === idx));
-            };
-
-            const go = (idx, user=false) => {
-                const nextIdx = (idx + count) % count;
-                state.index = nextIdx;
-                slider.dataset.index = String(nextIdx);
-                updateDots(nextIdx);
-                track.scrollTo({ left: nextIdx * track.clientWidth, behavior: "smooth" });
-                if (user) state.userInteractedAt = Date.now();
-            };
-
-            const nextSlide = (user=false) => go(state.index + 1, user);
-            const prevSlide = (user=false) => go(state.index - 1, user);
-
-            const stopAutoplay = () => {
-                if (state.timer){
-                    clearInterval(state.timer);
-                    state.timer = null;
-                }
-            };
-
-            const startAutoplay = () => {
-                stopAutoplay();
-                if (count <= 1) return;
-                state.timer = setInterval(() => {
-                    const now = Date.now();
-                    if (now - state.userInteractedAt < 3500) return;
-                    nextSlide(false);
-                }, state.intervalMs);
-                PROJECT_SLIDERS.timers.push(state.timer);
-            };
-
-            slides.forEach((_, i) => {
-                const dot = document.createElement("div");
-                dot.className = "project-dot" + (i === 0 ? " active" : "");
-                dot.setAttribute("role","button");
-                dot.setAttribute("tabindex","0");
-                dot.setAttribute("aria-label", "Go to slide " + (i+1));
-                dot.onclick = () => go(i, true);
-                dot.onkeydown = (e) => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(i, true); } };
-                dots.appendChild(dot);
-            });
-
-            if (prev) prev.onclick = () => prevSlide(true);
-            if (next) next.onclick = () => nextSlide(true);
-
-            let isDown = false;
-            let startX = 0;
-            let startScroll = 0;
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchStartIndex = 0;
-            let touchStartScroll = 0;
-            let isTouching = false;
-
-            const pointerDown = (e) => {
-                isDown = true;
-                track.classList.add("dragging");
-                startX = (e.touches ? e.touches[0].pageX : e.pageX);
-                startScroll = track.scrollLeft;
-                state.userInteractedAt = Date.now();
-                stopAutoplay();
-            };
-
-            const pointerMove = (e) => {
-                if (!isDown) return;
-                const x = (e.touches ? e.touches[0].pageX : e.pageX);
-                const dx = x - startX;
-                track.scrollLeft = startScroll - dx;
-            };
-
-            const pointerUp = () => {
-                if (!isDown) return;
-                isDown = false;
-                track.classList.remove("dragging");
-                const w = track.clientWidth || 1;
-                const idx = Math.round(track.scrollLeft / w);
-                go(idx, true);
-                startAutoplay();
-            };
-
-            // Mouse (pointer events)
-            track.addEventListener("pointerdown", (e) => {
-                if (e.pointerType !== "mouse") return;
-                pointerDown(e);
-                track.setPointerCapture(e.pointerId);
-            });
-            track.addEventListener("pointermove", (e) => {
-                if (e.pointerType !== "mouse") return;
-                pointerMove(e);
-            });
-            track.addEventListener("pointerup", (e) => {
-                if (e.pointerType !== "mouse") return;
-                pointerUp();
-            });
-            track.addEventListener("pointercancel", (e) => {
-                if (e.pointerType !== "mouse") return;
-                pointerUp();
-            });
-
-            // Touch
-            track.addEventListener("touchstart", (e) => {
-                touchStartX = e.touches ? e.touches[0].pageX : 0;
-                touchStartY = e.touches ? e.touches[0].pageY : 0;
-                touchStartScroll = track.scrollLeft;
-                const w = track.clientWidth || 1;
-                touchStartIndex = Math.round(touchStartScroll / w);
-                isTouching = true;
-                state.userInteractedAt = Date.now();
-                stopAutoplay();
-            }, { passive: true });
-            track.addEventListener("touchmove", (e) => {
-                if (!isTouching || !e.touches || !e.touches[0]) return;
-                const currentX = e.touches[0].pageX;
-                const currentY = e.touches[0].pageY;
-                const dx = currentX - touchStartX;
-                const dy = currentY - touchStartY;
-                const isHorizontal = Math.abs(dx) > Math.abs(dy) + 6;
-                if (!isHorizontal) return;
-                e.preventDefault();
-                track.scrollLeft = touchStartScroll - dx;
-            }, { passive: false });
-            track.addEventListener("touchend", (e) => {
-                if (!isTouching) return;
-                isTouching = false;
-                const endX = e.changedTouches ? e.changedTouches[0].pageX : 0;
-                const dx = endX ? (touchStartX - endX) : 0;
-                const swipeThreshold = 24;
-                if (dx > swipeThreshold){
-                    nextSlide(true);
-                } else if (dx < -swipeThreshold){
-                    prevSlide(true);
-                } else {
-                    const w = track.clientWidth || 1;
-                    const idx = Math.round(track.scrollLeft / w);
-                    go(idx, true);
-                }
-                startAutoplay();
-            }, { passive: true });
-
-            track.addEventListener("scroll", () => {
-                const w = track.clientWidth || 1;
-                const idx = Math.round(track.scrollLeft / w);
-                if (idx !== state.index){
-                    state.index = idx;
-                    slider.dataset.index = String(idx);
-                    updateDots(idx);
-                }
-            }, { passive: true });
-
-            startAutoplay();
-        });
-
-        if (!projectSliderResizeBound){
-            projectSliderResizeBound = true;
-            window.addEventListener("resize", () => {
-                document.querySelectorAll("[data-project-slider]").forEach((slider) => {
-                    const track = slider.querySelector(".project-track");
-                    if (!track) return;
-                    const idx = Number(slider.dataset.index || 0);
-                    track.scrollTo({ left: idx * track.clientWidth });
-                });
-            }, { passive: true });
-        }
-    }
-
-    function renderProjects(projects, wrapId="projectsWrap"){
-        const wrap = document.getElementById(wrapId);
-        if (!wrap) return;
-
-        const list = Array.isArray(projects) ? projects : [];
-        wrap.innerHTML = list.map((p) => {
-            const side = (p?.side === "left") ? "left" : "right";
-            const title = t(p?.title);
-            const meta = maybeLocalizeDigits(t(p?.meta));
-            const desc = t(p?.desc);
-            const srcs = projectImageList(p);
-            const slides = srcs.map((src, i) => `
-            <div class="project-slide">
-              <div class="img-blur" style="--img:url('${escapeHtml(src)}')">
-                <img loading="${i === 0 ? "eager" : "lazy"}" src="${escapeHtml(src)}" alt="${escapeHtml(title)} ${i+1}">
-              </div>
-            </div>
-          `).join("");
-
-            return `
-        <div class="project ${side}" data-side="${side}">
-          <div class="project-slider reveal" data-project-slider>
-            <div class="project-track" aria-label="${escapeHtml(title)} images">
-              ${slides}
-            </div>
-            <button class="project-arrow left" type="button" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 18l-6-6 6-6"></path>
-              </svg>
-            </button>
-            <button class="project-arrow right" type="button" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 6l6 6-6 6"></path>
-              </svg>
-            </button>
-            <div class="project-dots" aria-label="Project dots"></div>
-          </div>
-          <div class="card ${side === "left" ? "reveal-left" : "reveal-right"}">
-            <h3>${escapeHtml(title)}</h3>
-            <div class="meta">${escapeHtml(meta)}</div>
-            <p class="desc">${escapeHtml(desc)}</p>
-          </div>
-        </div>
-      `;
-        }).join("");
-
-        initProjectSliders();
-    }
-
-    /* ---------------- GALLERY ---------------- */
-
-    function renderGallery(gallery){
-        const stage = document.getElementById("galleryStage");
-        if (!stage) return;
-
-        const word = stage.querySelector(".gallery-word");
-        stage.innerHTML = "";
-        if (word) stage.appendChild(word);
-
-        const list = Array.isArray(gallery) ? gallery : [];
-        const srcs = list.map(x => x?.image).filter(Boolean);
-
-        const slots = ["g4","g5","g1","g2","g3"];
-        for (let i=0; i<Math.min(5, srcs.length); i++){
-            const cls = slots[i];
-            const div = document.createElement("div");
-            div.className = `g ${cls} ${i % 2 ? "reveal-right" : "reveal-left"}`;
-            div.style.setProperty("--img", `url('${srcs[i]}')`);
-            div.innerHTML = `<img loading="lazy" src="${escapeHtml(srcs[i])}" alt="">`;
-            stage.appendChild(div);
-        }
-    }
-
-    /* ---------------- CONTACT ICONS ---------------- */
-
-    function iconPin(){
-        return `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11Z"></path>
-        <circle cx="12" cy="10" r="2.5"></circle>
-      </svg>`;
-    }
-    function iconPhone(){
-        return `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.9 19.9 0 0 1-8.7-3.1A19.5 19.5 0 0 1 5.2 13a19.9 19.9 0 0 1-3.1-8.8A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.5a16 16 0 0 0 6.4 6.4l1.1-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9Z"></path>
-      </svg>`;
-    }
-    function iconInstagram(){
-        return `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-        <circle cx="12" cy="12" r="4"></circle>
-        <circle cx="17.5" cy="6.5" r="1"></circle>
-      </svg>`;
-    }
-    function iconEmail(){
-        return `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-        <path d="M3 7l9 6 9-6"></path>
-      </svg>`;
-    }
-    function iconWhatsApp(){
-        return `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 11.8a8 8 0 0 1-11.7 7.1L4 20l1.1-4.1A8 8 0 1 1 20 11.8Z"></path>
-        <path d="M9.2 9.1c.2-.5.5-.5.8-.5.2 0 .4 0 .6.1.2.1.4.2.5.5.1.3.3 1 .3 1.1 0 .2 0 .4-.2.6l-.3.4c-.1.1-.2.2-.1.4.1.2.4.7.9 1.2.6.6 1.1.9 1.3 1 .2.1.3.1.4-.1l.4-.5c.2-.2.4-.2.6-.1.2.1 1 .5 1.1.6.2.1.3.2.3.3 0 .1 0 .7-.3 1.1-.3.4-.8.7-1.3.7-.5 0-1.6-.2-3-1.2-1.7-1.2-2.7-2.8-3-3.3-.3-.6-.1-1 .1-1.2l.4-.5Z"></path>
-      </svg>`;
-    }
-    function whatsappUrlFromE164(e164, message){
-        const digits = String(e164 || "").replace(/[^\d]/g, "");
-        if (!digits) return "#";
-        const text = String(message || "").trim();
-        const query = text ? `?text=${encodeURIComponent(text)}` : "";
-        return `https://wa.me/${digits}${query}`;
-    }
-
-    function renderContact(){
-        const wrap = document.getElementById("contactList");
-        if (!wrap) return;
-
-        const c = SITE?.partner?.contact || {};
-        const address = t(c.address);
-        const addressLinks = Array.isArray(c.addressLinks) ? c.addressLinks : [];
-        const phoneLabel = t(c.phoneLabel) || (LANG === "ar" ? "الهاتف" : "Phone");
-        const phone = c.phoneE164 || "";
-        const phone2 = c.phone2E164 || "";
-        const emailLabel = t(c.emailLabel) || (LANG === "ar" ? "البريد الإلكتروني" : "Email");
-        const email = c.email || "";
-
-        const waLabel = t(c.whatsappLabel) || (LANG === "ar" ? "واتساب" : "WhatsApp");
-        const waNumber = c.whatsappNumberE164 || "";
-        const waMessage = t(c.whatsappMessage);
-        const waUrl = whatsappUrlFromE164(waNumber, waMessage);
-
-        const igLabel = t(c.instagramLabel) || (LANG === "ar" ? "إنستغرام" : "Instagram");
-        const igName = c.instagramName || "";
-        const igUrl = c.instagramUrl || (igName ? `https://instagram.com/${igName}` : "#");
-
-        const phoneDisplay = (LANG === "ar") ? toArabicIndicDigits(phone) : phone;
-        const phone2Display = (LANG === "ar") ? toArabicIndicDigits(phone2) : phone2;
-        const waDisplay = (LANG === "ar") ? toArabicIndicDigits(waNumber) : waNumber;
-
-        const rows = [];
-
-        const addressHtml = addressLinks.length
-            ? addressLinks.map((item) => {
-                const text = t(item?.text ?? item?.label ?? "");
-                const url = item?.url || "";
-                if (!text) return "";
-                if (url) return `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(text)}</a>`;
-                return escapeHtml(text);
-            }).filter(Boolean).join("<br>")
-            : escapeHtml(address).replace(/\n/g, "<br>");
-
-        if (addressHtml.trim()){
-            rows.push(`
-        <div class="contact-row">
-          ${iconPin()}
-          <div class="label">${escapeHtml(LANG === "ar" ? "العنوان" : "Address")}</div>
-          <div class="value">${addressHtml}</div>
-        </div>
-      `);
-        }
-
-        if (phone.trim() || phone2.trim()){
-            const phones = [];
-            if (phone.trim()){
-                phones.push(`<a href="tel:${escapeHtml(phone)}">${escapeHtml(phoneDisplay)}</a>`);
-            }
-            if (phone2.trim()){
-                phones.push(`<a href="tel:${escapeHtml(phone2)}">${escapeHtml(phone2Display)}</a>`);
-            }
-            rows.push(`
-        <div class="contact-row">
-          ${iconPhone()}
-          <div class="label">${escapeHtml(phoneLabel)}</div>
-          <div class="value">${phones.join("<br>")}</div>
-        </div>
-      `);
-        }
-
-        if (email.trim()){
-            rows.push(`
-        <div class="contact-row">
-          ${iconEmail()}
-          <div class="label">${escapeHtml(emailLabel)}</div>
-          <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
-        </div>
-      `);
-        }
-
-        if (waNumber.trim()){
-            rows.push(`
-        <div class="contact-row">
-          ${iconWhatsApp()}
-          <div class="label">${escapeHtml(waLabel)}</div>
-          <div class="value"><a href="${escapeHtml(waUrl)}" target="_blank" rel="noreferrer">${escapeHtml(waDisplay)}</a></div>
-        </div>
-      `);
-        }
-
-        if (igUrl && igUrl !== "#"){
-            rows.push(`
-        <div class="contact-row">
-          ${iconInstagram()}
-          <div class="label">${escapeHtml(igLabel)}</div>
-          <div class="value"><a href="${escapeHtml(igUrl)}" target="_blank" rel="noreferrer">@${escapeHtml(igName || "instagram")}</a></div>
-        </div>
-      `);
-        }
-
-        wrap.innerHTML = rows.join("");
-    }
-
-    /* ---------------- ANIMATIONS ---------------- */
-
-    function clearScrollTriggers(){
-        if (!window.ScrollTrigger) return;
-        ScrollTrigger.getAll().forEach(t => t.kill());
-    }
-
-    function initAnimations(){
-        if (!window.gsap || !window.ScrollTrigger) return;
-        gsap.registerPlugin(ScrollTrigger);
-        clearScrollTriggers();
-
-        const revealTo = (selector) => {
-            document.querySelectorAll(selector).forEach((el) => {
-                gsap.fromTo(el,
-                    {
-                        opacity: 0,
-                        x: el.classList.contains("reveal-left") ? -22 : el.classList.contains("reveal-right") ? 22 : 0,
-                        y: el.classList.contains("reveal") ? 18 : 0
-                    },
-                    {
-                        opacity: 1, x: 0, y: 0,
-                        duration: 0.75,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
-                    }
-                );
-            });
-        };
-        revealTo(".reveal");
-        revealTo(".reveal-left");
-        revealTo(".reveal-right");
-
-        // initial wipes
-        gsap.fromTo('[data-wipe-left]',  { scaleX: 1 }, { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 });
-        gsap.fromTo('[data-wipe-right]', { scaleX: 1 }, { scaleX: 0, duration: 1.1, ease: "power3.out", delay: 0.1 });
-
-        // subtle hero parallax
-        gsap.to("#heroVideo", {
-            y: 18,
-            ease: "none",
-            scrollTrigger: { trigger: "#heroMedia", start: "top top", end: "bottom top", scrub: true }
-        });
-
-        // projects
-        gsap.utils.toArray(".project").forEach((proj) => {
-            const media = proj.querySelector(".project-slider");
-            const card = proj.querySelector(".card");
-            const side = proj.dataset.side;
-
-            if (media){
-                gsap.fromTo(media, {opacity:0, y: 18}, {
-                    opacity:1, y:0, duration: .75, ease:"power2.out",
-                    scrollTrigger: { trigger: proj, start: "top 78%" }
-                });
-            }
-
-            gsap.fromTo(card,
-                {opacity:0, x: side === "right" ? 26 : -26},
-                {opacity:1, x:0, duration: .8, ease:"power2.out",
-                    scrollTrigger: { trigger: proj, start: "top 78%" }
-                }
-            );
-        });
-
-        // gallery
-        gsap.utils.toArray("#galleryStage .g").forEach((el, idx) => {
-            gsap.fromTo(el,
-                { opacity: 0, y: 26, rotate: (idx % 2 ? 1.0 : -1.0) },
-                { opacity: 1, y: 0, rotate: 0, duration: .8, ease: "power2.out",
-                    scrollTrigger: { trigger: "#galleryStage", start: "top 78%" }
-                }
-            );
-
-            gsap.to(el, {
-                y: (idx % 2 ? -14 : 14),
-                ease: "none",
-                scrollTrigger: { trigger: "#galleryStage", start: "top bottom", end: "bottom top", scrub: true }
-            });
-        });
-    }
-
-    function applyStaticLabels(){
-        const isAr = LANG === "ar";
-
-        document.getElementById("langLabel").textContent = isAr ? "العربية" : "English";
-
-        document.getElementById("navAbout").textContent = isAr ? "من نحن" : "About";
-        document.getElementById("navServices").textContent = isAr ? "الخدمات" : "Services";
-        document.getElementById("navProjects").textContent = isAr ? "المشاريع المكتملة" : "Completed Projects";
-        document.getElementById("navGallery").textContent = isAr ? "معرض الصور" : "Gallery";
-        document.getElementById("navPartner").textContent = isAr ? "تواصل" : "Partner";
-
-        document.getElementById("aboutTitle").textContent = isAr ? "من نحن" : "ABOUT";
-        document.getElementById("servicesTitle").textContent = isAr ? "الخدمات" : "SERVICES";
-        document.getElementById("projectsTitle").textContent = isAr ? "المشاريع المكتملة" : "COMPLETED PROJECTS";
-        document.getElementById("upcomingProjectsTitle").textContent = isAr ? "المشاريع القادمة" : "UPCOMING PROJECTS";
-        document.getElementById("galleryTitle").textContent = isAr ? "معرض الصور" : "GALLERY";
-        document.getElementById("galleryWord").textContent = isAr ? "معرض الصور" : "GALLERY";
-    }
-
-    function renderAll(){
-        // Brand + logo
-        document.getElementById("brandName").textContent = SITE?.brand?.name || "WM GROUP";
-        if (SITE?.brand?.logo) document.getElementById("brandLogo").src = SITE.brand.logo;
-
-        // HERO
-        initHeroVideo();
-
-        // About
-        document.getElementById("aboutP1").textContent = t(SITE?.about?.p1);
-        document.getElementById("aboutP2").textContent = t(SITE?.about?.p2);
-
-        // Services / Projects / Gallery
-        renderServices(SITE?.services);
-        initAccordion();
-        renderProjects(SITE?.projects);
-        renderProjects(SITE?.upcomingProjects, "upcomingProjectsWrap");
-        renderGallery(SITE?.gallery);
-
-        // Partner
-        document.getElementById("partnerTitle").textContent = t(SITE?.partner?.title);
-        document.getElementById("partnerDesc").textContent = t(SITE?.partner?.desc);
-        if (SITE?.partner?.image){
-            document.getElementById("partnerImg").src = SITE.partner.image;
-            const pr = document.querySelector(".partner-right");
-            if (pr) pr.style.setProperty("--img", `url('${SITE.partner.image}')`);
-        }
-        renderContact();
-
-        // Labels
-        applyStaticLabels();
-    }
-
-    async function loadSiteContent(){
-        const res = await fetch("./content/site.json", { cache: "no-store" });
-        if (!res.ok) throw new Error("Failed to load ./content/site.json");
-        SITE = await res.json();
-
-        setLang(getLang());
-        renderAll();
-        initAnimations();
-    }
-
-    document.getElementById("langToggle")?.addEventListener("click", () => {
-        setLang(getLang() === "en" ? "ar" : "en");
-        renderAll();
-        initAnimations();
-    });
-
-    loadSiteContent().catch((err) => {
-        console.warn(err);
-        setLang("en");
-        applyStaticLabels();
-        initAnimations();
-    });
-</script>
-
-<!-- Netlify Identity (Decap CMS auth) -->
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="assets/js/build.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

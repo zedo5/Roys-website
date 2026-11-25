@@ -1,21 +1,40 @@
 {
   "brand": {
     "name": "WM GROUP",
-    "logo": "assets/uploads/logo.png"
+    "logo": "assets/uploads/logo.png",
+    "logoLight": "assets/uploads/logo-light.png",
+    "tagline": {
+      "en": "Architecture · Engineering · Design-Build",
+      "ar": "عمارة · هندسة · تصميم وتنفيذ"
+    },
+    "established": "1998"
   },
   "hero": {
-    "video": "assets/uploads/video.MP4"
+    "video": "assets/uploads/video.MP4",
+    "word": {
+      "en": "",
+      "ar": ""
+    },
+    "images": [
+      {
+        "image": "./assets/uploads/picture-1.jpg"
+      },
+      {
+        "image": "./assets/uploads/picture-3.jpg"
+      }
+    ],
+    "intervalMs": 4500
   },
   "partner": {
     "title": {
-      "en": "Partner with us",
-      "ar": "تعاون معنا"
+      "en": "Let's shape tomorrow together.",
+      "ar": "لنصنع الغد معًا."
     },
     "desc": {
-      "en": "You can reach us here:",
-      "ar": "يمكنكم التواصل معنا عبر:"
+      "en": "Ready to turn your vision into reality? Our team in Damascus and Dubai would love to hear about your next project.",
+      "ar": "هل أنتم مستعدون لتحويل رؤيتكم إلى واقع؟ يسعد فريقنا في دمشق ودبي أن يسمع عن مشروعكم القادم."
     },
-    "image": "assets/uploads/logo.png",
+    "image": "assets/uploads/portfolio/balena-hq-night.jpg",
     "contact": {
       "whatsappLabel": {
         "en": "WhatsApp",
@@ -25,7 +44,7 @@
         "en": "Instagram",
         "ar": "إنستغرام"
       },
-      "whatsappNumberE164": "+963932022000 ",
+      "whatsappNumberE164": "+963932022000",
       "phoneLabel": {
         "en": "Phone",
         "ar": "الهاتف"
@@ -90,10 +109,191 @@
     },
     {
       "image": "./assets/uploads/picture-13.jpg"
+    },
+    {
+      "image": "assets/uploads/portfolio/qasyoun-hotel-evening.jpg",
+      "caption": {
+        "en": "Qasyoun Hotel — Damascus",
+        "ar": "فندق قاسيون — دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/balena-hq-showroom.jpg",
+      "caption": {
+        "en": "Balena HQ — Dubai",
+        "ar": "مقر بالينا — دبي"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/villa-yaafour-living.jpg",
+      "caption": {
+        "en": "Private Villa — Yaafour, Damascus",
+        "ar": "فيلا خاصة — يعفور، دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/hotel-erbil-room.jpg",
+      "caption": {
+        "en": "Hotel — Erbil",
+        "ar": "فندق — أربيل"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/galliard-restaurant.jpg",
+      "caption": {
+        "en": "Galliard Restaurant — Damascus",
+        "ar": "مطعم غاليارد — دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/private-villa-built-2.jpg",
+      "caption": {
+        "en": "Private Villa — Built",
+        "ar": "فيلا خاصة — منفّذة"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/private-office-damascus.jpg",
+      "caption": {
+        "en": "Private Office — Damascus",
+        "ar": "مكتب خاص — دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/beauty-salon-damascus.jpg",
+      "caption": {
+        "en": "Beauty Salon — Damascus",
+        "ar": "صالون تجميل — دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/villa-yaafour-interior.jpg",
+      "caption": {
+        "en": "Private Villa — Yaafour, Damascus",
+        "ar": "فيلا خاصة — يعفور، دمشق"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/private-office-erbil.jpg",
+      "caption": {
+        "en": "Private Office — Erbil",
+        "ar": "مكتب خاص — أربيل"
+      }
+    },
+    {
+      "image": "assets/uploads/portfolio/bremer-showroom-erbil.jpg",
+      "caption": {
+        "en": "Bremer Showroom — Erbil",
+        "ar": "معرض بريمر — أربيل"
+      }
     }
   ],
   "langDefault": "en",
   "projects": [
+    {
+      "side": "left",
+      "title": {
+        "en": "Qasyoun Hotel & Mall",
+        "ar": "فندق ومول قاسيون"
+      },
+      "meta": {
+        "en": "Syria • Hospitality & Retail • Qasyoun Mountain, Damascus",
+        "ar": "سوريا • ضيافة وتجارة • جبل قاسيون، دمشق"
+      },
+      "desc": {
+        "en": "A luxury hotel and retail destination overlooking Damascus, combining contemporary architecture, premium hospitality and an integrated shopping experience in one iconic development.",
+        "ar": "وجهة فندقية وتجارية فاخرة تطل على دمشق، تجمع بين العمارة المعاصرة والضيافة الراقية وتجربة تسوق متكاملة في مشروع واحد مميز."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/portfolio/qasyoun-hotel-aerial-night.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/qasyoun-hotel-day.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/qasyoun-hotel-mountain.jpg"
+        }
+      ]
+    },
+    {
+      "side": "right",
+      "title": {
+        "en": "Balena Headquarters & Restaurant",
+        "ar": "مقر ومطعم بالينا"
+      },
+      "meta": {
+        "en": "UAE • Corporate & Dining • Dubai",
+        "ar": "الإمارات • مقر شركة ومطعم • دبي"
+      },
+      "desc": {
+        "en": "A landmark development combining Balena's private corporate headquarters with a luxury restaurant — contemporary architecture and refined interiors that reflect innovation, elegance and the company's identity.",
+        "ar": "مشروع مميز يجمع بين المقر الخاص لشركة بالينا ومطعم فاخر، بعمارة معاصرة وتصاميم داخلية راقية تعكس الابتكار والأناقة وهوية الشركة."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/portfolio/balena-hq-aerial.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/balena-hq-interior.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/balena-hq-showroom.jpg"
+        }
+      ]
+    },
+    {
+      "side": "left",
+      "title": {
+        "en": "Shopping Complex",
+        "ar": "المجمع التجاري"
+      },
+      "meta": {
+        "en": "Iraq • Retail • Erbil",
+        "ar": "العراق • تجاري • أربيل"
+      },
+      "desc": {
+        "en": "A sculptural retail landmark whose sweeping canopies and landscaped forecourt turn arrival into an experience.",
+        "ar": "معلم تجاري نحتي تحوّل مظلاته الانسيابية وساحته المنسقة لحظة الوصول إلى تجربة بحد ذاتها."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/portfolio/shopping-complex-aerial.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/shopping-complex-erbil.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/shopping-complex-mall.jpg"
+        }
+      ]
+    },
+    {
+      "side": "right",
+      "title": {
+        "en": "La Vida Complex",
+        "ar": "مجمع لا فيدا"
+      },
+      "meta": {
+        "en": "Iraq • Mixed-use • Erbil",
+        "ar": "العراق • متعدد الاستخدامات • أربيل"
+      },
+      "desc": {
+        "en": "A mixed-use urban quarter of hotel, retail and public plazas, organised around shaded courtyards and pedestrian streets.",
+        "ar": "حي حضري متعدد الاستخدامات يضم فندقًا ومحلات تجارية وساحات عامة، منظمًا حول باحات مظللة وشوارع للمشاة."
+      },
+      "images": [
+        {
+          "image": "assets/uploads/portfolio/la-vida-complex.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/la-vida-complex-aerial.jpg"
+        },
+        {
+          "image": "assets/uploads/portfolio/hotel-erbil-lobby.jpg"
+        }
+      ]
+    },
     {
       "side": "left",
       "title": {
@@ -227,21 +427,6 @@
       ]
     }
   ],
-  "hero": {
-    "word": {
-      "en": "",
-      "ar": ""
-    },
-    "images": [
-      {
-        "image": "./assets/uploads/picture-1.jpg"
-      },
-      {
-        "image": "./assets/uploads/picture-3.jpg"
-      }
-    ],
-    "intervalMs": 4500
-  },
   "footer": {
     "social": []
   },
@@ -398,5 +583,177 @@
       ],
       "image": "./assets/uploads/picture-6.jpg"
     }
-  ]
+  ],
+  "chapters": [
+    {
+      "image": "assets/uploads/portfolio/qasyoun-hotel-sunrise.jpg",
+      "line1": {
+        "en": "Built to",
+        "ar": "نبني ما"
+      },
+      "line2": {
+        "en": "outlast us.",
+        "ar": "يبقى بعدنا."
+      },
+      "project": {
+        "en": "Qasyoun Hotel & Mall",
+        "ar": "فندق ومول قاسيون"
+      },
+      "location": {
+        "en": "Qasyoun Mountain, Damascus",
+        "ar": "جبل قاسيون، دمشق"
+      },
+      "focusX": 0.45
+    },
+    {
+      "image": "assets/uploads/portfolio/balena-hq-night.jpg",
+      "line1": {
+        "en": "Every detail,",
+        "ar": "كل تفصيلٍ"
+      },
+      "line2": {
+        "en": "deliberate.",
+        "ar": "مدروس."
+      },
+      "project": {
+        "en": "Balena Headquarters",
+        "ar": "مقر بالينا"
+      },
+      "location": {
+        "en": "Dubai, UAE",
+        "ar": "دبي، الإمارات"
+      },
+      "focusX": 0.5
+    },
+    {
+      "image": "assets/uploads/portfolio/shopping-complex-erbil.jpg",
+      "line1": {
+        "en": "Where the city",
+        "ar": "حيث تلتقي"
+      },
+      "line2": {
+        "en": "gathers.",
+        "ar": "المدينة."
+      },
+      "project": {
+        "en": "Shopping Complex",
+        "ar": "مجمع تجاري"
+      },
+      "location": {
+        "en": "Erbil, Iraq",
+        "ar": "أربيل، العراق"
+      },
+      "focusX": 0.5
+    },
+    {
+      "image": "assets/uploads/portfolio/private-villa-render.jpg",
+      "line1": {
+        "en": "Made to be",
+        "ar": "صُمّمت"
+      },
+      "line2": {
+        "en": "lived in.",
+        "ar": "لتُعاش."
+      },
+      "project": {
+        "en": "Private Villa",
+        "ar": "فيلا خاصة"
+      },
+      "location": {
+        "en": "Design & Build",
+        "ar": "تصميم وتنفيذ"
+      },
+      "focusX": 0.55
+    },
+    {
+      "image": "assets/uploads/portfolio/qasyoun-hotel-night.jpg",
+      "line1": {
+        "en": "A skyline",
+        "ar": "أفقٌ"
+      },
+      "line2": {
+        "en": "worth keeping.",
+        "ar": "يستحق البقاء."
+      },
+      "project": {
+        "en": "Qasyoun Hotel & Mall",
+        "ar": "فندق ومول قاسيون"
+      },
+      "location": {
+        "en": "Damascus, by night",
+        "ar": "دمشق ليلاً"
+      },
+      "focusX": 0.6
+    }
+  ],
+  "intro": {
+    "statement": {
+      "en": "Since 1998, Waleed Medaa Group has turned drawings into landmarks — across Damascus, Dubai and Erbil.",
+      "ar": "منذ عام ١٩٩٨، تحوّل مجموعة وليد ميدع المخططات إلى معالم — في دمشق ودبي وأربيل."
+    }
+  },
+  "stats": [
+    {
+      "value": "28",
+      "suffix": "+",
+      "label": {
+        "en": "Years in practice",
+        "ar": "عامًا من الخبرة"
+      }
+    },
+    {
+      "value": "200",
+      "suffix": "+",
+      "label": {
+        "en": "Completed projects",
+        "ar": "مشروع منجز"
+      }
+    },
+    {
+      "value": "5",
+      "suffix": "M",
+      "label": {
+        "en": "Square metres developed",
+        "ar": "متر مربع مطوّر"
+      }
+    },
+    {
+      "value": "500",
+      "suffix": "+",
+      "label": {
+        "en": "Engineers & specialists",
+        "ar": "مهندس واختصاصي"
+      }
+    }
+  ],
+  "film": {
+    "title": {
+      "en": "The Qasioun Complex",
+      "ar": "مجمع قاسيون"
+    },
+    "caption": {
+      "en": "A walk through the design — Damascus, 2028",
+      "ar": "جولة في التصميم — دمشق، ٢٠٢٨"
+    }
+  },
+  "designBuilt": {
+    "title": {
+      "en": "Designed. Then delivered.",
+      "ar": "صُمّم. ثم نُفّذ."
+    },
+    "text": {
+      "en": "What we build looks even better than what we design. With design and construction under one roof, every detail of the render is carried through to the finished home.",
+      "ar": "ما نبنيه يبدو أجمل مما نصممه. فمع جمع التصميم والتنفيذ تحت سقف واحد، ينتقل كل تفصيل من التصور إلى المنزل المنجز."
+    },
+    "render": "assets/uploads/portfolio/private-villa-render.jpg",
+    "built": "assets/uploads/portfolio/private-villa-built.jpg",
+    "renderLabel": {
+      "en": "The design",
+      "ar": "التصميم"
+    },
+    "builtLabel": {
+      "en": "The built result",
+      "ar": "النتيجة المنفّذة"
+    }
+  }
 }
